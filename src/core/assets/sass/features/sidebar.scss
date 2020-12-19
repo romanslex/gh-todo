@@ -1,0 +1,23 @@
+@import "../variables";
+
+.mobile-sidebar {
+  & .ant-drawer {
+    &-header {
+      background: $bg-dark-color;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: #{$spacer-9}px;
+      border: none;
+    }
+    &-title {
+      color: white;
+      font-size: $fs-xl;
+      font-weight: 400;
+    }
+    &-body {
+      padding: 0 !important;
+      background: $bg-dark-color;
+    }
+  }
+}

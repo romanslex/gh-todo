@@ -19,6 +19,8 @@ export const MobileSidebar: React.FC = () => {
       onClose={closeMenu}
       visible={isOpen}
       key="top"
+      className="mobile-sidebar"
+      closeIcon={null}
     >
       <AppMenu />
     </Drawer>

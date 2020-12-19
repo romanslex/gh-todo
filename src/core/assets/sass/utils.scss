@@ -32,8 +32,13 @@
   }
 }
 
-.bg-white {
-  background: white !important;
+.bg {
+  &-white {
+    background: white !important;
+  }
+  &-dark {
+    background: $bg-dark-color !important;
+  }
 }
 
 .c {
