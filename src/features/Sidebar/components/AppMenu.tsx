@@ -7,12 +7,14 @@ import InboxOutlined from '@ant-design/icons/InboxOutlined';
 import CalendarOutlined from '@ant-design/icons/CalendarOutlined';
 import HourglassOutlined from '@ant-design/icons/HourglassOutlined';
 import ProjectOutlined from '@ant-design/icons/ProjectOutlined';
+import TagOutlined from '@ant-design/icons/TagOutlined';
 import { SubMenuItemWithAddBtn } from 'features/Sidebar/components/SubMenuItemWithAddBtn';
 
 export const AppMenu: React.FC = () => {
   const currentPath = RouterHooks.useCurrentPath();
 
   const openEditProjectModal = useCallback(() => {}, []);
+  const openEditTagModal = useCallback(() => {}, []);
 
   return (
     <Menu theme="dark" mode="inline" selectedKeys={[currentPath]}>
@@ -34,7 +36,15 @@ export const AppMenu: React.FC = () => {
           />
         }
       />
-      <Menu.SubMenu title="Tags" />
+      <Menu.SubMenu
+        title={
+          <SubMenuItemWithAddBtn
+            icon={<TagOutlined />}
+            onAdd={openEditTagModal}
+            title="Tags"
+          />
+        }
+      />
       <Menu.SubMenu title="Filters" />
     </Menu>
   );
