@@ -1,0 +1,116 @@
+@import 'variables';
+
+.h-100 {
+  height: 100% !important;
+}
+.w-100 {
+  width: 100% !important;
+}
+
+.d-flex {
+  display: flex;
+  &_justify {
+    &--center {
+      justify-content: center;
+    }
+  }
+  &_align {
+    &--center {
+      align-items: center;
+    }
+    &--bottom {
+      align-items: flex-end;
+    }
+  }
+  &_direction {
+    &--row {
+      flex-direction: row;
+    }
+    &--column {
+      flex-direction: column;
+    }
+  }
+}
+
+.bg-white {
+  background: white !important;
+}
+
+.c {
+  &-white {
+    color: white !important;
+  }
+  &-primary {
+    color: #096dd9 !important;
+  }
+  &-danger {
+    color: #f5222d !important;
+  }
+  &-success {
+    color: #237804 !important;
+  }
+}
+
+.fs {
+  &-xs {
+    font-size: 12px !important;
+    line-height: 20px !important;
+  }
+  &-s {
+    font-size: 14px !important;
+    line-height: 22px !important;
+  }
+  &-md {
+    font-size: 16px !important;
+    line-height: 24px !important;
+  }
+  &-lg {
+    font-size: 20px !important;
+    line-height: 28px !important;
+  }
+  &-xl {
+    font-size: 24px !important;
+    line-height: 32px !important;
+  }
+  &-xxl {
+    font-size: 30px !important;
+    line-height: 38px !important;
+  }
+}
+.fw {
+  &-regular {
+    font-weight: 400 !important;
+  }
+  &-medium {
+    font-weight: 500 !important;
+  }
+  &-bold {
+    font-weight: 700 !important;
+  }
+}
+
+
+@each $i, $size in  $spacers {
+  .m-#{$i} { margin: #{$size}px }
+  .p-#{$i} { padding: #{$size}px }
+
+  .mt-#{$i} { margin-top: #{$size}px; }
+  .mb-#{$i} { margin-bottom: #{$size}px; }
+  .ml-#{$i} { margin-left: #{$size}px; }
+  .mr-#{$i} { margin-right: #{$size}px; }
+
+  .pt-#{$i} { padding-top: #{$size}px; }
+  .pb-#{$i} { padding-bottom: #{$size}px; }
+  .pl-#{$i} { padding-left: #{$size}px; }
+  .pr-#{$i} { padding-right: #{$size}px; }
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+.t-align {
+  &-r {
+    text-align: right !important;
+  }
+}
