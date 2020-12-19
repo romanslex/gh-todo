@@ -8,6 +8,7 @@ import CalendarOutlined from '@ant-design/icons/CalendarOutlined';
 import HourglassOutlined from '@ant-design/icons/HourglassOutlined';
 import ProjectOutlined from '@ant-design/icons/ProjectOutlined';
 import TagOutlined from '@ant-design/icons/TagOutlined';
+import FilterOutlined from '@ant-design/icons/FilterOutlined';
 import { SubMenuItemWithAddBtn } from 'features/Sidebar/components/SubMenuItemWithAddBtn';
 
 export const AppMenu: React.FC = () => {
@@ -15,6 +16,7 @@ export const AppMenu: React.FC = () => {
 
   const openEditProjectModal = useCallback(() => {}, []);
   const openEditTagModal = useCallback(() => {}, []);
+  const openEditFilterModal = useCallback(() => {}, []);
 
   return (
     <Menu theme="dark" mode="inline" selectedKeys={[currentPath]}>
@@ -45,7 +47,15 @@ export const AppMenu: React.FC = () => {
           />
         }
       />
-      <Menu.SubMenu title="Filters" />
+      <Menu.SubMenu
+        title={
+          <SubMenuItemWithAddBtn
+            icon={<FilterOutlined />}
+            onAdd={openEditFilterModal}
+            title="Filters"
+          />
+        }
+      />
     </Menu>
   );
 };
