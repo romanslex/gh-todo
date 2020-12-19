@@ -1,9 +1,0 @@
-@import "../variables";
-
-.desktop-sidebar {
-  display: block;
-
-  @media (max-width: $sidebar-mobile-breakpoint) {
-    display: none;
-  }
-}

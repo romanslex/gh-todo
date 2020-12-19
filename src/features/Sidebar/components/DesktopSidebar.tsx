@@ -9,7 +9,7 @@ export const DesktopSidebar: React.FC = () => {
       collapsible
       theme="dark"
       width={250}
-      className="desktop-sidebar"
+      className="desktop-only"
     >
       <div
         className="c-white d-flex d-flex_justify--center d-flex_align--center fs-xl"

@@ -91,18 +91,18 @@
 
 
 @each $i, $size in  $spacers {
-  .m-#{$i} { margin: #{$size}px }
-  .p-#{$i} { padding: #{$size}px }
+  .m-#{$i} { margin: #{$size}px !important; }
+  .p-#{$i} { padding: #{$size}px !important; }
 
-  .mt-#{$i} { margin-top: #{$size}px; }
-  .mb-#{$i} { margin-bottom: #{$size}px; }
-  .ml-#{$i} { margin-left: #{$size}px; }
-  .mr-#{$i} { margin-right: #{$size}px; }
+  .mt-#{$i} { margin-top: #{$size}px !important; }
+  .mb-#{$i} { margin-bottom: #{$size}px !important; }
+  .ml-#{$i} { margin-left: #{$size}px !important; }
+  .mr-#{$i} { margin-right: #{$size}px !important; }
 
-  .pt-#{$i} { padding-top: #{$size}px; }
-  .pb-#{$i} { padding-bottom: #{$size}px; }
-  .pl-#{$i} { padding-left: #{$size}px; }
-  .pr-#{$i} { padding-right: #{$size}px; }
+  .pt-#{$i} { padding-top: #{$size}px !important; }
+  .pb-#{$i} { padding-bottom: #{$size}px !important; }
+  .pl-#{$i} { padding-left: #{$size}px !important; }
+  .pr-#{$i} { padding-right: #{$size}px !important; }
 }
 
 .cursor-pointer {
@@ -112,5 +112,16 @@
 .t-align {
   &-r {
     text-align: right !important;
+  }
+}
+
+.mobile-only {
+  @media (min-width: $mobile-screen-max-width + 1) {
+    display: none !important;
+  }
+}
+.desktop-only {
+  @media (max-width: $mobile-screen-max-width) {
+    display: none !important;
   }
 }
