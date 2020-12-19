@@ -21,6 +21,9 @@ export const AppMenu: React.FC = () => {
       <Menu.Item key={ERoute.Week} icon={<CalendarOutlined />}>
         <Link to={ERoute.Week}>Week</Link>
       </Menu.Item>
+      <Menu.SubMenu title="Projects" />
+      <Menu.SubMenu title="Tags" />
+      <Menu.SubMenu title="Filters" />
     </Menu>
   );
 };
