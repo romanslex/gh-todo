@@ -1,14 +1,21 @@
 import React from 'react';
 import Modal from 'antd/es/modal/Modal';
 
-export const AppModal: React.FC = () => {
-  const close = () => console.log('close');
+interface IComponentProps {
+  isOpen: boolean;
+  close: () => void;
+}
+
+export const AppModal: React.FC<IComponentProps> = ({
+  isOpen,
+  close,
+}: IComponentProps) => {
   const content = 'Hello from modal';
 
   return (
     <Modal
       className="modal-content modal-content_desktop"
-      visible
+      visible={isOpen}
       footer={null}
       width={400}
       onCancel={close}

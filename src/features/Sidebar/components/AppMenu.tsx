@@ -10,11 +10,16 @@ import ProjectOutlined from '@ant-design/icons/ProjectOutlined';
 import TagOutlined from '@ant-design/icons/TagOutlined';
 import FilterOutlined from '@ant-design/icons/FilterOutlined';
 import { SubMenuItemWithAddBtn } from 'features/Sidebar/components/SubMenuItemWithAddBtn';
+import { useDispatch } from 'react-redux';
+import { projectsActions } from 'features/Projects/Projects.slice';
 
 export const AppMenu: React.FC = () => {
+  const dispatch = useDispatch();
   const currentPath = RouterHooks.useCurrentPath();
 
-  const openEditProjectModal = useCallback(() => {}, []);
+  const openEditProjectModal = useCallback(() => {
+    dispatch(projectsActions.toggleEditModal(true));
+  }, [dispatch]);
   const openEditTagModal = useCallback(() => {}, []);
   const openEditFilterModal = useCallback(() => {}, []);
 
