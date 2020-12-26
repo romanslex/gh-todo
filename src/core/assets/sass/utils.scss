@@ -16,6 +16,9 @@
     &--end {
       justify-content: flex-end;
     }
+    &--space-between {
+      justify-content: space-between;
+    }
   }
   &_align {
     &--center {
@@ -41,6 +44,30 @@
   }
   &-dark {
     background: $bg-dark-color !important;
+  }
+  &-pr-red {
+    background: $color-pr-red !important;
+  }
+  &-pr-orange {
+    background: $color-pr-orange !important;
+  }
+  &-pr-yellow {
+    background: $color-pr-yellow !important;
+  }
+  &-pr-green {
+    background: $color-pr-green !important;
+  }
+  &-pr-cyan {
+    background: $color-pr-cyan !important;
+  }
+  &-pr-blue {
+    background: $color-pr-blue !important;
+  }
+  &-pr-magenta {
+    background: $color-pr-magenta !important;
+  }
+  &-pr-purple {
+    background: $color-pr-purple !important;
   }
 }
 
