@@ -26,6 +26,7 @@ export const AppModal: React.FC<AllProps> = ({
         title={title}
         placement="bottom"
         closable={false}
+        maskClosable={false}
         visible={isOpen}
         onClose={close}
         key="bottom"
@@ -43,6 +44,8 @@ export const AppModal: React.FC<AllProps> = ({
       className="modal-content modal-content_desktop"
       visible={isOpen}
       footer={null}
+      closable={false}
+      maskClosable={false}
       width={400}
       onCancel={close}
     >

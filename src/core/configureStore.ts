@@ -5,12 +5,13 @@ import createSagaMiddleware from 'redux-saga';
 import { all } from 'redux-saga/effects';
 import { sidebarReducer } from 'features/Sidebar/Sidebar.slice';
 import { projectsReducer } from 'features/Projects/Projects.slice';
+import { projectsEffects } from 'features/Projects/Projects.effects';
 
 export const history = createBrowserHistory();
 const sagaMiddleware = createSagaMiddleware();
 
 function* rootSaga() {
-  yield all([]);
+  yield all([...projectsEffects]);
 }
 
 export const store = configureStore({

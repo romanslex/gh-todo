@@ -17,10 +17,11 @@ interface IFormValues {
 export const EditProjectModal: React.FC = () => {
   const dispatch = useDispatch();
   const isOpen = useSelector(projectsSelectors.getIsEditModalOpen);
+  const isLoading = useSelector(projectsSelectors.getIsLoading);
 
   const close = () => dispatch(projectsActions.toggleEditModal(false));
   const finish = (values: IFormValues) => {
-    console.log({ values });
+    dispatch(projectsActions.create.try(values));
   };
 
   return (
@@ -31,19 +32,19 @@ export const EditProjectModal: React.FC = () => {
           name="name"
           rules={[{ required: true, message: 'Field is required' }]}
         >
-          <Input />
+          <Input disabled={isLoading} />
         </Form.Item>
         <Form.Item label="Color" name="color">
           <ColorPicker />
         </Form.Item>
         <div className="d-flex d-flex_justify--end">
           <Form.Item className="mr-2 mb-0">
-            <Button htmlType="submit" type="primary">
+            <Button htmlType="submit" type="primary" loading={isLoading}>
               Save
             </Button>
           </Form.Item>
           <Form.Item className="mb-0">
-            <Button>Cancel</Button>
+            <Button disabled={isLoading}>Cancel</Button>
           </Form.Item>
         </div>
       </Form>
