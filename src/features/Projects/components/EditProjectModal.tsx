@@ -9,23 +9,28 @@ import Button from 'antd/es/button';
 import { ColorPicker } from 'common/components/ColorPicker';
 import { EProjectColor } from 'features/Projects/Projects.models';
 
+interface IFormValues {
+  name: string;
+  color: EProjectColor;
+}
+
 export const EditProjectModal: React.FC = () => {
   const dispatch = useDispatch();
   const isOpen = useSelector(projectsSelectors.getIsEditModalOpen);
 
   const close = () => dispatch(projectsActions.toggleEditModal(false));
-  const finish = (values: any) => {
+  const finish = (values: IFormValues) => {
     console.log({ values });
   };
 
   return (
     <AppModal title="Create new project" isOpen={isOpen} close={close}>
-      <Form
-        layout="vertical"
-        onFinish={finish}
-        initialValues={{ color: EProjectColor.Blue }}
-      >
-        <Form.Item label="Name" name="name">
+      <Form layout="vertical" onFinish={finish}>
+        <Form.Item
+          label="Name"
+          name="name"
+          rules={[{ required: true, message: 'Field is required' }]}
+        >
           <Input />
         </Form.Item>
         <Form.Item label="Color" name="color">
