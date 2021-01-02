@@ -16,6 +16,7 @@ import { projectsActions } from 'features/Projects/Projects.slice';
 import { tagsActions } from 'features/Tags/Tags.slice';
 import { tagsSelectors } from 'features/Tags/Tags.selectors';
 import { filtersActions } from 'features/Filters/Filters.slice';
+import { filtersSelectors } from 'features/Filters/Filters.selectors';
 
 const projectCircleStyle: CSSProperties = {
   width: '10px',
@@ -28,6 +29,7 @@ export const AppMenu: React.FC = () => {
   const currentPath = RouterHooks.useCurrentPath();
   const projects = useSelector(projectsSelectors.getCollection);
   const tags = useSelector(tagsSelectors.getCollection);
+  const filters = useSelector(filtersSelectors.getCollection);
 
   const openEditProjectModal = useCallback(() => {
     dispatch(projectsActions.toggleEditModal(true));
@@ -92,7 +94,11 @@ export const AppMenu: React.FC = () => {
             title="Filters"
           />
         }
-      />
+      >
+        {filters.map((filter) => (
+          <Menu.Item key={filter.id}>{filter.name}</Menu.Item>
+        ))}
+      </Menu.SubMenu>
     </Menu>
   );
 };
