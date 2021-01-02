@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { sidebarActions } from 'features/Sidebar/Sidebar.slice';
 import { EditProjectModal } from 'features/Projects/components/EditProjectModal';
 import { useInit } from 'common/hooks/Init.hooks';
+import { EditTagModal } from 'features/Tags/components/EditTagModal';
 
 const { Header, Content, Footer } = Layout;
 
@@ -35,6 +36,7 @@ export const Default: React.FC = () => {
         <Footer>Footer</Footer>
       </Layout>
       <EditProjectModal />
+      <EditTagModal />
     </Layout>
   );
 };
