@@ -5,6 +5,7 @@ import Button from 'antd/es/button';
 import MenuOutlined from '@ant-design/icons/MenuOutlined';
 import { useDispatch } from 'react-redux';
 import { sidebarActions } from 'features/Sidebar/Sidebar.slice';
+import { EditProjectModal } from 'features/Projects/components/EditProjectModal';
 
 const { Header, Content, Footer } = Layout;
 
@@ -30,6 +31,7 @@ export const Default: React.FC = () => {
         <Content className="p-7">Content</Content>
         <Footer>Footer</Footer>
       </Layout>
+      <EditProjectModal />
     </Layout>
   );
 };

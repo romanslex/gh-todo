@@ -35,6 +35,9 @@ module.exports = {
     "react/jsx-props-no-spreading": "off",
     "import/prefer-default-export": "off",
     "no-param-reassign": "off",
+    "react/require-default-props": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "@typescript-eslint/explicit-module-boundary-types": 'off',
     "@typescript-eslint/no-unused-expressions": [
       "error", {"allowShortCircuit": true }
     ],
