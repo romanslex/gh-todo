@@ -19,4 +19,15 @@ function* create() {
   );
 }
 
-export const tagsEffects = [create()];
+function* getCollection() {
+  yield takeEvery(tagsActions.getCollection.try.type, function* createWorker() {
+    try {
+      const data = yield call(tagsService.getCollection);
+      yield put(tagsActions.getCollection.success(data));
+    } catch (e) {
+      yield put(tagsActions.getCollection.fail(e.message));
+    }
+  });
+}
+
+export const tagsEffects = [create(), getCollection()];

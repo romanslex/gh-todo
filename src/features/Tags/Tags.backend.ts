@@ -1,4 +1,4 @@
-import { ICreateTagModel } from 'features/Tags/Tags.models';
+import { ICreateTagModel, ITagModel } from 'features/Tags/Tags.models';
 import { v4 } from 'uuid';
 import { localStorageService } from 'rml-back-mock-helper';
 
@@ -11,5 +11,9 @@ export const tagsBackend = {
       ...data,
     };
     localStorageService.add(key, tag);
+  },
+
+  getCollection(): ITagModel[] {
+    return Object.values(localStorageService.getCollection(key));
   },
 };
