@@ -8,4 +8,10 @@ export const projectsService = {
       projectsBackend.create(data);
     }, 5000);
   },
+
+  getCollection() {
+    return doWithDelay(() => {
+      return projectsBackend.getCollection();
+    });
+  },
 };

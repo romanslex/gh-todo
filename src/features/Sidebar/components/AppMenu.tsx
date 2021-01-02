@@ -10,12 +10,14 @@ import ProjectOutlined from '@ant-design/icons/ProjectOutlined';
 import TagOutlined from '@ant-design/icons/TagOutlined';
 import FilterOutlined from '@ant-design/icons/FilterOutlined';
 import { SubMenuItemWithAddBtn } from 'features/Sidebar/components/SubMenuItemWithAddBtn';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { projectsSelectors } from 'features/Projects/Projects.selectors';
 import { projectsActions } from 'features/Projects/Projects.slice';
 
 export const AppMenu: React.FC = () => {
   const dispatch = useDispatch();
   const currentPath = RouterHooks.useCurrentPath();
+  const projects = useSelector(projectsSelectors.getCollection);
 
   const openEditProjectModal = useCallback(() => {
     dispatch(projectsActions.toggleEditModal(true));
@@ -42,7 +44,11 @@ export const AppMenu: React.FC = () => {
             title="Projects"
           />
         }
-      />
+      >
+        {projects.map((project) => (
+          <Menu.Item key={project.id}>{project.name}</Menu.Item>
+        ))}
+      </Menu.SubMenu>
       <Menu.SubMenu
         title={
           <SubMenuItemWithAddBtn
