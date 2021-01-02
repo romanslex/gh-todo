@@ -7,12 +7,13 @@ import { sidebarReducer } from 'features/Sidebar/Sidebar.slice';
 import { projectsReducer } from 'features/Projects/Projects.slice';
 import { projectsEffects } from 'features/Projects/Projects.effects';
 import { tagsReducer } from 'features/Tags/Tags.slice';
+import { tagsEffects } from 'features/Tags/Tags.effects';
 
 export const history = createBrowserHistory();
 const sagaMiddleware = createSagaMiddleware();
 
 function* rootSaga() {
-  yield all([...projectsEffects]);
+  yield all([...projectsEffects, ...tagsEffects]);
 }
 
 export const store = configureStore({
