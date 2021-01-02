@@ -1,10 +1,18 @@
-import { IFiltersSlice } from 'features/Filters/Filters.models';
+import {
+  ICreateFilterModel,
+  IFiltersSlice,
+} from 'features/Filters/Filters.models';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { ReduxHelpers } from 'common/Helpers/Redux.helpers';
 
 const initialState: IFiltersSlice = {
   isEditModalOpen: false,
   isLoading: false,
 };
+
+const create = ReduxHelpers.createAction<ICreateFilterModel, void, string>(
+  'filters/create'
+);
 
 const filtersSlice = createSlice({
   name: 'filters',
@@ -17,4 +25,4 @@ const filtersSlice = createSlice({
 });
 
 export const filtersReducer = filtersSlice.reducer;
-export const filtersActions = filtersSlice.actions;
+export const filtersActions = { ...filtersSlice.actions, create };

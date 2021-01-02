@@ -9,12 +9,13 @@ import { projectsEffects } from 'features/Projects/Projects.effects';
 import { tagsReducer } from 'features/Tags/Tags.slice';
 import { tagsEffects } from 'features/Tags/Tags.effects';
 import { filtersReducer } from 'features/Filters/Filters.slice';
+import { filtersEffects } from 'features/Filters/Filters.effects';
 
 export const history = createBrowserHistory();
 const sagaMiddleware = createSagaMiddleware();
 
 function* rootSaga() {
-  yield all([...projectsEffects, ...tagsEffects]);
+  yield all([...projectsEffects, ...tagsEffects, ...filtersEffects]);
 }
 
 export const store = configureStore({

@@ -7,16 +7,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import { filtersSelectors } from 'features/Filters/Filters.selectors';
 import { filtersActions } from 'features/Filters/Filters.slice';
 
+interface IFormValues {
+  name: string;
+  query: string;
+}
+
 export const EditFilterModal: React.FC = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(filtersSelectors.getIsLoading);
   const isOpen = useSelector(filtersSelectors.getIsEditModalOpen);
 
   const close = () => dispatch(filtersActions.toggleEditModal(false));
+  const finish = (values: IFormValues) => {
+    dispatch(filtersActions.create.try(values));
+  };
 
   return (
     <AppModal title="Create new filter" isOpen={isOpen} close={close}>
-      <Form>
+      <Form onFinish={finish} layout="vertical">
         <Form.Item
           label="Name"
           name="name"
