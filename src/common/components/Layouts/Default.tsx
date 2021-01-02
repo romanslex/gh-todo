@@ -8,6 +8,7 @@ import { sidebarActions } from 'features/Sidebar/Sidebar.slice';
 import { EditProjectModal } from 'features/Projects/components/EditProjectModal';
 import { useInit } from 'common/hooks/Init.hooks';
 import { EditTagModal } from 'features/Tags/components/EditTagModal';
+import { EditFilterModal } from 'features/Filters/components/EditFilterModal';
 
 const { Header, Content, Footer } = Layout;
 
@@ -37,6 +38,7 @@ export const Default: React.FC = () => {
       </Layout>
       <EditProjectModal />
       <EditTagModal />
+      <EditFilterModal />
     </Layout>
   );
 };

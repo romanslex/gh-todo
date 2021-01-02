@@ -1,5 +1,5 @@
 import { IFiltersSlice } from 'features/Filters/Filters.models';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const initialState: IFiltersSlice = {
   isEditModalOpen: false,
@@ -9,7 +9,11 @@ const initialState: IFiltersSlice = {
 const filtersSlice = createSlice({
   name: 'filters',
   initialState: initialState as IFiltersSlice,
-  reducers: {},
+  reducers: {
+    toggleEditModal(state, { payload }: PayloadAction<boolean>) {
+      state.isEditModalOpen = payload;
+    },
+  },
 });
 
 export const filtersReducer = filtersSlice.reducer;
