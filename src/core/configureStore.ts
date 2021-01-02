@@ -6,6 +6,7 @@ import { all } from 'redux-saga/effects';
 import { sidebarReducer } from 'features/Sidebar/Sidebar.slice';
 import { projectsReducer } from 'features/Projects/Projects.slice';
 import { projectsEffects } from 'features/Projects/Projects.effects';
+import { tagsReducer } from 'features/Tags/Tags.slice';
 
 export const history = createBrowserHistory();
 const sagaMiddleware = createSagaMiddleware();
@@ -21,6 +22,7 @@ export const store = configureStore({
     router: connectRouter(history),
     sidebar: sidebarReducer,
     projects: projectsReducer,
+    tags: tagsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(routerMiddleware(history), sagaMiddleware),

@@ -13,6 +13,7 @@ import { SubMenuItemWithAddBtn } from 'features/Sidebar/components/SubMenuItemWi
 import { useDispatch, useSelector } from 'react-redux';
 import { projectsSelectors } from 'features/Projects/Projects.selectors';
 import { projectsActions } from 'features/Projects/Projects.slice';
+import { tagsActions } from 'features/Tags/Tags.slice';
 
 const projectCircleStyle: CSSProperties = {
   width: '10px',
@@ -28,7 +29,9 @@ export const AppMenu: React.FC = () => {
   const openEditProjectModal = useCallback(() => {
     dispatch(projectsActions.toggleEditModal(true));
   }, [dispatch]);
-  const openEditTagModal = useCallback(() => {}, []);
+  const openEditTagModal = useCallback(() => {
+    dispatch(tagsActions.toggleEditModal(true));
+  }, [dispatch]);
   const openEditFilterModal = useCallback(() => {}, []);
 
   return (
