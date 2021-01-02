@@ -15,6 +15,7 @@ import { projectsSelectors } from 'features/Projects/Projects.selectors';
 import { projectsActions } from 'features/Projects/Projects.slice';
 import { tagsActions } from 'features/Tags/Tags.slice';
 import { tagsSelectors } from 'features/Tags/Tags.selectors';
+import { filtersActions } from 'features/Filters/Filters.slice';
 
 const projectCircleStyle: CSSProperties = {
   width: '10px',
@@ -34,7 +35,9 @@ export const AppMenu: React.FC = () => {
   const openEditTagModal = useCallback(() => {
     dispatch(tagsActions.toggleEditModal(true));
   }, [dispatch]);
-  const openEditFilterModal = useCallback(() => {}, []);
+  const openEditFilterModal = useCallback(() => {
+    dispatch(filtersActions.toggleEditModal(true));
+  }, [dispatch]);
 
   return (
     <Menu theme="dark" mode="inline" selectedKeys={[currentPath]}>
