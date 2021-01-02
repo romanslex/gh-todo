@@ -35,7 +35,7 @@ export const EditProjectModal: React.FC = () => {
           <Input disabled={isLoading} />
         </Form.Item>
         <Form.Item label="Color" name="color">
-          <ColorPicker />
+          <ColorPicker disabled={isLoading} />
         </Form.Item>
         <div className="d-flex d-flex_justify--end">
           <Form.Item className="mr-2 mb-0">
@@ -44,7 +44,9 @@ export const EditProjectModal: React.FC = () => {
             </Button>
           </Form.Item>
           <Form.Item className="mb-0">
-            <Button disabled={isLoading}>Cancel</Button>
+            <Button onClick={close} disabled={isLoading}>
+              Cancel
+            </Button>
           </Form.Item>
         </div>
       </Form>

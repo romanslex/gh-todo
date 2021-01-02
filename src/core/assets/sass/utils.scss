@@ -140,8 +140,13 @@
   .pr-#{$i} { padding-right: #{$size}px !important; }
 }
 
-.cursor-pointer {
-  cursor: pointer !important;
+.cursor {
+  &-pointer {
+    cursor: pointer !important;
+  }
+  &-disabled {
+    cursor: not-allowed !important;
+  }
 }
 
 .t-align {

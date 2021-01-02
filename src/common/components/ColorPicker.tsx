@@ -13,25 +13,31 @@ const activeColorItemStyle: CSSProperties = {
 
 interface IComponentProps {
   value?: EProjectColor;
+  disabled?: boolean;
   onChange?: (value: EProjectColor) => void;
 }
 
 export const ColorPicker: React.FC<IComponentProps> = ({
   value = EProjectColor.Red,
   onChange,
+  disabled,
 }: IComponentProps) => {
   return (
     <div className="d-flex d-flex_justify--space-between">
       {Object.values(EProjectColor).map((color) => (
         <div
           key={color}
-          onClick={() => onChange && onChange(color as EProjectColor)}
+          onClick={() =>
+            !disabled && onChange && onChange(color as EProjectColor)
+          }
           style={
             value === color
               ? { ...colorItemStyle, ...activeColorItemStyle }
               : colorItemStyle
           }
-          className={`bg-pr-${color} cursor-pointer`}
+          className={`bg-pr-${color} cursor-pointer ${
+            disabled ? 'cursor-disabled' : ''
+          }`}
         />
       ))}
     </div>
