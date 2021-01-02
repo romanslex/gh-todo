@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { projectsSelectors } from 'features/Projects/Projects.selectors';
 import { projectsActions } from 'features/Projects/Projects.slice';
 import { tagsActions } from 'features/Tags/Tags.slice';
+import { tagsSelectors } from 'features/Tags/Tags.selectors';
 
 const projectCircleStyle: CSSProperties = {
   width: '10px',
@@ -25,6 +26,7 @@ export const AppMenu: React.FC = () => {
   const dispatch = useDispatch();
   const currentPath = RouterHooks.useCurrentPath();
   const projects = useSelector(projectsSelectors.getCollection);
+  const tags = useSelector(tagsSelectors.getCollection);
 
   const openEditProjectModal = useCallback(() => {
     dispatch(projectsActions.toggleEditModal(true));
@@ -74,7 +76,11 @@ export const AppMenu: React.FC = () => {
             title="Tags"
           />
         }
-      />
+      >
+        {tags.map((tag) => (
+          <Menu.Item key={tag.id}>{tag.name}</Menu.Item>
+        ))}
+      </Menu.SubMenu>
       <Menu.SubMenu
         title={
           <SubMenuItemWithAddBtn
