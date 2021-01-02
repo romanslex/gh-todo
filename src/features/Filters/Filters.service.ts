@@ -8,4 +8,10 @@ export const filtersService = {
       filtersBackend.create(data);
     });
   },
+
+  getCollection() {
+    return doWithDelay(() => {
+      return filtersBackend.getCollection();
+    });
+  },
 };

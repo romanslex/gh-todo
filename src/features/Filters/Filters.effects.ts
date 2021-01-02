@@ -19,4 +19,18 @@ function* create() {
   );
 }
 
-export const filtersEffects = [create()];
+function* getCollection() {
+  yield takeEvery(
+    filtersActions.getCollection.try.type,
+    function* createWorker() {
+      try {
+        const data = yield call(filtersService.getCollection);
+        yield put(filtersActions.getCollection.success(data));
+      } catch (e) {
+        yield put(filtersActions.getCollection.fail(e.message));
+      }
+    }
+  );
+}
+
+export const filtersEffects = [create(), getCollection()];

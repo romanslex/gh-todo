@@ -1,4 +1,7 @@
-import { ICreateFilterModel } from 'features/Filters/Filters.models';
+import {
+  ICreateFilterModel,
+  IFilterModel,
+} from 'features/Filters/Filters.models';
 import { v4 } from 'uuid';
 import { localStorageService } from 'rml-back-mock-helper';
 
@@ -11,5 +14,9 @@ export const filtersBackend = {
       ...data,
     };
     localStorageService.add(key, filter);
+  },
+
+  getCollection(): IFilterModel[] {
+    return Object.values(localStorageService.getCollection(key));
   },
 };
