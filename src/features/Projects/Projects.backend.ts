@@ -1,4 +1,7 @@
-import { ICreateProjectModel } from 'features/Projects/Projects.models';
+import {
+  ICreateProjectModel,
+  IProjectModel,
+} from 'features/Projects/Projects.models';
 import { localStorageService } from 'rml-back-mock-helper';
 import { v4 } from 'uuid';
 
@@ -11,5 +14,9 @@ export const projectsBackend = {
       ...data,
     };
     localStorageService.add(key, project);
+  },
+
+  getCollection(): IProjectModel[] {
+    return Object.values(localStorageService.getCollection(key));
   },
 };

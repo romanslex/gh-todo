@@ -1,6 +1,13 @@
 export interface IProjectsSlice {
   isEditModalOpen: boolean;
   isLoading: boolean;
+  collection: IProjectModel[];
+}
+
+export interface IProjectModel {
+  id: string;
+  name: string;
+  color: EProjectColor;
 }
 
 export interface ICreateProjectModel {

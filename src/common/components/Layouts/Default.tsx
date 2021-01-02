@@ -6,6 +6,7 @@ import MenuOutlined from '@ant-design/icons/MenuOutlined';
 import { useDispatch } from 'react-redux';
 import { sidebarActions } from 'features/Sidebar/Sidebar.slice';
 import { EditProjectModal } from 'features/Projects/components/EditProjectModal';
+import { useInit } from 'common/hooks/Init.hooks';
 
 const { Header, Content, Footer } = Layout;
 
@@ -14,6 +15,8 @@ export const Default: React.FC = () => {
   const toggleMobileMenu = () => {
     dispatch(sidebarActions.toggleMobileMenu(true));
   };
+
+  useInit();
 
   return (
     <Layout className="h-100">
