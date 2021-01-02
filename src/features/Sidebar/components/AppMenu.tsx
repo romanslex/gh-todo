@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { CSSProperties, useCallback } from 'react';
 import Menu from 'antd/es/menu';
 import { Link } from 'react-router-dom';
 import { ERoute } from 'common/const/Router.const';
@@ -13,6 +13,12 @@ import { SubMenuItemWithAddBtn } from 'features/Sidebar/components/SubMenuItemWi
 import { useDispatch, useSelector } from 'react-redux';
 import { projectsSelectors } from 'features/Projects/Projects.selectors';
 import { projectsActions } from 'features/Projects/Projects.slice';
+
+const projectCircleStyle: CSSProperties = {
+  width: '10px',
+  height: '10px',
+  borderRadius: '50%',
+};
 
 export const AppMenu: React.FC = () => {
   const dispatch = useDispatch();
@@ -46,7 +52,15 @@ export const AppMenu: React.FC = () => {
         }
       >
         {projects.map((project) => (
-          <Menu.Item key={project.id}>{project.name}</Menu.Item>
+          <Menu.Item key={project.id}>
+            <div className="d-flex d-flex_align--center">
+              <div
+                style={projectCircleStyle}
+                className={`mr-2 bg-pr-${project.color}`}
+              />
+              <div>{project.name}</div>
+            </div>
+          </Menu.Item>
         ))}
       </Menu.SubMenu>
       <Menu.SubMenu
