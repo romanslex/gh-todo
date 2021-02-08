@@ -17,6 +17,7 @@ import { tagsActions } from 'features/Tags/Tags.slice';
 import { tagsSelectors } from 'features/Tags/Tags.selectors';
 import { filtersActions } from 'features/Filters/Filters.slice';
 import { filtersSelectors } from 'features/Filters/Filters.selectors';
+import { SidebarDropdown } from 'features/Sidebar/components/SidebarDropdown';
 
 const projectCircleStyle: CSSProperties = {
   width: '10px',
@@ -41,6 +42,13 @@ export const AppMenu: React.FC = () => {
     dispatch(filtersActions.toggleEditModal(true));
   }, [dispatch]);
 
+  const removeProject = useCallback(
+    (projectId) => {
+      dispatch(projectsActions.remove.try(projectId));
+    },
+    [dispatch]
+  );
+
   return (
     <Menu theme="dark" mode="inline" selectedKeys={[currentPath]}>
       <Menu.Item key={ERoute.Inbox} icon={<InboxOutlined />}>
@@ -62,13 +70,14 @@ export const AppMenu: React.FC = () => {
         }
       >
         {projects.map((project) => (
-          <Menu.Item key={project.id}>
+          <Menu.Item key={project.id} className="pr-0">
             <div className="d-flex d-flex_align--center">
               <div
                 style={projectCircleStyle}
                 className={`mr-2 bg-pr-${project.color}`}
               />
-              <div>{project.name}</div>
+              <div style={{ flexGrow: 1 }}>{project.name}</div>
+              <SidebarDropdown onRemove={() => removeProject(project.id)} />
             </div>
           </Menu.Item>
         ))}

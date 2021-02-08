@@ -20,6 +20,10 @@ const getCollection = ReduxHelpers.createAction<void, IProjectModel[], string>(
   'projects/getCollection'
 );
 
+const remove = ReduxHelpers.createAction<string, void, string>(
+  'projects/remove'
+);
+
 const projectsSlice = createSlice({
   name: 'projects',
   initialState: initialState as IProjectsSlice,
@@ -56,4 +60,5 @@ export const projectsActions = {
   ...projectsSlice.actions,
   create,
   getCollection,
+  remove,
 };

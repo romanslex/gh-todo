@@ -33,4 +33,19 @@ function* getCollection() {
   );
 }
 
-export const projectsEffects = [create(), getCollection()];
+function* remove() {
+  yield takeEvery(
+    projectsActions.remove.try.type,
+    function* removeWorker({ payload: id }: PayloadAction<string>) {
+      try {
+        yield call(projectsService.remove, id);
+        yield put(projectsActions.remove.success());
+        yield put(projectsActions.getCollection.try());
+      } catch (e) {
+        yield put(projectsActions.remove.fail(e.message));
+      }
+    }
+  );
+}
+
+export const projectsEffects = [create(), getCollection(), remove()];
