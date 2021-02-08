@@ -14,4 +14,10 @@ export const projectsService = {
       return projectsBackend.getCollection();
     });
   },
+
+  remove(id: string) {
+    return doWithDelay(() => {
+      projectsBackend.remove(id);
+    });
+  },
 };
