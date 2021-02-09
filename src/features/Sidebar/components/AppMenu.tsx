@@ -77,7 +77,10 @@ export const AppMenu: React.FC = () => {
                 className={`mr-2 bg-pr-${project.color}`}
               />
               <div style={{ flexGrow: 1 }}>{project.name}</div>
-              <SidebarDropdown onRemove={() => removeProject(project.id)} />
+              <SidebarDropdown
+                onEdit={openEditProjectModal}
+                onRemove={() => removeProject(project.id)}
+              />
             </div>
           </Menu.Item>
         ))}
