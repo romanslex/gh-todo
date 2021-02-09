@@ -14,4 +14,10 @@ export const filtersService = {
       return filtersBackend.getCollection();
     });
   },
+
+  remove(id: string) {
+    return doWithDelay(() => {
+      filtersBackend.remove(id);
+    });
+  },
 };
