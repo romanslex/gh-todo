@@ -39,6 +39,7 @@ const projectsSlice = createSlice({
       })
       .addCase(create.success, (state) => {
         state.isLoading = false;
+        state.isEditModalOpen = false;
       })
       .addCase(create.fail, (state) => {
         state.isLoading = false;
