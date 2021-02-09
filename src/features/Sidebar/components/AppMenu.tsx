@@ -48,9 +48,12 @@ export const AppMenu: React.FC = () => {
     },
     [dispatch]
   );
-
   const removeTag = useCallback(
     (tagId) => dispatch(tagsActions.remove.try(tagId)),
+    [dispatch]
+  );
+  const removeFilter = useCallback(
+    (filterId) => dispatch(filtersActions.remove.try(filterId)),
     [dispatch]
   );
 
@@ -121,7 +124,15 @@ export const AppMenu: React.FC = () => {
         }
       >
         {filters.map((filter) => (
-          <Menu.Item key={filter.id}>{filter.name}</Menu.Item>
+          <Menu.Item key={filter.id} className="pr-0">
+            <div className="d-flex d-flex_align--center">
+              <div className="flex-grow-1">{filter.name}</div>
+              <SidebarDropdown
+                onEdit={openEditFilterModal}
+                onRemove={() => removeFilter(filter.id)}
+              />
+            </div>
+          </Menu.Item>
         ))}
       </Menu.SubMenu>
     </Menu>

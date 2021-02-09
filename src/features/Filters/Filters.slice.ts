@@ -20,6 +20,10 @@ const getCollection = ReduxHelpers.createAction<void, IFilterModel[], string>(
   'filters/getCollection'
 );
 
+const remove = ReduxHelpers.createAction<string, void, string>(
+  'filters/remove'
+);
+
 const filtersSlice = createSlice({
   name: 'filters',
   initialState: initialState as IFiltersSlice,
@@ -56,4 +60,5 @@ export const filtersActions = {
   ...filtersSlice.actions,
   create,
   getCollection,
+  remove,
 };
