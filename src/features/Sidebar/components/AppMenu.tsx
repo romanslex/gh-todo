@@ -49,6 +49,11 @@ export const AppMenu: React.FC = () => {
     [dispatch]
   );
 
+  const removeTag = useCallback(
+    (tagId) => dispatch(tagsActions.remove.try(tagId)),
+    [dispatch]
+  );
+
   return (
     <Menu theme="dark" mode="inline" selectedKeys={[currentPath]}>
       <Menu.Item key={ERoute.Inbox} icon={<InboxOutlined />}>
@@ -100,7 +105,7 @@ export const AppMenu: React.FC = () => {
               <div className="flex-grow-1">{tag.name}</div>
               <SidebarDropdown
                 onEdit={openEditTagModal}
-                onRemove={() => console.log('remove tag')}
+                onRemove={() => removeTag(tag.id)}
               />
             </div>
           </Menu.Item>

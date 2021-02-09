@@ -14,4 +14,10 @@ export const tagsService = {
       return tagsBackend.getCollection();
     });
   },
+
+  remove(id: string) {
+    return doWithDelay(() => {
+      tagsBackend.remove(id);
+    });
+  },
 };

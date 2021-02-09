@@ -30,4 +30,19 @@ function* getCollection() {
   });
 }
 
-export const tagsEffects = [create(), getCollection()];
+function* remove() {
+  yield takeEvery(
+    tagsActions.remove.try.type,
+    function* removeWorker({ payload: id }: PayloadAction<string>) {
+      try {
+        yield call(tagsService.remove, id);
+        yield put(tagsActions.remove.success());
+        yield put(tagsActions.getCollection.try());
+      } catch (e) {
+        yield put(tagsActions.remove.fail(e.message));
+      }
+    }
+  );
+}
+
+export const tagsEffects = [create(), getCollection(), remove()];

@@ -16,4 +16,8 @@ export const tagsBackend = {
   getCollection(): ITagModel[] {
     return Object.values(localStorageService.getCollection(key));
   },
+
+  remove(id: string): void {
+    localStorageService.remove(key, id);
+  },
 };
