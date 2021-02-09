@@ -7,15 +7,22 @@ import MoreOutlined from '@ant-design/icons/MoreOutlined';
 
 interface IComponentProps {
   onRemove: () => void;
+  onEdit: () => void;
 }
 
 export const SidebarDropdown: React.FC<IComponentProps> = ({
   onRemove,
+  onEdit,
 }: IComponentProps) => {
   return (
     <Dropdown
       overlay={
         <Menu>
+          <Menu.Item>
+            <Button size="small" type="text" onClick={onEdit}>
+              Edit
+            </Button>
+          </Menu.Item>
           <Menu.Item>
             <Popconfirm
               placement="topLeft"
