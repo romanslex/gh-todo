@@ -76,7 +76,7 @@ export const AppMenu: React.FC = () => {
                 style={projectCircleStyle}
                 className={`mr-2 bg-pr-${project.color}`}
               />
-              <div style={{ flexGrow: 1 }}>{project.name}</div>
+              <div className="flex-grow-1">{project.name}</div>
               <SidebarDropdown
                 onEdit={openEditProjectModal}
                 onRemove={() => removeProject(project.id)}
@@ -95,7 +95,15 @@ export const AppMenu: React.FC = () => {
         }
       >
         {tags.map((tag) => (
-          <Menu.Item key={tag.id}>{tag.name}</Menu.Item>
+          <Menu.Item key={tag.id} className="pr-0">
+            <div className="d-flex d-flex_align--center">
+              <div className="flex-grow-1">{tag.name}</div>
+              <SidebarDropdown
+                onEdit={openEditTagModal}
+                onRemove={() => console.log('remove tag')}
+              />
+            </div>
+          </Menu.Item>
         ))}
       </Menu.SubMenu>
       <Menu.SubMenu
