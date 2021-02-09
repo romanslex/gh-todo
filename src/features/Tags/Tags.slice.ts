@@ -20,6 +20,8 @@ const getCollection = ReduxHelpers.createAction<void, ITagModel[], string>(
   'tags/getCollection'
 );
 
+const remove = ReduxHelpers.createAction<string, void, string>('tags/remove');
+
 const tagsSlice = createSlice({
   name: 'tags',
   initialState: initialState as ITagsSlice,
@@ -52,4 +54,9 @@ const tagsSlice = createSlice({
 });
 
 export const tagsReducer = tagsSlice.reducer;
-export const tagsActions = { ...tagsSlice.actions, create, getCollection };
+export const tagsActions = {
+  ...tagsSlice.actions,
+  create,
+  getCollection,
+  remove,
+};
