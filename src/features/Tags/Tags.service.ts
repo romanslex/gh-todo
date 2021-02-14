@@ -20,4 +20,10 @@ export const tagsService = {
       tagsBackend.remove(id);
     });
   },
+
+  update(data: ITagModel) {
+    return doWithDelay(() => {
+      tagsBackend.update(data);
+    });
+  },
 };

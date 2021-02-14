@@ -2,6 +2,7 @@ import {
   ICreateTagModel,
   ITagModel,
   ITagsSlice,
+  IToggleEditModalParams,
 } from 'features/Tags/Tags.models';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ReduxHelpers } from 'common/Helpers/Redux.helpers';
@@ -9,6 +10,7 @@ import { ReduxHelpers } from 'common/Helpers/Redux.helpers';
 const initialState: ITagsSlice = {
   isEditModalOpen: false,
   isLoading: false,
+  editTagData: undefined,
   collection: [],
 };
 
@@ -22,12 +24,20 @@ const getCollection = ReduxHelpers.createAction<void, ITagModel[], string>(
 
 const remove = ReduxHelpers.createAction<string, void, string>('tags/remove');
 
+const update = ReduxHelpers.createAction<ITagModel, void, string>(
+  'tags/update'
+);
+
 const tagsSlice = createSlice({
   name: 'tags',
   initialState: initialState as ITagsSlice,
   reducers: {
-    toggleEditModal(state, { payload }: PayloadAction<boolean>) {
-      state.isEditModalOpen = payload;
+    toggleEditModal(
+      state,
+      { payload: { isOpen, data } }: PayloadAction<IToggleEditModalParams>
+    ) {
+      state.editTagData = data;
+      state.isEditModalOpen = isOpen;
     },
   },
   extraReducers: (builder) =>
@@ -51,6 +61,16 @@ const tagsSlice = createSlice({
       })
       .addCase(getCollection.fail, (state) => {
         state.isLoading = false;
+      })
+      .addCase(update.try, (state, { payload }) => {
+        state.editTagData = payload;
+        state.isLoading = true;
+      })
+      .addCase(update.success, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(update.fail, (state) => {
+        state.isLoading = false;
       }),
 });
 
@@ -60,4 +80,5 @@ export const tagsActions = {
   create,
   getCollection,
   remove,
+  update,
 };
