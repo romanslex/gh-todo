@@ -1,4 +1,7 @@
-import { ICreateFilterModel } from 'features/Filters/Filters.models';
+import {
+  ICreateFilterModel,
+  IFilterModel,
+} from 'features/Filters/Filters.models';
 import { doWithDelay } from 'rml-back-mock-helper';
 import { filtersBackend } from 'features/Filters/Filters.backend';
 
@@ -18,6 +21,12 @@ export const filtersService = {
   remove(id: string) {
     return doWithDelay(() => {
       filtersBackend.remove(id);
+    });
+  },
+
+  update(data: IFilterModel) {
+    return doWithDelay(() => {
+      return filtersBackend.update(data);
     });
   },
 };

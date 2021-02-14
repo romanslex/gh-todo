@@ -16,15 +16,28 @@ export const EditFilterModal: React.FC = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(filtersSelectors.getIsLoading);
   const isOpen = useSelector(filtersSelectors.getIsEditModalOpen);
+  const editFilter = useSelector(filtersSelectors.getEditFilterData);
+  const fields = [
+    { name: 'name', value: editFilter?.name },
+    { name: 'query', value: editFilter?.query },
+  ];
 
-  const close = () => dispatch(filtersActions.toggleEditModal(false));
+  const close = () =>
+    dispatch(filtersActions.toggleEditModal({ isOpen: false }));
   const finish = (values: IFormValues) => {
-    dispatch(filtersActions.create.try(values));
+    editFilter &&
+      dispatch(filtersActions.update.try({ ...editFilter, ...values }));
+    !editFilter && dispatch(filtersActions.create.try(values));
   };
 
   return (
     <AppModal title="Create new filter" isOpen={isOpen} close={close}>
-      <Form onFinish={finish} layout="vertical">
+      <Form
+        onFinish={finish}
+        layout="vertical"
+        autoComplete="off"
+        fields={fields}
+      >
         <Form.Item
           label="Name"
           name="name"

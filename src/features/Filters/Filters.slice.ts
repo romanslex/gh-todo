@@ -2,12 +2,14 @@ import {
   ICreateFilterModel,
   IFilterModel,
   IFiltersSlice,
+  IToggleEditModalParams,
 } from 'features/Filters/Filters.models';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ReduxHelpers } from 'common/Helpers/Redux.helpers';
 
 const initialState: IFiltersSlice = {
   isEditModalOpen: false,
+  editFilterData: undefined,
   isLoading: false,
   collection: [],
 };
@@ -24,12 +26,20 @@ const remove = ReduxHelpers.createAction<string, void, string>(
   'filters/remove'
 );
 
+const update = ReduxHelpers.createAction<IFilterModel, void, string>(
+  'filters/update'
+);
+
 const filtersSlice = createSlice({
   name: 'filters',
   initialState: initialState as IFiltersSlice,
   reducers: {
-    toggleEditModal(state, { payload }: PayloadAction<boolean>) {
-      state.isEditModalOpen = payload;
+    toggleEditModal(
+      state,
+      { payload: { isOpen, data } }: PayloadAction<IToggleEditModalParams>
+    ) {
+      state.editFilterData = data;
+      state.isEditModalOpen = isOpen;
     },
   },
   extraReducers: (builder) =>
@@ -53,6 +63,17 @@ const filtersSlice = createSlice({
       })
       .addCase(getCollection.fail, (state) => {
         state.isLoading = false;
+      })
+      .addCase(update.try, (state, { payload }) => {
+        state.editFilterData = payload;
+        state.isLoading = true;
+      })
+      .addCase(update.success.type, (state) => {
+        state.isLoading = false;
+        state.isEditModalOpen = false;
+      })
+      .addCase(update.fail.type, (state) => {
+        state.isLoading = false;
       }),
 });
 
@@ -62,4 +83,5 @@ export const filtersActions = {
   create,
   getCollection,
   remove,
+  update,
 };

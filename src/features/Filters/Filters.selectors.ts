@@ -10,8 +10,12 @@ const getIsLoading = (state: State): boolean => state.filters.isLoading;
 const getCollection = (state: State): IFilterModel[] =>
   state.filters.collection;
 
+const getEditFilterData = (state: State): IFilterModel | undefined =>
+  state.filters.editFilterData;
+
 export const filtersSelectors = {
   getIsEditModalOpen,
   getIsLoading,
   getCollection,
+  getEditFilterData,
 };
