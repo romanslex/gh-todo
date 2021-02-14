@@ -10,12 +10,19 @@ import { tagsReducer } from 'features/Tags/Tags.slice';
 import { tagsEffects } from 'features/Tags/Tags.effects';
 import { filtersReducer } from 'features/Filters/Filters.slice';
 import { filtersEffects } from 'features/Filters/Filters.effects';
+import { tasksReducer } from 'features/Tasks/Tasks.slice';
+import { tasksEffects } from 'features/Tasks/Tasks.effects';
 
 export const history = createBrowserHistory();
 const sagaMiddleware = createSagaMiddleware();
 
 function* rootSaga() {
-  yield all([...projectsEffects, ...tagsEffects, ...filtersEffects]);
+  yield all([
+    ...projectsEffects,
+    ...tagsEffects,
+    ...filtersEffects,
+    ...tasksEffects,
+  ]);
 }
 
 export const store = configureStore({
@@ -27,6 +34,7 @@ export const store = configureStore({
     projects: projectsReducer,
     tags: tagsReducer,
     filters: filtersReducer,
+    tasks: tasksReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(routerMiddleware(history), sagaMiddleware),
