@@ -13,8 +13,12 @@ const getIsLoading = (state: State): boolean => state.projects.isLoading;
 const getCollection = (state: State): IProjectModel[] =>
   state.projects.collection;
 
+const getEditProjectData = (state: State): IProjectModel | undefined =>
+  state.projects.editProjectData;
+
 export const projectsSelectors = {
   getIsEditModalOpen,
   getIsLoading,
   getCollection,
+  getEditProjectData,
 };

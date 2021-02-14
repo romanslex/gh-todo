@@ -1,5 +1,6 @@
 export interface IProjectsSlice {
   isEditModalOpen: boolean;
+  editProjectData?: IProjectModel;
   isLoading: boolean;
   collection: IProjectModel[];
 }
@@ -13,6 +14,11 @@ export interface IProjectModel {
 export interface ICreateProjectModel {
   name: string;
   color: EProjectColor;
+}
+
+export interface IToggleEditModalParams {
+  isOpen: boolean;
+  data?: IProjectModel;
 }
 
 export enum EProjectColor {

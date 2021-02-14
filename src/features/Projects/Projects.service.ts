@@ -1,5 +1,8 @@
 import { doWithDelay } from 'rml-back-mock-helper';
-import { ICreateProjectModel } from 'features/Projects/Projects.models';
+import {
+  ICreateProjectModel,
+  IProjectModel,
+} from 'features/Projects/Projects.models';
 import { projectsBackend } from 'features/Projects/Projects.backend';
 
 export const projectsService = {
@@ -19,5 +22,11 @@ export const projectsService = {
     return doWithDelay(() => {
       projectsBackend.remove(id);
     });
+  },
+
+  update(data: IProjectModel) {
+    return doWithDelay(() => {
+      projectsBackend.update(data);
+    }, 1000);
   },
 };

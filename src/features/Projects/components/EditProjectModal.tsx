@@ -18,15 +18,34 @@ export const EditProjectModal: React.FC = () => {
   const dispatch = useDispatch();
   const isOpen = useSelector(projectsSelectors.getIsEditModalOpen);
   const isLoading = useSelector(projectsSelectors.getIsLoading);
+  const editProject = useSelector(projectsSelectors.getEditProjectData);
+  const fields = [
+    {
+      name: 'name',
+      value: editProject?.name,
+    },
+    {
+      name: 'color',
+      value: editProject?.color,
+    },
+  ];
 
-  const close = () => dispatch(projectsActions.toggleEditModal(false));
+  const close = () =>
+    dispatch(projectsActions.toggleEditModal({ isOpen: false }));
   const finish = (values: IFormValues) => {
-    dispatch(projectsActions.create.try(values));
+    editProject &&
+      dispatch(projectsActions.update.try({ ...editProject, ...values }));
+    !editProject && dispatch(projectsActions.create.try(values));
   };
 
   return (
     <AppModal title="Create new project" isOpen={isOpen} close={close}>
-      <Form layout="vertical" onFinish={finish}>
+      <Form
+        layout="vertical"
+        onFinish={finish}
+        autoComplete="off"
+        fields={fields}
+      >
         <Form.Item
           label="Name"
           name="name"
