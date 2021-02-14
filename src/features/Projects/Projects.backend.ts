@@ -23,4 +23,8 @@ export const projectsBackend = {
   remove(id: string): void {
     localStorageService.remove(key, id);
   },
+
+  update(data: IProjectModel): void {
+    localStorageService.update(key, data);
+  },
 };

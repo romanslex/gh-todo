@@ -1,7 +1,10 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { projectsActions } from 'features/Projects/Projects.slice';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { ICreateProjectModel } from 'features/Projects/Projects.models';
+import {
+  ICreateProjectModel,
+  IProjectModel,
+} from 'features/Projects/Projects.models';
 import { projectsService } from 'features/Projects/Projects.service';
 
 function* create() {
@@ -48,4 +51,19 @@ function* remove() {
   );
 }
 
-export const projectsEffects = [create(), getCollection(), remove()];
+function* update() {
+  yield takeEvery(
+    projectsActions.update.try,
+    function* updateWorker({ payload }: PayloadAction<IProjectModel>) {
+      try {
+        yield call(projectsService.update, payload);
+        yield put(projectsActions.update.success());
+        yield put(projectsActions.getCollection.try());
+      } catch (e) {
+        yield put(projectsActions.update.fail(e.message));
+      }
+    }
+  );
+}
+
+export const projectsEffects = [create(), getCollection(), remove(), update()];
