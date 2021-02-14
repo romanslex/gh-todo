@@ -23,4 +23,8 @@ export const filtersBackend = {
   remove(id: string): void {
     localStorageService.remove(key, id);
   },
+
+  update(data: IFilterModel) {
+    localStorageService.update(key, data);
+  },
 };

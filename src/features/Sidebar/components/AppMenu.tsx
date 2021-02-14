@@ -19,6 +19,7 @@ import { filtersActions } from 'features/Filters/Filters.slice';
 import { filtersSelectors } from 'features/Filters/Filters.selectors';
 import { SidebarDropdown } from 'features/Sidebar/components/SidebarDropdown';
 import { IProjectModel } from 'features/Projects/Projects.models';
+import { IFilterModel } from 'features/Filters/Filters.models';
 
 const projectCircleStyle: CSSProperties = {
   width: '10px',
@@ -42,9 +43,12 @@ export const AppMenu: React.FC = () => {
   const openEditTagModal = useCallback(() => {
     dispatch(tagsActions.toggleEditModal(true));
   }, [dispatch]);
-  const openEditFilterModal = useCallback(() => {
-    dispatch(filtersActions.toggleEditModal(true));
-  }, [dispatch]);
+  const openEditFilterModal = useCallback(
+    (data?: IFilterModel) => {
+      dispatch(filtersActions.toggleEditModal({ isOpen: true, data }));
+    },
+    [dispatch]
+  );
 
   const removeProject = useCallback(
     (projectId) => {
@@ -132,7 +136,7 @@ export const AppMenu: React.FC = () => {
             <div className="d-flex d-flex_align--center">
               <div className="flex-grow-1">{filter.name}</div>
               <SidebarDropdown
-                onEdit={openEditFilterModal}
+                onEdit={() => openEditFilterModal(filter)}
                 onRemove={() => removeFilter(filter.id)}
               />
             </div>

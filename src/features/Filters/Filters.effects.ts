@@ -1,7 +1,10 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { filtersActions } from 'features/Filters/Filters.slice';
-import { ICreateFilterModel } from 'features/Filters/Filters.models';
+import {
+  ICreateFilterModel,
+  IFilterModel,
+} from 'features/Filters/Filters.models';
 import { filtersService } from 'features/Filters/Filters.service';
 
 function* create() {
@@ -48,4 +51,19 @@ function* remove() {
   );
 }
 
-export const filtersEffects = [create(), getCollection(), remove()];
+function* update() {
+  yield takeEvery(
+    filtersActions.update.try.type,
+    function* updateWorker({ payload }: PayloadAction<IFilterModel>) {
+      try {
+        yield call(filtersService.update, payload);
+        yield put(filtersActions.update.success());
+        yield put(filtersActions.getCollection.try());
+      } catch (e) {
+        yield put(filtersActions.update.fail(e.message));
+      }
+    }
+  );
+}
+
+export const filtersEffects = [create(), getCollection(), remove(), update()];
