@@ -9,8 +9,12 @@ const getIsLoading = (state: State): boolean => state.tags.isLoading;
 
 const getCollection = (state: State): ITagModel[] => state.tags.collection;
 
+const getEditTagData = (state: State): ITagModel | undefined =>
+  state.tags.editTagData;
+
 export const tagsSelectors = {
   getIsEditModalOpen,
   getIsLoading,
   getCollection,
+  getEditTagData,
 };

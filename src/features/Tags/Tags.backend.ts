@@ -20,4 +20,8 @@ export const tagsBackend = {
   remove(id: string): void {
     localStorageService.remove(key, id);
   },
+
+  update(data: ITagModel) {
+    localStorageService.update(key, data);
+  },
 };

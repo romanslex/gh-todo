@@ -1,7 +1,7 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { tagsActions } from 'features/Tags/Tags.slice';
-import { ICreateTagModel } from 'features/Tags/Tags.models';
+import { ICreateTagModel, ITagModel } from 'features/Tags/Tags.models';
 import { tagsService } from 'features/Tags/Tags.service';
 
 function* create() {
@@ -45,4 +45,19 @@ function* remove() {
   );
 }
 
-export const tagsEffects = [create(), getCollection(), remove()];
+function* update() {
+  yield takeEvery(
+    tagsActions.update.try.type,
+    function* updateWorker({ payload }: PayloadAction<ITagModel>) {
+      try {
+        yield call(tagsService.update, payload);
+        yield put(tagsActions.update.success());
+        yield put(tagsActions.getCollection.try());
+      } catch (e) {
+        yield put(tagsActions.update.fail(e.message));
+      }
+    }
+  );
+}
+
+export const tagsEffects = [create(), getCollection(), remove(), update()];
