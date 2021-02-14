@@ -9,6 +9,7 @@ import { EditProjectModal } from 'features/Projects/components/EditProjectModal'
 import { useInit } from 'common/hooks/Init.hooks';
 import { EditTagModal } from 'features/Tags/components/EditTagModal';
 import { EditFilterModal } from 'features/Filters/components/EditFilterModal';
+import { EditTaskForm } from 'features/Tasks/components/EditTaskForm';
 
 const { Header, Content, Footer } = Layout;
 
@@ -33,7 +34,10 @@ export const Default: React.FC = () => {
             <MenuOutlined />
           </Button>
         </Header>
-        <Content className="p-7">Content</Content>
+        <Content className="p-7">
+          Content
+          <EditTaskForm />
+        </Content>
         <Footer>Footer</Footer>
       </Layout>
       <EditProjectModal />
