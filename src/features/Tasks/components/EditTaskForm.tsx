@@ -18,7 +18,7 @@ import {
 
 interface IFormValues {
   name: string;
-  project?: string;
+  project: string;
   tags?: string[];
   dueDate?: Moment;
 }
@@ -56,7 +56,11 @@ export const EditTaskForm: React.FC = () => {
             </Form.Item>
           </Col>
           <Col span={24} md={6}>
-            <Form.Item name="project" label="Project">
+            <Form.Item
+              name="project"
+              label="Project"
+              rules={[{ required: true, message: 'Field is required' }]}
+            >
               <Select
                 showSearch
                 className="w-100"
