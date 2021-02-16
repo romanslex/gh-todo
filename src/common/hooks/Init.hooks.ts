@@ -18,4 +18,8 @@ export function useInit() {
   useEffect(() => {
     dispatch(filtersActions.getCollection.try());
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(projectsActions.initInbox());
+  });
 }

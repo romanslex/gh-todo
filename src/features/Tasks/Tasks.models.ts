@@ -9,4 +9,9 @@ export interface ITaskModel {
   dueDate: number;
 }
 
-export type ICreateTaskModel = Partial<Omit<ITaskModel, 'id'>>;
+export interface ICreateTaskModel {
+  name: string;
+  project: string;
+  tags?: string[];
+  dueDate?: number;
+}

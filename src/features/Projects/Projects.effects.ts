@@ -66,4 +66,16 @@ function* update() {
   );
 }
 
-export const projectsEffects = [create(), getCollection(), remove(), update()];
+function* initInboxProject() {
+  yield takeEvery(projectsActions.initInbox, function* worker() {
+    yield call(projectsService.initInboxProject);
+  });
+}
+
+export const projectsEffects = [
+  create(),
+  getCollection(),
+  remove(),
+  update(),
+  initInboxProject(),
+];

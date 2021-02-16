@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react';
-import { EProjectColor } from 'features/Projects/Projects.models';
+import { EProjectColor } from 'features/Projects/backend/Projects.models';
 
 const colorItemRadius = 30;
 const colorItemStyle: CSSProperties = {
