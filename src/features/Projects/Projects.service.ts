@@ -3,7 +3,7 @@ import {
   ICreateProjectModel,
   IProjectModel,
 } from 'features/Projects/Projects.models';
-import { projectsBackend } from 'features/Projects/Projects.backend';
+import { projectsBackend } from 'features/Projects/backend/Projects.backend';
 
 export const projectsService = {
   create(data: ICreateProjectModel) {
@@ -28,5 +28,9 @@ export const projectsService = {
     return doWithDelay(() => {
       projectsBackend.update(data);
     }, 1000);
+  },
+
+  initInboxProject() {
+    projectsBackend.createDefaultInboxProject();
   },
 };

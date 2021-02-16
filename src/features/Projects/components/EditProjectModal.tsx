@@ -7,7 +7,7 @@ import Form from 'antd/es/form';
 import Input from 'antd/es/input';
 import Button from 'antd/es/button';
 import { ColorPicker } from 'common/components/ColorPicker';
-import { EProjectColor } from 'features/Projects/Projects.models';
+import { EProjectColor } from 'features/Projects/backend/Projects.models';
 
 interface IFormValues {
   name: string;

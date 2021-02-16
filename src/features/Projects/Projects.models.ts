@@ -1,3 +1,5 @@
+import { EProjectColor } from 'features/Projects/backend/Projects.models';
+
 export interface IProjectsSlice {
   isEditModalOpen: boolean;
   editProjectData?: IProjectModel;
@@ -19,15 +21,4 @@ export interface ICreateProjectModel {
 export interface IToggleEditModalParams {
   isOpen: boolean;
   data?: IProjectModel;
-}
-
-export enum EProjectColor {
-  Red = 'red',
-  Orange = 'orange',
-  Yellow = 'yellow',
-  Green = 'green',
-  Cyan = 'cyan',
-  Blue = 'blue',
-  Magenta = 'magenta',
-  Purple = 'purple',
 }

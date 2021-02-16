@@ -4,7 +4,7 @@ import {
   IProjectsSlice,
   IToggleEditModalParams,
 } from 'features/Projects/Projects.models';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ReduxHelpers } from 'common/Helpers/Redux.helpers';
 
 const initialState: IProjectsSlice = {
@@ -29,6 +29,8 @@ const remove = ReduxHelpers.createAction<string, void, string>(
 const update = ReduxHelpers.createAction<IProjectModel, void, string>(
   'projects/update'
 );
+
+const initInbox = createAction('projects/initInbox');
 
 const projectsSlice = createSlice({
   name: 'projects',
@@ -83,4 +85,5 @@ export const projectsActions = {
   getCollection,
   remove,
   update,
+  initInbox,
 };
