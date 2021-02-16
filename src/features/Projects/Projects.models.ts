@@ -1,4 +1,7 @@
-import { EProjectColor } from 'features/Projects/backend/Projects.models';
+import {
+  EProjectColor,
+  IBackendProjectModel,
+} from 'features/Projects/backend/Projects.models';
 
 export interface IProjectsSlice {
   isEditModalOpen: boolean;
@@ -7,11 +10,7 @@ export interface IProjectsSlice {
   collection: IProjectModel[];
 }
 
-export interface IProjectModel {
-  id: string;
-  name: string;
-  color: EProjectColor;
-}
+export type IProjectModel = IBackendProjectModel;
 
 export interface ICreateProjectModel {
   name: string;

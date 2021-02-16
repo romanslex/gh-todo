@@ -31,7 +31,7 @@ const projectCircleStyle: CSSProperties = {
 export const AppMenu: React.FC = () => {
   const dispatch = useDispatch();
   const currentPath = RouterHooks.useCurrentPath();
-  const projects = useSelector(projectsSelectors.getCollection);
+  const projects = useSelector(projectsSelectors.getCollectionWithoutInbox);
   const tags = useSelector(tagsSelectors.getCollection);
   const filters = useSelector(filtersSelectors.getCollection);
 
