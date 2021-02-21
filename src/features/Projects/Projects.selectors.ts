@@ -22,10 +22,14 @@ const getCollectionWithoutInbox = createSelector(
   (collection) => collection.filter((project) => !project.isInbox)
 );
 
+const getInboxProject = (state: State): IProjectModel | undefined =>
+  state.projects.collection.find((project) => project.isInbox);
+
 export const projectsSelectors = {
   getIsEditModalOpen,
   getIsLoading,
   getCollection,
   getEditProjectData,
   getCollectionWithoutInbox,
+  getInboxProject,
 };

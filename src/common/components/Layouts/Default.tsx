@@ -10,6 +10,9 @@ import { useInit } from 'common/hooks/Init.hooks';
 import { EditTagModal } from 'features/Tags/components/EditTagModal';
 import { EditFilterModal } from 'features/Filters/components/EditFilterModal';
 import { EditTaskForm } from 'features/Tasks/components/EditTaskForm';
+import { ERoute } from 'common/const/Router.const';
+import { InboxPage } from 'common/components/Pages/InboxPage';
+import { Switch, Route } from 'react-router-dom';
 
 const { Header, Content, Footer } = Layout;
 
@@ -35,7 +38,9 @@ export const Default: React.FC = () => {
           </Button>
         </Header>
         <Content className="p-7">
-          Content
+          <Switch>
+            <Route path={ERoute.Inbox} component={InboxPage} />
+          </Switch>
           <EditTaskForm />
         </Content>
         <Footer>Footer</Footer>
