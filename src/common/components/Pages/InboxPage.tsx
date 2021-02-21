@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { tasksSelectors } from 'features/Tasks/Tasks.selectors';
 import { tasksActions } from 'features/Tasks/Tasks.slice';
 import { projectsSelectors } from 'features/Projects/Projects.selectors';
+import { TaskItem } from 'features/Tasks/components/TaskItem';
 
 export const InboxPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ export const InboxPage: React.FC = () => {
   return (
     <div>
       {tasks.map((task) => (
-        <div key={task.id}>{task.name}</div>
+        <TaskItem key={task.id} task={task} />
       ))}
     </div>
   );

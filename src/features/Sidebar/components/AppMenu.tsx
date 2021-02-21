@@ -1,4 +1,4 @@
-import React, { CSSProperties, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import Menu from 'antd/es/menu';
 import { Link } from 'react-router-dom';
 import { ERoute } from 'common/const/Router.const';
@@ -21,12 +21,7 @@ import { SidebarDropdown } from 'features/Sidebar/components/SidebarDropdown';
 import { IProjectModel } from 'features/Projects/Projects.models';
 import { IFilterModel } from 'features/Filters/Filters.models';
 import { ITagModel } from 'features/Tags/Tags.models';
-
-const projectCircleStyle: CSSProperties = {
-  width: '10px',
-  height: '10px',
-  borderRadius: '50%',
-};
+import { ColorCircle } from 'common/components/ColorCircle';
 
 export const AppMenu: React.FC = () => {
   const dispatch = useDispatch();
@@ -92,9 +87,11 @@ export const AppMenu: React.FC = () => {
         {projects.map((project) => (
           <Menu.Item key={project.id} className="pr-0">
             <div className="d-flex d-flex_align--center">
-              <div
-                style={projectCircleStyle}
-                className={`mr-2 bg-pr-${project.color}`}
+              <ColorCircle
+                width="10px"
+                height="10px"
+                color={project.color}
+                className="mr-2"
               />
               <div className="flex-grow-1">{project.name}</div>
               <SidebarDropdown
