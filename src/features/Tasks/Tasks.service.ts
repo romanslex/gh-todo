@@ -1,11 +1,21 @@
-import { ICreateTaskModel } from 'features/Tasks/Tasks.models';
 import { doWithDelay } from 'rml-back-mock-helper';
-import { tasksBackend } from 'features/Tasks/backend/Tasks.backend';
+import {
+  ICreateTaskParams,
+  IGetTaskCollectionParams,
+} from 'common/models/requestsModels';
+import { tasksController } from 'backend/features/Tasks/Tasks.controller';
+import { ITaskDTO } from 'common/models/dtos';
 
 export const tasksService = {
-  create(data: ICreateTaskModel) {
+  create(data: ICreateTaskParams) {
     return doWithDelay(() => {
-      tasksBackend.create(data);
+      tasksController.create(data);
     }, 1000);
+  },
+
+  getCollection(data: IGetTaskCollectionParams): Promise<ITaskDTO[]> {
+    return doWithDelay(() => {
+      return tasksController.getCollection(data);
+    }, 500);
   },
 };
