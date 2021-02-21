@@ -13,6 +13,7 @@ import { EditTaskForm } from 'features/Tasks/components/EditTaskForm';
 import { ERoute } from 'common/const/Router.const';
 import { InboxPage } from 'common/components/Pages/InboxPage';
 import { Switch, Route } from 'react-router-dom';
+import { ProjectPage } from 'common/components/Pages/ProjectPage';
 
 const { Header, Content, Footer } = Layout;
 
@@ -40,6 +41,7 @@ export const Default: React.FC = () => {
         <Content className="p-7">
           <Switch>
             <Route path={ERoute.Inbox} component={InboxPage} />
+            <Route path={`${ERoute.Project}/:id`} component={ProjectPage} />
           </Switch>
           <EditTaskForm />
         </Content>

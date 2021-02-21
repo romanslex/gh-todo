@@ -17,6 +17,7 @@ const getInboxTasks = createSelector(
 const getIsLoading = (state: State) => state.tasks.isLoading;
 
 export const tasksSelectors = {
+  getCollection,
   getInboxTasks,
   getIsLoading,
 };
