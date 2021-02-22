@@ -119,13 +119,16 @@ export const AppMenu: React.FC = () => {
       >
         {tags.map((tag) => (
           <Menu.Item key={tag.id} className="pr-0">
-            <div className="d-flex d-flex_align--center">
+            <Link
+              to={getUrl(ERoute.Tag, tag.id)}
+              className="d-flex d-flex_align--center"
+            >
               <div className="flex-grow-1">{tag.name}</div>
               <SidebarDropdown
                 onEdit={() => openEditTagModal(tag)}
                 onRemove={() => removeTag(tag.id)}
               />
-            </div>
+            </Link>
           </Menu.Item>
         ))}
       </Menu.SubMenu>
