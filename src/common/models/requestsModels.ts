@@ -6,10 +6,6 @@ export interface IGetTaskCollectionByTagParams {
   tagId: string;
 }
 
-export interface IGetTaskCollectionByFilterParams {
-  filterId: string;
-}
-
 export interface IGetTaskCollectionByDateParams {
   startDate: string;
   endDate: string;
@@ -18,7 +14,6 @@ export interface IGetTaskCollectionByDateParams {
 export type IGetTaskCollectionParams =
   | IGetTaskCollectionByProjectParams
   | IGetTaskCollectionByTagParams
-  | IGetTaskCollectionByFilterParams
   | IGetTaskCollectionByDateParams;
 
 export const isByProjectParams = (
@@ -36,11 +31,6 @@ export const isByTagParams = (
   value: IGetTaskCollectionParams
 ): value is IGetTaskCollectionByTagParams =>
   typeof (value as IGetTaskCollectionByTagParams).tagId !== 'undefined';
-
-export const isByFilterParams = (
-  value: IGetTaskCollectionParams
-): value is IGetTaskCollectionByFilterParams =>
-  typeof (value as IGetTaskCollectionByFilterParams).filterId !== 'undefined';
 
 export interface ICreateTaskParams {
   name: string;
