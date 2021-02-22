@@ -11,7 +11,8 @@ export interface IGetTaskCollectionByFilterParams {
 }
 
 export interface IGetTaskCollectionByDateParams {
-  date: number;
+  startDate: string;
+  endDate: string;
 }
 
 export type IGetTaskCollectionParams =
@@ -28,7 +29,8 @@ export const isByProjectParams = (
 export const isByDateParams = (
   value: IGetTaskCollectionParams
 ): value is IGetTaskCollectionByDateParams =>
-  typeof (value as IGetTaskCollectionByDateParams).date !== 'undefined';
+  typeof (value as IGetTaskCollectionByDateParams).startDate !== 'undefined' &&
+  typeof (value as IGetTaskCollectionByDateParams).endDate !== 'undefined';
 
 export interface ICreateTaskParams {
   name: string;

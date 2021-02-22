@@ -1,24 +1,30 @@
 import React, { useEffect } from 'react';
+import { TaskItem } from 'features/Tasks/components/TaskItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { tasksSelectors } from 'features/Tasks/Tasks.selectors';
 import { tasksActions } from 'features/Tasks/Tasks.slice';
-import { DateHelper } from 'common/Helpers/Date.helpers';
-import { TaskItem } from 'features/Tasks/components/TaskItem';
+import moment from 'moment';
+import { mapMomentToString } from 'common/Helpers/Date.helpers';
 
-export const TodayPage: React.FC = () => {
+export const WeekPage: React.FC = () => {
   const dispatch = useDispatch();
   const tasks = useSelector(tasksSelectors.getCollection);
-  const today = DateHelper.getTodayDateString();
 
   useEffect(() => {
+    const startDate = moment();
+    const endDate = moment().add(7, 'days');
+
     dispatch(
-      tasksActions.getCollection.try({ startDate: today, endDate: today })
+      tasksActions.getCollection.try({
+        startDate: mapMomentToString(startDate),
+        endDate: mapMomentToString(endDate),
+      })
     );
-  }, [dispatch, today]);
+  }, [dispatch]);
 
   return (
     <div>
-      Today page
+      Week page
       {tasks.map((task) => (
         <TaskItem key={task.id} task={task} />
       ))}

@@ -9,4 +9,20 @@ export const momentToNumber = (date?: Moment): number | undefined => {
 export const formatDateNumber = (date: number): string =>
   moment.unix(date).format(DATE_DISPLAY_FORMAT);
 
-export const getTodayDateNumber = (): number => moment().unix();
+export const mapMomentToString = (date: Moment): string =>
+  formatDateNumber(date.unix());
+
+const getTodayDateString = (): string => moment().format(DATE_DISPLAY_FORMAT);
+
+const mapStringToMoment = (
+  date: string,
+  format: string = DATE_DISPLAY_FORMAT
+): Moment => moment(date, format);
+
+const mapNumberToMoment = (date: number): Moment => moment.unix(date);
+
+export const DateHelper = {
+  mapStringToMoment,
+  mapNumberToMoment,
+  getTodayDateString,
+};
