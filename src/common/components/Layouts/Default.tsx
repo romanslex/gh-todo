@@ -14,6 +14,8 @@ import { ERoute } from 'common/const/Router.const';
 import { InboxPage } from 'common/components/Pages/InboxPage';
 import { Switch, Route } from 'react-router-dom';
 import { ProjectPage } from 'common/components/Pages/ProjectPage';
+import { TodayPage } from 'common/components/Pages/TodayPage';
+import { WeekPage } from 'common/components/Pages/WeekPage';
 
 const { Header, Content, Footer } = Layout;
 
@@ -41,6 +43,8 @@ export const Default: React.FC = () => {
         <Content className="p-7">
           <Switch>
             <Route path={ERoute.Inbox} component={InboxPage} />
+            <Route path={ERoute.Today} component={TodayPage} />
+            <Route path={ERoute.Week} component={WeekPage} />
             <Route path={`${ERoute.Project}/:id`} component={ProjectPage} />
           </Switch>
           <EditTaskForm />
