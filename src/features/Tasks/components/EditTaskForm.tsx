@@ -12,6 +12,7 @@ import Button from 'antd/es/button';
 import { Moment } from 'moment';
 import { tasksActions } from 'features/Tasks/Tasks.slice';
 import { DATE_DISPLAY_FORMAT, DateHelper } from 'common/Helpers/Date.helpers';
+import { tasksSelectors } from 'features/Tasks/Tasks.selectors';
 
 interface IFormValues {
   name: string;
@@ -23,6 +24,7 @@ interface IFormValues {
 export const EditTaskForm: React.FC = () => {
   const projects = useSelector(projectsSelectors.getCollection);
   const tags = useSelector(tagsSelectors.getCollection);
+  const isOpen = useSelector(tasksSelectors.getEditFormIsOpen);
   const dispatch = useDispatch();
 
   const submit = (values: IFormValues) => {
@@ -34,6 +36,14 @@ export const EditTaskForm: React.FC = () => {
       })
     );
   };
+
+  const cancel = () => {
+    dispatch(tasksActions.toggleEditForm({ isOpen: false }));
+  };
+
+  if (!isOpen) {
+    return null;
+  }
 
   return (
     <Card>
@@ -92,7 +102,9 @@ export const EditTaskForm: React.FC = () => {
             <Button type="primary" htmlType="submit">
               Add
             </Button>
-            <Button type="link">Cancel</Button>
+            <Button onClick={cancel} type="link">
+              Cancel
+            </Button>
           </Col>
         </Row>
       </Form>

@@ -16,8 +16,11 @@ const getInboxTasks = createSelector(
 
 const getIsLoading = (state: State) => state.tasks.isLoading;
 
+const getEditFormIsOpen = (state: State) => state.tasks.editForm.isOpen;
+
 export const tasksSelectors = {
   getCollection,
   getInboxTasks,
   getIsLoading,
+  getEditFormIsOpen,
 };
