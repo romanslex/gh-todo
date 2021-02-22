@@ -28,6 +28,8 @@ export const EditTaskForm: React.FC = () => {
   const editTask = useSelector(tasksSelectors.getEditFormData);
   const dispatch = useDispatch();
 
+  const title = editTask ? 'Edit task' : 'Create task';
+
   const fields = [
     {
       name: 'name',
@@ -77,7 +79,7 @@ export const EditTaskForm: React.FC = () => {
 
   return (
     <AppModal
-      title="Create task"
+      title={title}
       isOpen={isOpen}
       close={() => tasksActions.toggleEditForm({ isOpen: false })}
     >
@@ -131,7 +133,7 @@ export const EditTaskForm: React.FC = () => {
         <Row justify="end">
           <Col>
             <Button type="primary" htmlType="submit">
-              Add
+              Save
             </Button>
             <Button onClick={cancel} type="link">
               Cancel
