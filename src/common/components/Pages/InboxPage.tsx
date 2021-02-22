@@ -4,6 +4,7 @@ import { tasksSelectors } from 'features/Tasks/Tasks.selectors';
 import { tasksActions } from 'features/Tasks/Tasks.slice';
 import { projectsSelectors } from 'features/Projects/Projects.selectors';
 import { TaskItem } from 'features/Tasks/components/TaskItem';
+import { AddTaskButton } from 'features/Tasks/components/AddTaskButton';
 
 export const InboxPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ export const InboxPage: React.FC = () => {
       {tasks.map((task) => (
         <TaskItem key={task.id} task={task} />
       ))}
+      <AddTaskButton />
     </div>
   );
 };
