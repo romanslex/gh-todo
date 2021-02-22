@@ -6,17 +6,21 @@ import {
   ICreateTaskParams,
   IGetTaskCollectionParams,
   isByDateParams,
+  isByFilterParams,
   isByProjectParams,
   isByTagParams,
 } from 'common/models/requestsModels';
 import { Tag } from 'backend/models/Tag';
 import { Project } from 'backend/models/Project';
 import { DateHelper } from 'common/Helpers/Date.helpers';
+import { getByFilter } from 'backend/features/Tasks/GetByFilter.service';
+import { Filter } from 'backend/models/Filter';
 
 const tasksKey = 'tasks';
 const taskTagKey = 'task_tag';
 const tagsKey = 'tags';
 const projectsKey = 'projects';
+const filtersKey = 'filters';
 
 export const tasksController = {
   create(data: ICreateTaskParams): void {
@@ -69,6 +73,11 @@ export const tasksController = {
         .filter((item) => item.tagId === data.tagId)
         .map((item) => item.taskId);
       tasks = tasks.filter((task) => neededTasksIds.includes(task.id));
+    }
+
+    if (isByFilterParams(data)) {
+      const filter = localStorageService.get<Filter>(filtersKey, data.filterId);
+      tasks = getByFilter(filter, tasks);
     }
 
     return tasks.map((task) => ({
