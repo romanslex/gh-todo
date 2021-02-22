@@ -3,7 +3,7 @@ import { ITaskModel } from 'features/Tasks/Tasks.models';
 import { Col, Row } from 'antd/es/grid';
 import Checkbox from 'antd/es/checkbox/Checkbox';
 import { ColorCircle } from 'common/components/ColorCircle';
-import { formatDateNumber } from 'common/Helpers/Date.helpers';
+import { DateHelper } from 'common/Helpers/Date.helpers';
 import CalendarOutlined from '@ant-design/icons/CalendarOutlined';
 import Card from 'antd/es/card';
 
@@ -48,7 +48,7 @@ export const TaskItem: React.FC<IComponentProps> = ({
                 <>
                   <CalendarOutlined className="mr-1 c-danger" />
                   <span className="mr-2 fs-xs c-danger">
-                    {formatDateNumber(dueDate)}
+                    {DateHelper.mapNumberToString(dueDate)}
                   </span>
                 </>
               )}

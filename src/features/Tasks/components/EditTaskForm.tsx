@@ -11,10 +11,7 @@ import Card from 'antd/es/card';
 import Button from 'antd/es/button';
 import { Moment } from 'moment';
 import { tasksActions } from 'features/Tasks/Tasks.slice';
-import {
-  DATE_DISPLAY_FORMAT,
-  momentToNumber,
-} from 'common/Helpers/Date.helpers';
+import { DATE_DISPLAY_FORMAT, DateHelper } from 'common/Helpers/Date.helpers';
 
 interface IFormValues {
   name: string;
@@ -31,7 +28,10 @@ export const EditTaskForm: React.FC = () => {
   const submit = (values: IFormValues) => {
     const { dueDate } = values;
     dispatch(
-      tasksActions.create.try({ ...values, dueDate: momentToNumber(dueDate) })
+      tasksActions.create.try({
+        ...values,
+        dueDate: dueDate ? DateHelper.mapMomentToNumber(dueDate) : undefined,
+      })
     );
   };
 

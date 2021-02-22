@@ -2,15 +2,8 @@ import moment, { Moment } from 'moment';
 
 export const DATE_DISPLAY_FORMAT = 'DD.MM.YYYY';
 
-export const momentToNumber = (date?: Moment): number | undefined => {
-  return date?.unix();
-};
-
-export const formatDateNumber = (date: number): string =>
-  moment.unix(date).format(DATE_DISPLAY_FORMAT);
-
-export const mapMomentToString = (date: Moment): string =>
-  formatDateNumber(date.unix());
+const mapMomentToString = (date: Moment): string =>
+  date.format(DATE_DISPLAY_FORMAT);
 
 const getTodayDateString = (): string => moment().format(DATE_DISPLAY_FORMAT);
 
@@ -21,8 +14,16 @@ const mapStringToMoment = (
 
 const mapNumberToMoment = (date: number): Moment => moment.unix(date);
 
+const mapMomentToNumber = (date: Moment): number => date.unix();
+
+const mapNumberToString = (date: number): string =>
+  mapMomentToString(mapNumberToMoment(date));
+
 export const DateHelper = {
   mapStringToMoment,
   mapNumberToMoment,
   getTodayDateString,
+  mapMomentToNumber,
+  mapNumberToString,
+  mapMomentToString,
 };

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { tasksSelectors } from 'features/Tasks/Tasks.selectors';
 import { tasksActions } from 'features/Tasks/Tasks.slice';
 import moment from 'moment';
-import { mapMomentToString } from 'common/Helpers/Date.helpers';
+import { DateHelper } from 'common/Helpers/Date.helpers';
 
 export const WeekPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -16,8 +16,8 @@ export const WeekPage: React.FC = () => {
 
     dispatch(
       tasksActions.getCollection.try({
-        startDate: mapMomentToString(startDate),
-        endDate: mapMomentToString(endDate),
+        startDate: DateHelper.mapMomentToString(startDate),
+        endDate: DateHelper.mapMomentToString(endDate),
       })
     );
   }, [dispatch]);
