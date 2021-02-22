@@ -25,16 +25,48 @@ export const EditTaskForm: React.FC = () => {
   const projects = useSelector(projectsSelectors.getCollection);
   const tags = useSelector(tagsSelectors.getCollection);
   const isOpen = useSelector(tasksSelectors.getEditFormIsOpen);
+  const editTask = useSelector(tasksSelectors.getEditFormData);
   const dispatch = useDispatch();
+
+  const fields = [
+    {
+      name: 'name',
+      value: editTask?.name,
+    },
+    {
+      name: 'dueDate',
+      value: editTask?.dueDate,
+    },
+    {
+      name: 'project',
+      value: editTask?.project?.id,
+    },
+    {
+      name: 'tags',
+      value: editTask?.tags?.map((item) => item.id),
+    },
+  ];
 
   const submit = (values: IFormValues) => {
     const { dueDate } = values;
-    dispatch(
-      tasksActions.create.try({
-        ...values,
-        dueDate: dueDate ? DateHelper.mapMomentToNumber(dueDate) : undefined,
-      })
-    );
+    editTask &&
+      dispatch(
+        tasksActions.update.try({
+          id: editTask.id,
+          name: values.name || editTask.name,
+          project: values.project || editTask.project.id,
+          tags: values.tags,
+          dueDate: dueDate ? DateHelper.mapMomentToNumber(dueDate) : undefined,
+        })
+      );
+
+    !editTask &&
+      dispatch(
+        tasksActions.create.try({
+          ...values,
+          dueDate: dueDate ? DateHelper.mapMomentToNumber(dueDate) : undefined,
+        })
+      );
   };
 
   const cancel = () => {
@@ -47,7 +79,12 @@ export const EditTaskForm: React.FC = () => {
       isOpen={isOpen}
       close={() => tasksActions.toggleEditForm({ isOpen: false })}
     >
-      <Form layout="vertical" autoComplete="off" onFinish={submit}>
+      <Form
+        layout="vertical"
+        autoComplete="off"
+        onFinish={submit}
+        fields={fields}
+      >
         <Form.Item
           name="name"
           label="Title"

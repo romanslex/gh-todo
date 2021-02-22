@@ -1,4 +1,4 @@
-import { ITasksSlice } from 'features/Tasks/Tasks.models';
+import { ITaskModel, ITasksSlice } from 'features/Tasks/Tasks.models';
 import { createSelector } from '@reduxjs/toolkit';
 import { projectsSelectors } from 'features/Projects/Projects.selectors';
 
@@ -14,13 +14,18 @@ const getInboxTasks = createSelector(
   }
 );
 
-const getIsLoading = (state: State) => state.tasks.isLoading;
+const getIsLoading = (state: State): boolean => state.tasks.isLoading;
 
-const getEditFormIsOpen = (state: State) => state.tasks.editForm.isOpen;
+const getEditFormIsOpen = (state: State): boolean =>
+  state.tasks.editForm.isOpen;
+
+const getEditFormData = (state: State): ITaskModel | undefined =>
+  state.tasks.editForm.data;
 
 export const tasksSelectors = {
   getCollection,
   getInboxTasks,
   getIsLoading,
   getEditFormIsOpen,
+  getEditFormData,
 };

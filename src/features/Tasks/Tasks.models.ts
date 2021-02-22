@@ -10,4 +10,5 @@ export type ITaskModel = ITaskDTO;
 
 export interface IEditFormBranch {
   isOpen: boolean;
+  data?: ITaskModel;
 }

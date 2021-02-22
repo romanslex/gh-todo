@@ -8,6 +8,7 @@ import { ReduxHelpers } from 'common/Helpers/Redux.helpers';
 import {
   ICreateTaskParams,
   IGetTaskCollectionParams,
+  IUpdateTaskParams,
 } from 'common/models/requestsModels';
 
 const initialState: ITasksSlice = {
@@ -28,15 +29,20 @@ const getCollection = ReduxHelpers.createAction<
   string
 >('tasks/getCollection');
 
+const update = ReduxHelpers.createAction<IUpdateTaskParams, void, string>(
+  'tasks/update'
+);
+
 const tasksSlice = createSlice({
   name: 'tasks',
   initialState: initialState as ITasksSlice,
   reducers: {
     toggleEditForm(
       state,
-      { payload: { isOpen } }: PayloadAction<IEditFormBranch>
+      { payload: { isOpen, data } }: PayloadAction<IEditFormBranch>
     ) {
       state.editForm.isOpen = isOpen;
+      state.editForm.data = data;
     },
   },
   extraReducers: (builder) =>
@@ -59,8 +65,22 @@ const tasksSlice = createSlice({
       })
       .addCase(getCollection.fail, (state) => {
         state.isLoading = false;
+      })
+      .addCase(update.try, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(update.success, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(update.fail, (state) => {
+        state.isLoading = false;
       }),
 });
 
 export const tasksReducer = tasksSlice.reducer;
-export const tasksActions = { ...tasksSlice.actions, create, getCollection };
+export const tasksActions = {
+  ...tasksSlice.actions,
+  create,
+  getCollection,
+  update,
+};

@@ -8,6 +8,7 @@ import {
   isByDateParams,
   isByProjectParams,
   isByTagParams,
+  IUpdateTaskParams,
 } from 'common/models/requestsModels';
 import { Tag } from 'backend/models/Tag';
 import { Project } from 'backend/models/Project';
@@ -80,5 +81,28 @@ export const tasksController = {
         .filter((item) => item.taskId === task.id)
         .map((item) => tags[item.tagId]),
     }));
+  },
+
+  update(data: IUpdateTaskParams) {
+    const { id, name, project, tags, dueDate } = data;
+    const task: Task = {
+      id,
+      name,
+      dueDate,
+      project,
+    };
+    localStorageService.update(tasksKey, task);
+
+    Object.values(localStorageService.getCollection<TaskTag>(taskTagKey))
+      .filter((item) => item.taskId === id)
+      .forEach((item) => localStorageService.remove(taskTagKey, item.id));
+
+    tags?.forEach((tagId) => {
+      localStorageService.add<TaskTag>(taskTagKey, {
+        tagId,
+        id: v4(),
+        taskId: id,
+      });
+    });
   },
 };

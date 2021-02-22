@@ -38,3 +38,7 @@ export interface ICreateTaskParams {
   tags?: string[];
   dueDate?: number;
 }
+
+export interface IUpdateTaskParams extends ICreateTaskParams {
+  id: string;
+}

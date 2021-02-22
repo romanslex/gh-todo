@@ -6,6 +6,8 @@ import { ColorCircle } from 'common/components/ColorCircle';
 import { DateHelper } from 'common/Helpers/Date.helpers';
 import CalendarOutlined from '@ant-design/icons/CalendarOutlined';
 import Card from 'antd/es/card';
+import { useDispatch } from 'react-redux';
+import { tasksActions } from 'features/Tasks/Tasks.slice';
 
 const cardBodyStyles: CSSProperties = {
   padding: '5px 10px',
@@ -19,6 +21,10 @@ export const TaskItem: React.FC<IComponentProps> = ({
   task,
 }: IComponentProps) => {
   const { name, project, dueDate, tags } = task;
+  const dispatch = useDispatch();
+
+  const editTask = () =>
+    dispatch(tasksActions.toggleEditForm({ isOpen: true, data: task }));
 
   return (
     <Card bodyStyle={cardBodyStyles} className="mb-3">
@@ -28,7 +34,13 @@ export const TaskItem: React.FC<IComponentProps> = ({
         </Col>
         <Col flex={1}>
           <Row>
-            <Col flex={1}>{name}</Col>
+            <Col
+              className="cursor-pointer c-primary"
+              flex={1}
+              onClick={editTask}
+            >
+              {name}
+            </Col>
             <Col>
               <Row align="middle" gutter={[6, 0]}>
                 <Col className="fs-xs">{project.name}</Col>

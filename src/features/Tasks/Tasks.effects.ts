@@ -5,6 +5,7 @@ import { tasksService } from 'features/Tasks/Tasks.service';
 import {
   ICreateTaskParams,
   IGetTaskCollectionParams,
+  IUpdateTaskParams,
 } from 'common/models/requestsModels';
 import { ITaskModel } from 'features/Tasks/Tasks.models';
 
@@ -41,4 +42,19 @@ function* getCollection() {
   );
 }
 
-export const tasksEffects = [create(), getCollection()];
+function* update() {
+  yield takeEvery(
+    tasksActions.update.try.type,
+    function* worker(action: PayloadAction<IUpdateTaskParams>) {
+      const { payload } = action;
+      try {
+        yield call(tasksService.update, payload);
+        yield put(tasksActions.update.success());
+      } catch (e) {
+        yield put(tasksActions.update.fail(e.message));
+      }
+    }
+  );
+}
+
+export const tasksEffects = [create(), getCollection(), update()];
