@@ -7,6 +7,7 @@ import {
   IGetTaskCollectionParams,
   isByDateParams,
   isByProjectParams,
+  isByTagParams,
 } from 'common/models/requestsModels';
 import { Tag } from 'backend/models/Tag';
 import { Project } from 'backend/models/Project';
@@ -62,6 +63,13 @@ export const tasksController = {
       localStorageService.getCollection<TaskTag>(taskTagKey)
     );
     const projects = localStorageService.getCollection<Project>(projectsKey);
+
+    if (isByTagParams(data)) {
+      const neededTasksIds = taskTagCollection
+        .filter((item) => item.tagId === data.tagId)
+        .map((item) => item.taskId);
+      tasks = tasks.filter((task) => neededTasksIds.includes(task.id));
+    }
 
     return tasks.map((task) => ({
       id: task.id,
