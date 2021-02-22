@@ -35,7 +35,9 @@ export const EditTaskForm: React.FC = () => {
     },
     {
       name: 'dueDate',
-      value: editTask?.dueDate,
+      value: editTask?.dueDate
+        ? DateHelper.mapNumberToMoment(editTask.dueDate)
+        : undefined,
     },
     {
       name: 'project',
