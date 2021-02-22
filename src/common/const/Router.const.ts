@@ -3,5 +3,6 @@ export enum ERoute {
   Today = '/today',
   Week = '/week',
   Project = '/projects',
-  Tag = '/tag',
+  Tag = '/tags',
+  Filter = '/filters',
 }

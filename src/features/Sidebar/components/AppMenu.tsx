@@ -143,13 +143,16 @@ export const AppMenu: React.FC = () => {
       >
         {filters.map((filter) => (
           <Menu.Item key={filter.id} className="pr-0">
-            <div className="d-flex d-flex_align--center">
+            <Link
+              to={getUrl(ERoute.Filter, filter.id)}
+              className="d-flex d-flex_align--center"
+            >
               <div className="flex-grow-1">{filter.name}</div>
               <SidebarDropdown
                 onEdit={() => openEditFilterModal(filter)}
                 onRemove={() => removeFilter(filter.id)}
               />
-            </div>
+            </Link>
           </Menu.Item>
         ))}
       </Menu.SubMenu>

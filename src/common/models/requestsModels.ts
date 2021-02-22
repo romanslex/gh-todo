@@ -37,6 +37,11 @@ export const isByTagParams = (
 ): value is IGetTaskCollectionByTagParams =>
   typeof (value as IGetTaskCollectionByTagParams).tagId !== 'undefined';
 
+export const isByFilterParams = (
+  value: IGetTaskCollectionParams
+): value is IGetTaskCollectionByFilterParams =>
+  typeof (value as IGetTaskCollectionByFilterParams).filterId !== 'undefined';
+
 export interface ICreateTaskParams {
   name: string;
   project: string;
