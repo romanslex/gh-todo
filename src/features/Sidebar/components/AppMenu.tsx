@@ -23,6 +23,8 @@ import { IFilterModel } from 'features/Filters/Filters.models';
 import { ITagModel } from 'features/Tags/Tags.models';
 import { ColorCircle } from 'common/components/ColorCircle';
 
+const getUrl = (baseUrl: string, id: string) => `${baseUrl}/${id}`;
+
 export const AppMenu: React.FC = () => {
   const dispatch = useDispatch();
   const currentPath = RouterHooks.useCurrentPath();
@@ -76,6 +78,7 @@ export const AppMenu: React.FC = () => {
         <Link to={ERoute.Week}>Week</Link>
       </Menu.Item>
       <Menu.SubMenu
+        key={ERoute.Project}
         title={
           <SubMenuItemWithAddBtn
             icon={<ProjectOutlined />}
@@ -86,7 +89,10 @@ export const AppMenu: React.FC = () => {
       >
         {projects.map((project) => (
           <Menu.Item key={project.id} className="pr-0">
-            <div className="d-flex d-flex_align--center">
+            <Link
+              to={getUrl(ERoute.Project, project.id)}
+              className="d-flex d-flex_align--center"
+            >
               <ColorCircle
                 width="10px"
                 height="10px"
@@ -98,7 +104,7 @@ export const AppMenu: React.FC = () => {
                 onEdit={() => openEditProjectModal(project)}
                 onRemove={() => removeProject(project.id)}
               />
-            </div>
+            </Link>
           </Menu.Item>
         ))}
       </Menu.SubMenu>
