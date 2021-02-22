@@ -8,7 +8,6 @@ import { sidebarActions } from 'features/Sidebar/Sidebar.slice';
 import { EditProjectModal } from 'features/Projects/components/EditProjectModal';
 import { useInit } from 'common/hooks/Init.hooks';
 import { EditTagModal } from 'features/Tags/components/EditTagModal';
-import { EditFilterModal } from 'features/Filters/components/EditFilterModal';
 import { EditTaskForm } from 'features/Tasks/components/EditTaskForm';
 import { ERoute } from 'common/const/Router.const';
 import { InboxPage } from 'common/components/Pages/InboxPage';
@@ -17,7 +16,6 @@ import { ProjectPage } from 'common/components/Pages/ProjectPage';
 import { TodayPage } from 'common/components/Pages/TodayPage';
 import { WeekPage } from 'common/components/Pages/WeekPage';
 import { TagPage } from 'common/components/Pages/TagPage';
-import { FilterPage } from 'common/components/Pages/FilterPage';
 
 const { Header, Content, Footer } = Layout;
 
@@ -49,7 +47,6 @@ export const Default: React.FC = () => {
             <Route path={ERoute.Week} component={WeekPage} />
             <Route path={`${ERoute.Tag}/:id`} component={TagPage} />
             <Route path={`${ERoute.Project}/:id`} component={ProjectPage} />
-            <Route path={`${ERoute.Filter}/:id`} component={FilterPage} />
           </Switch>
           <EditTaskForm />
         </Content>
@@ -57,7 +54,6 @@ export const Default: React.FC = () => {
       </Layout>
       <EditProjectModal />
       <EditTagModal />
-      <EditFilterModal />
     </Layout>
   );
 };

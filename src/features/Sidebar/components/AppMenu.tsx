@@ -8,18 +8,14 @@ import CalendarOutlined from '@ant-design/icons/CalendarOutlined';
 import HourglassOutlined from '@ant-design/icons/HourglassOutlined';
 import ProjectOutlined from '@ant-design/icons/ProjectOutlined';
 import TagOutlined from '@ant-design/icons/TagOutlined';
-import FilterOutlined from '@ant-design/icons/FilterOutlined';
 import { SubMenuItemWithAddBtn } from 'features/Sidebar/components/SubMenuItemWithAddBtn';
 import { useDispatch, useSelector } from 'react-redux';
 import { projectsSelectors } from 'features/Projects/Projects.selectors';
 import { projectsActions } from 'features/Projects/Projects.slice';
 import { tagsActions } from 'features/Tags/Tags.slice';
 import { tagsSelectors } from 'features/Tags/Tags.selectors';
-import { filtersActions } from 'features/Filters/Filters.slice';
-import { filtersSelectors } from 'features/Filters/Filters.selectors';
 import { SidebarDropdown } from 'features/Sidebar/components/SidebarDropdown';
 import { IProjectModel } from 'features/Projects/Projects.models';
-import { IFilterModel } from 'features/Filters/Filters.models';
 import { ITagModel } from 'features/Tags/Tags.models';
 import { ColorCircle } from 'common/components/ColorCircle';
 
@@ -30,7 +26,6 @@ export const AppMenu: React.FC = () => {
   const currentPath = RouterHooks.useCurrentPath();
   const projects = useSelector(projectsSelectors.getCollectionWithoutInbox);
   const tags = useSelector(tagsSelectors.getCollection);
-  const filters = useSelector(filtersSelectors.getCollection);
 
   const openEditProjectModal = useCallback(
     (data?: IProjectModel) => {
@@ -44,12 +39,6 @@ export const AppMenu: React.FC = () => {
     },
     [dispatch]
   );
-  const openEditFilterModal = useCallback(
-    (data?: IFilterModel) => {
-      dispatch(filtersActions.toggleEditModal({ isOpen: true, data }));
-    },
-    [dispatch]
-  );
 
   const removeProject = useCallback(
     (projectId) => {
@@ -59,10 +48,6 @@ export const AppMenu: React.FC = () => {
   );
   const removeTag = useCallback(
     (tagId) => dispatch(tagsActions.remove.try(tagId)),
-    [dispatch]
-  );
-  const removeFilter = useCallback(
-    (filterId) => dispatch(filtersActions.remove.try(filterId)),
     [dispatch]
   );
 
@@ -127,30 +112,6 @@ export const AppMenu: React.FC = () => {
               <SidebarDropdown
                 onEdit={() => openEditTagModal(tag)}
                 onRemove={() => removeTag(tag.id)}
-              />
-            </Link>
-          </Menu.Item>
-        ))}
-      </Menu.SubMenu>
-      <Menu.SubMenu
-        title={
-          <SubMenuItemWithAddBtn
-            icon={<FilterOutlined />}
-            onAdd={openEditFilterModal}
-            title="Filters"
-          />
-        }
-      >
-        {filters.map((filter) => (
-          <Menu.Item key={filter.id} className="pr-0">
-            <Link
-              to={getUrl(ERoute.Filter, filter.id)}
-              className="d-flex d-flex_align--center"
-            >
-              <div className="flex-grow-1">{filter.name}</div>
-              <SidebarDropdown
-                onEdit={() => openEditFilterModal(filter)}
-                onRemove={() => removeFilter(filter.id)}
               />
             </Link>
           </Menu.Item>
