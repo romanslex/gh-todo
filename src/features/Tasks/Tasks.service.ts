@@ -6,7 +6,6 @@ import {
 } from 'common/models/requestsModels';
 import { tasksController } from 'backend/features/Tasks/Tasks.controller';
 import { ITaskDTO } from 'common/models/dtos';
-import { ITaskModel } from 'features/Tasks/Tasks.models';
 
 export const tasksService = {
   create(data: ICreateTaskParams) {

@@ -26,6 +26,7 @@ export const EditTaskForm: React.FC = () => {
   const tags = useSelector(tagsSelectors.getCollection);
   const isOpen = useSelector(tasksSelectors.getEditFormIsOpen);
   const editTask = useSelector(tasksSelectors.getEditFormData);
+  const isLoading = useSelector(tasksSelectors.getIsLoading);
   const dispatch = useDispatch();
 
   const title = editTask ? 'Edit task' : 'Create task';
@@ -132,10 +133,10 @@ export const EditTaskForm: React.FC = () => {
         </Form.Item>
         <Row justify="end">
           <Col>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" loading={isLoading}>
               Save
             </Button>
-            <Button onClick={cancel} type="link">
+            <Button onClick={cancel} type="link" disabled={isLoading}>
               Cancel
             </Button>
           </Col>
