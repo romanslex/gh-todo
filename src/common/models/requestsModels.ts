@@ -10,16 +10,25 @@ export interface IGetTaskCollectionByFilterParams {
   filterId: string;
 }
 
+export interface IGetTaskCollectionByDateParams {
+  date: number;
+}
+
 export type IGetTaskCollectionParams =
   | IGetTaskCollectionByProjectParams
   | IGetTaskCollectionByTagParams
-  | IGetTaskCollectionByFilterParams;
+  | IGetTaskCollectionByFilterParams
+  | IGetTaskCollectionByDateParams;
 
 export const isByProjectParams = (
-  value: any
-): value is IGetTaskCollectionByProjectParams => {
-  return typeof value.projectId === 'string';
-};
+  value: IGetTaskCollectionParams
+): value is IGetTaskCollectionByProjectParams =>
+  typeof (value as IGetTaskCollectionByProjectParams).projectId !== 'undefined';
+
+export const isByDateParams = (
+  value: IGetTaskCollectionParams
+): value is IGetTaskCollectionByDateParams =>
+  typeof (value as IGetTaskCollectionByDateParams).date !== 'undefined';
 
 export interface ICreateTaskParams {
   name: string;

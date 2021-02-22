@@ -5,10 +5,12 @@ import { ITaskDTO } from 'common/models/dtos';
 import {
   ICreateTaskParams,
   IGetTaskCollectionParams,
+  isByDateParams,
   isByProjectParams,
 } from 'common/models/requestsModels';
 import { Tag } from 'backend/models/Tag';
 import { Project } from 'backend/models/Project';
+import { formatDateNumber } from 'common/Helpers/Date.helpers';
 
 const tasksKey = 'tasks';
 const taskTagKey = 'task_tag';
@@ -43,6 +45,14 @@ export const tasksController = {
 
     if (isByProjectParams(data)) {
       tasks = tasks.filter((task) => task.project === data.projectId);
+    }
+
+    if (isByDateParams(data)) {
+      tasks = tasks.filter(
+        (task) =>
+          task?.dueDate &&
+          formatDateNumber(task.dueDate) === formatDateNumber(data.date)
+      );
     }
 
     const tags = localStorageService.getCollection<Tag>(tagsKey);

@@ -8,3 +8,5 @@ export const momentToNumber = (date?: Moment): number | undefined => {
 
 export const formatDateNumber = (date: number): string =>
   moment.unix(date).format(DATE_DISPLAY_FORMAT);
+
+export const getTodayDateNumber = (): number => moment().unix();
