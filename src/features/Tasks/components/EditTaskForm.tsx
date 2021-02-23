@@ -13,6 +13,7 @@ import { DATE_DISPLAY_FORMAT, DateHelper } from 'common/Helpers/Date.helpers';
 import { tasksSelectors } from 'features/Tasks/Tasks.selectors';
 import { AppModal } from 'common/components/AppModal';
 import { Col, Row } from 'antd/es/grid';
+import { isUpdateTaskParams } from 'common/models/IUpdateTaskParams';
 
 interface IFormValues {
   name: string;
@@ -44,23 +45,22 @@ export const EditTaskForm: React.FC = () => {
     },
     {
       name: 'project',
-      value: editTask?.project?.id,
+      value: editTask?.project,
     },
     {
       name: 'tags',
-      value: editTask?.tags?.map((item) => item.id),
+      value: editTask?.tags,
     },
   ];
 
   const submit = (values: IFormValues) => {
     const { dueDate } = values;
-    editTask &&
+
+    isUpdateTaskParams(editTask) &&
       dispatch(
         tasksActions.update.try({
           id: editTask.id,
-          name: values.name || editTask.name,
-          project: values.project || editTask.project.id,
-          tags: values.tags,
+          ...values,
           dueDate: dueDate ? DateHelper.mapMomentToNumber(dueDate) : undefined,
         })
       );

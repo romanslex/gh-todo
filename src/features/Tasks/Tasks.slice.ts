@@ -64,11 +64,13 @@ const tasksSlice = createSlice({
       .addCase(getCollection.fail, (state) => {
         state.isLoading = false;
       })
-      .addCase(update.try, (state) => {
+      .addCase(update.try, (state, { payload }) => {
         state.isLoading = true;
+        state.editForm.data = payload;
       })
       .addCase(update.success, (state) => {
         state.isLoading = false;
+        state.editForm.data = undefined;
       })
       .addCase(update.fail, (state) => {
         state.isLoading = false;

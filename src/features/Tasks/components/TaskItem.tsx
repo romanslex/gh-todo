@@ -20,11 +20,22 @@ interface IComponentProps {
 export const TaskItem: React.FC<IComponentProps> = ({
   task,
 }: IComponentProps) => {
-  const { name, project, dueDate, tags } = task;
+  const { id, name, project, dueDate, tags } = task;
   const dispatch = useDispatch();
 
   const editTask = () =>
-    dispatch(tasksActions.toggleEditForm({ isOpen: true, data: task }));
+    dispatch(
+      tasksActions.toggleEditForm({
+        isOpen: true,
+        data: {
+          id,
+          name,
+          dueDate,
+          project: project.id,
+          tags: tags?.map((tag) => tag.id),
+        },
+      })
+    );
 
   return (
     <Card bodyStyle={cardBodyStyles} className="mb-3">
