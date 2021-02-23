@@ -1,35 +1,27 @@
-import {
-  ICreateProjectModel,
-  IProjectModel,
-} from 'features/Projects/Projects.models';
 import { localStorageService } from 'rml-back-mock-helper';
 import { v4 } from 'uuid';
-import {
-  EProjectColor,
-  IBackendProjectModel,
-} from 'features/Projects/backend/Projects.models';
+import { EProjectColor, Project } from 'common/models/Project';
+import { ICreateProjectParams } from 'common/models/ICreateProjectParams';
 
 const key = 'projects';
 
-const inboxProject: IBackendProjectModel = {
+const inboxProject: Project = {
   id: v4(),
   color: EProjectColor.Blue,
   name: 'Inbox',
   isInbox: true,
 };
 
-export const projectsBackend = {
+export const projectsController = {
   createDefaultInboxProject() {
-    const projects = localStorageService.getCollection<IBackendProjectModel>(
-      key
-    );
+    const projects = localStorageService.getCollection<Project>(key);
     if (!Object.values(projects).some((project) => project.isInbox)) {
       localStorageService.add(key, inboxProject);
     }
   },
 
-  create(data: ICreateProjectModel): void {
-    const project: IBackendProjectModel = {
+  create(data: ICreateProjectParams): void {
+    const project: Project = {
       id: v4(),
       ...data,
       isInbox: false,
@@ -37,7 +29,7 @@ export const projectsBackend = {
     localStorageService.add(key, project);
   },
 
-  getCollection(): IProjectModel[] {
+  getCollection(): Project[] {
     return Object.values(localStorageService.getCollection(key));
   },
 
@@ -45,7 +37,7 @@ export const projectsBackend = {
     localStorageService.remove(key, id);
   },
 
-  update(data: IProjectModel): void {
+  update(data: Project): void {
     localStorageService.update(key, data);
   },
 };

@@ -1,17 +1,18 @@
 import { localStorageService } from 'rml-back-mock-helper';
 import { v4 } from 'uuid';
-import { Task, TaskTag } from 'backend/models/Task';
-import { ITaskDTO } from 'common/models/dtos';
+import { Task, TaskTag } from 'common/models/Task';
+import { Tag } from 'common/models/Tag';
+import { Project } from 'common/models/Project';
+import { DateHelper } from 'common/Helpers/Date.helpers';
+import { ICreateTaskParams } from 'common/models/ICreateTaskParams';
 import {
-  ICreateTaskParams,
   IGetTaskCollectionParams,
   isByDateParams,
   isByProjectParams,
   isByTagParams,
-} from 'common/models/requestsModels';
-import { Tag } from 'backend/models/Tag';
-import { Project } from 'backend/models/Project';
-import { DateHelper } from 'common/Helpers/Date.helpers';
+} from 'common/models/IGetTaskCollectionParams';
+import { ITaskDTO } from 'common/models/TaskDTO';
+import { IUpdateTaskParams } from 'common/models/IUpdateTaskParams';
 
 const tasksKey = 'tasks';
 const taskTagKey = 'task_tag';
@@ -80,5 +81,28 @@ export const tasksController = {
         .filter((item) => item.taskId === task.id)
         .map((item) => tags[item.tagId]),
     }));
+  },
+
+  update(data: IUpdateTaskParams) {
+    const { id, name, project, tags, dueDate } = data;
+    const task: Task = {
+      id,
+      name,
+      dueDate,
+      project,
+    };
+    localStorageService.update(tasksKey, task);
+
+    Object.values(localStorageService.getCollection<TaskTag>(taskTagKey))
+      .filter((item) => item.taskId === id)
+      .forEach((item) => localStorageService.remove(taskTagKey, item.id));
+
+    tags?.forEach((tagId) => {
+      localStorageService.add<TaskTag>(taskTagKey, {
+        tagId,
+        id: v4(),
+        taskId: id,
+      });
+    });
   },
 };

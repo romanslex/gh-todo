@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react';
-import { EProjectColor } from 'backend/models/Project';
+import { EProjectColor } from 'common/models/Project';
 
 interface IComponentProps {
   width: string;

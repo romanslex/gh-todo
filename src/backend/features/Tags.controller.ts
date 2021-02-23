@@ -1,11 +1,12 @@
-import { ICreateTagModel, ITagModel } from 'features/Tags/Tags.models';
 import { v4 } from 'uuid';
 import { localStorageService } from 'rml-back-mock-helper';
+import { ICreateTagParams } from 'common/models/ICreateTagParams';
+import { Tag } from 'common/models/Tag';
 
 const key = 'tags';
 
-export const tagsBackend = {
-  create(data: ICreateTagModel): void {
+export const tagsController = {
+  create(data: ICreateTagParams): void {
     const tag = {
       id: v4(),
       ...data,
@@ -13,7 +14,7 @@ export const tagsBackend = {
     localStorageService.add(key, tag);
   },
 
-  getCollection(): ITagModel[] {
+  getCollection(): Tag[] {
     return Object.values(localStorageService.getCollection(key));
   },
 
@@ -21,7 +22,7 @@ export const tagsBackend = {
     localStorageService.remove(key, id);
   },
 
-  update(data: ITagModel) {
+  update(data: Tag) {
     localStorageService.update(key, data);
   },
 };

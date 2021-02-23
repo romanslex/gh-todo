@@ -1,13 +1,14 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { tagsActions } from 'features/Tags/Tags.slice';
-import { ICreateTagModel, ITagModel } from 'features/Tags/Tags.models';
+import { ITagModel } from 'features/Tags/Tags.models';
 import { tagsService } from 'features/Tags/Tags.service';
+import { ICreateTagParams } from 'common/models/ICreateTagParams';
 
 function* create() {
   yield takeEvery(
     tagsActions.create.try.type,
-    function* createWorker(action: PayloadAction<ICreateTagModel>) {
+    function* createWorker(action: PayloadAction<ICreateTagParams>) {
       const { payload } = action;
       try {
         yield call(tagsService.create, payload);

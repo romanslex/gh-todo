@@ -1,36 +1,34 @@
 import { doWithDelay } from 'rml-back-mock-helper';
-import {
-  ICreateProjectModel,
-  IProjectModel,
-} from 'features/Projects/Projects.models';
-import { projectsBackend } from 'features/Projects/backend/Projects.backend';
+import { IProjectModel } from 'features/Projects/Projects.models';
+import { ICreateProjectParams } from 'common/models/ICreateProjectParams';
+import { projectsController } from 'backend/features/Projects.controller';
 
 export const projectsService = {
-  create(data: ICreateProjectModel) {
+  create(data: ICreateProjectParams) {
     return doWithDelay(() => {
-      projectsBackend.create(data);
+      projectsController.create(data);
     }, 5000);
   },
 
   getCollection() {
     return doWithDelay(() => {
-      return projectsBackend.getCollection();
+      return projectsController.getCollection();
     });
   },
 
   remove(id: string) {
     return doWithDelay(() => {
-      projectsBackend.remove(id);
+      projectsController.remove(id);
     });
   },
 
   update(data: IProjectModel) {
     return doWithDelay(() => {
-      projectsBackend.update(data);
+      projectsController.update(data);
     }, 1000);
   },
 
   initInboxProject() {
-    projectsBackend.createDefaultInboxProject();
+    projectsController.createDefaultInboxProject();
   },
 };
