@@ -2,12 +2,10 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import { tasksActions } from 'features/Tasks/Tasks.slice';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { tasksService } from 'features/Tasks/Tasks.service';
-import {
-  ICreateTaskParams,
-  IGetTaskCollectionParams,
-  IUpdateTaskParams,
-} from 'common/models/requestsModels';
 import { ITaskModel } from 'features/Tasks/Tasks.models';
+import { ICreateTaskParams } from 'common/models/ICreateTaskParams';
+import { IGetTaskCollectionParams } from 'common/models/IGetTaskCollectionParams';
+import { IUpdateTaskParams } from 'common/models/IUpdateTaskParams';
 
 function* create() {
   yield takeEvery(

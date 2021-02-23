@@ -1,18 +1,18 @@
 import { localStorageService } from 'rml-back-mock-helper';
 import { v4 } from 'uuid';
-import { Task, TaskTag } from 'backend/models/Task';
-import { ITaskDTO } from 'common/models/dtos';
+import { Task, TaskTag } from 'common/models/Task';
+import { Tag } from 'common/models/Tag';
+import { Project } from 'common/models/Project';
+import { DateHelper } from 'common/Helpers/Date.helpers';
+import { ICreateTaskParams } from 'common/models/ICreateTaskParams';
 import {
-  ICreateTaskParams,
   IGetTaskCollectionParams,
   isByDateParams,
   isByProjectParams,
   isByTagParams,
-  IUpdateTaskParams,
-} from 'common/models/requestsModels';
-import { Tag } from 'backend/models/Tag';
-import { Project } from 'backend/models/Project';
-import { DateHelper } from 'common/Helpers/Date.helpers';
+} from 'common/models/IGetTaskCollectionParams';
+import { ITaskDTO } from 'common/models/TaskDTO';
+import { IUpdateTaskParams } from 'common/models/IUpdateTaskParams';
 
 const tasksKey = 'tasks';
 const taskTagKey = 'task_tag';

@@ -1,11 +1,11 @@
 import {
-  ICreateProjectModel,
   IProjectModel,
   IProjectsSlice,
   IToggleEditModalParams,
 } from 'features/Projects/Projects.models';
 import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ReduxHelpers } from 'common/Helpers/Redux.helpers';
+import { ICreateProjectParams } from 'common/models/ICreateProjectParams';
 
 const initialState: IProjectsSlice = {
   isEditModalOpen: false,
@@ -14,7 +14,7 @@ const initialState: IProjectsSlice = {
   collection: [],
 };
 
-const create = ReduxHelpers.createAction<ICreateProjectModel, void, string>(
+const create = ReduxHelpers.createAction<ICreateProjectParams, void, string>(
   'projects/create'
 );
 
