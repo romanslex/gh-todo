@@ -24,4 +24,6 @@ export enum ETaskBranchStatus {
   TaskCreated = 'taskCreated',
   TaskUpdating = 'taskUpdating',
   TaskUpdated = 'taskUpdated',
+  TaskRemoving = 'taskRemoving',
+  TaskRemoved = 'taskRemoved',
 }

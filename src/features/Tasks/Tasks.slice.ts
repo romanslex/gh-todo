@@ -33,6 +33,8 @@ const update = ReduxHelpers.createAction<IUpdateTaskParams, void, string>(
   'tasks/update'
 );
 
+const remove = ReduxHelpers.createAction<string, void, string>('tasks/remove');
+
 const tasksSlice = createSlice({
   name: 'tasks',
   initialState: initialState as ITasksSlice,
@@ -86,6 +88,18 @@ const tasksSlice = createSlice({
       })
       .addCase(update.fail, (state) => {
         state.isLoading = false;
+      })
+      .addCase(remove.try, (state) => {
+        state.isLoading = true;
+        state.status = ETaskBranchStatus.TaskRemoving;
+      })
+      .addCase(remove.success, (state) => {
+        state.isLoading = false;
+        state.editForm.isOpen = false;
+        state.status = ETaskBranchStatus.TaskRemoved;
+      })
+      .addCase(remove.fail, (state) => {
+        state.isLoading = false;
       }),
 });
 
@@ -95,4 +109,5 @@ export const tasksActions = {
   create,
   getCollection,
   update,
+  remove,
 };

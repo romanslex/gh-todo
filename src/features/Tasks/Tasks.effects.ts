@@ -55,4 +55,18 @@ function* update() {
   );
 }
 
-export const tasksEffects = [create(), getCollection(), update()];
+function* remove() {
+  yield takeEvery(
+    tasksActions.remove.try.type,
+    function* worker({ payload }: PayloadAction<string>) {
+      try {
+        yield call(tasksService.remove, payload);
+        yield put(tasksActions.remove.success());
+      } catch (e) {
+        yield put(tasksActions.remove.fail(e.message));
+      }
+    }
+  );
+}
+
+export const tasksEffects = [create(), getCollection(), update(), remove()];

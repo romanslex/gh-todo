@@ -79,7 +79,10 @@ export const EditTaskForm: React.FC = () => {
     dispatch(tasksActions.toggleEditForm({ isOpen: false }));
   };
 
-  const deleteTask = () => {};
+  const deleteTask = () => {
+    isUpdateTaskParams(editTask) &&
+      dispatch(tasksActions.remove.try(editTask.id));
+  };
 
   return (
     <AppModal
