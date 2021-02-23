@@ -45,11 +45,14 @@ const tasksSlice = createSlice({
   },
   extraReducers: (builder) =>
     builder
-      .addCase(create.try, (state) => {
+      .addCase(create.try, (state, { payload }) => {
         state.isLoading = true;
+        state.editForm.data = payload;
       })
       .addCase(create.success, (state) => {
+        state.editForm.isOpen = false;
         state.isLoading = false;
+        state.editForm.data = undefined;
       })
       .addCase(create.fail, (state) => {
         state.isLoading = false;
@@ -70,6 +73,7 @@ const tasksSlice = createSlice({
       })
       .addCase(update.success, (state) => {
         state.isLoading = false;
+        state.editForm.isOpen = false;
         state.editForm.data = undefined;
       })
       .addCase(update.fail, (state) => {
