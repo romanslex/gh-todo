@@ -1,4 +1,4 @@
-import { ITaskModel, ITasksSlice } from 'features/Tasks/Tasks.models';
+import { ETaskBranchStatus, ITasksSlice } from 'features/Tasks/Tasks.models';
 import { createSelector } from '@reduxjs/toolkit';
 import { projectsSelectors } from 'features/Projects/Projects.selectors';
 import { ICreateTaskParams } from 'common/models/ICreateTaskParams';
@@ -26,10 +26,13 @@ const getEditFormData = (
 ): ICreateTaskParams | IUpdateTaskParams | undefined =>
   state.tasks.editForm.data;
 
+const getStatus = (state: State): ETaskBranchStatus => state.tasks.status;
+
 export const tasksSelectors = {
   getCollection,
   getInboxTasks,
   getIsLoading,
   getEditFormIsOpen,
   getEditFormData,
+  getStatus,
 };

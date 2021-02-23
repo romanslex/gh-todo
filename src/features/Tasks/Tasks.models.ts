@@ -6,6 +6,7 @@ export interface ITasksSlice {
   isLoading: boolean;
   collection: ITaskModel[];
   editForm: IEditFormBranch;
+  status: ETaskBranchStatus;
 }
 
 export type ITaskModel = ITaskDTO;
@@ -13,4 +14,14 @@ export type ITaskModel = ITaskDTO;
 export interface IEditFormBranch {
   isOpen: boolean;
   data?: ICreateTaskParams | IUpdateTaskParams;
+}
+
+export enum ETaskBranchStatus {
+  Init = 'init',
+  CollectionFetching = 'collectionFetching',
+  CollectionFetched = 'collectionFetched',
+  TaskCreating = 'taskCreating',
+  TaskCreated = 'taskCreated',
+  TaskUpdating = 'taskUpdating',
+  TaskUpdated = 'taskUpdated',
 }

@@ -5,6 +5,7 @@ import { tasksActions } from 'features/Tasks/Tasks.slice';
 import { projectsSelectors } from 'features/Projects/Projects.selectors';
 import { TaskItem } from 'features/Tasks/components/TaskItem';
 import { AddTaskButton } from 'features/Tasks/components/AddTaskButton';
+import { TasksHooks } from 'features/Tasks/Tasks.hooks';
 
 export const InboxPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -15,6 +16,10 @@ export const InboxPage: React.FC = () => {
     inboxProject &&
       dispatch(tasksActions.getCollection.try({ projectId: inboxProject.id }));
   }, [inboxProject, dispatch]);
+
+  TasksHooks.useCollectionRefetch(
+    inboxProject && { projectId: inboxProject.id }
+  );
 
   if (!inboxProject) {
     return null;

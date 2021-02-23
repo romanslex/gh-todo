@@ -1,4 +1,5 @@
 import {
+  ETaskBranchStatus,
   IEditFormBranch,
   ITaskModel,
   ITasksSlice,
@@ -15,6 +16,7 @@ const initialState: ITasksSlice = {
   editForm: {
     isOpen: false,
   },
+  status: ETaskBranchStatus.Init,
 };
 
 const create = ReduxHelpers.createAction<ICreateTaskParams, void, string>(
@@ -47,22 +49,26 @@ const tasksSlice = createSlice({
     builder
       .addCase(create.try, (state, { payload }) => {
         state.isLoading = true;
+        state.status = ETaskBranchStatus.TaskCreating;
         state.editForm.data = payload;
       })
       .addCase(create.success, (state) => {
         state.editForm.isOpen = false;
         state.isLoading = false;
         state.editForm.data = undefined;
+        state.status = ETaskBranchStatus.TaskCreated;
       })
       .addCase(create.fail, (state) => {
         state.isLoading = false;
       })
       .addCase(getCollection.try, (state) => {
         state.isLoading = true;
+        state.status = ETaskBranchStatus.CollectionFetching;
       })
       .addCase(getCollection.success, (state, { payload }) => {
         state.collection = payload;
         state.isLoading = false;
+        state.status = ETaskBranchStatus.CollectionFetched;
       })
       .addCase(getCollection.fail, (state) => {
         state.isLoading = false;
@@ -70,11 +76,13 @@ const tasksSlice = createSlice({
       .addCase(update.try, (state, { payload }) => {
         state.isLoading = true;
         state.editForm.data = payload;
+        state.status = ETaskBranchStatus.TaskUpdating;
       })
       .addCase(update.success, (state) => {
         state.isLoading = false;
         state.editForm.isOpen = false;
         state.editForm.data = undefined;
+        state.status = ETaskBranchStatus.TaskUpdated;
       })
       .addCase(update.fail, (state) => {
         state.isLoading = false;
