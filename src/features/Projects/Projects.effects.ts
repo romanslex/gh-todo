@@ -1,16 +1,14 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { projectsActions } from 'features/Projects/Projects.slice';
 import { PayloadAction } from '@reduxjs/toolkit';
-import {
-  ICreateProjectModel,
-  IProjectModel,
-} from 'features/Projects/Projects.models';
+import { IProjectModel } from 'features/Projects/Projects.models';
 import { projectsService } from 'features/Projects/Projects.service';
+import { ICreateProjectParams } from 'common/models/ICreateProjectParams';
 
 function* create() {
   yield takeEvery(
     projectsActions.create.try.type,
-    function* createWorker(action: PayloadAction<ICreateProjectModel>) {
+    function* createWorker(action: PayloadAction<ICreateProjectParams>) {
       const { payload } = action;
       try {
         yield call(projectsService.create, payload);
