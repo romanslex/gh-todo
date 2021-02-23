@@ -1,3 +1,5 @@
+import { Tag } from 'common/models/Tag';
+
 export interface ITagsSlice {
   isEditModalOpen: boolean;
   isLoading: boolean;
@@ -5,14 +7,7 @@ export interface ITagsSlice {
   editTagData?: ITagModel;
 }
 
-export interface ICreateTagModel {
-  name: string;
-}
-
-export interface ITagModel {
-  id: string;
-  name: string;
-}
+export type ITagModel = Tag;
 
 export interface IToggleEditModalParams {
   isOpen: boolean;

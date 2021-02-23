@@ -1,11 +1,11 @@
 import {
-  ICreateTagModel,
   ITagModel,
   ITagsSlice,
   IToggleEditModalParams,
 } from 'features/Tags/Tags.models';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ReduxHelpers } from 'common/Helpers/Redux.helpers';
+import { ICreateTagParams } from 'common/models/ICreateTagParams';
 
 const initialState: ITagsSlice = {
   isEditModalOpen: false,
@@ -14,7 +14,7 @@ const initialState: ITagsSlice = {
   collection: [],
 };
 
-const create = ReduxHelpers.createAction<ICreateTagModel, void, string>(
+const create = ReduxHelpers.createAction<ICreateTagParams, void, string>(
   'tags/create'
 );
 

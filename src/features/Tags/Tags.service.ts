@@ -1,29 +1,30 @@
-import { ICreateTagModel, ITagModel } from 'features/Tags/Tags.models';
+import { ITagModel } from 'features/Tags/Tags.models';
 import { doWithDelay } from 'rml-back-mock-helper';
-import { tagsBackend } from 'features/Tags/Tags.backend';
+import { ICreateTagParams } from 'common/models/ICreateTagParams';
+import { tagsController } from 'backend/features/Tags.controller';
 
 export const tagsService = {
-  create(data: ICreateTagModel) {
+  create(data: ICreateTagParams) {
     return doWithDelay(() => {
-      tagsBackend.create(data);
+      tagsController.create(data);
     });
   },
 
   getCollection(): Promise<ITagModel[]> {
     return doWithDelay(() => {
-      return tagsBackend.getCollection();
+      return tagsController.getCollection();
     });
   },
 
   remove(id: string) {
     return doWithDelay(() => {
-      tagsBackend.remove(id);
+      tagsController.remove(id);
     });
   },
 
   update(data: ITagModel) {
     return doWithDelay(() => {
-      tagsBackend.update(data);
+      tagsController.update(data);
     });
   },
 };
