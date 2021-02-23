@@ -5,11 +5,9 @@ import {
 } from 'features/Tasks/Tasks.models';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ReduxHelpers } from 'common/Helpers/Redux.helpers';
-import {
-  ICreateTaskParams,
-  IGetTaskCollectionParams,
-  IUpdateTaskParams,
-} from 'common/models/requestsModels';
+import { ICreateTaskParams } from 'common/models/ICreateTaskParams';
+import { IGetTaskCollectionParams } from 'common/models/IGetTaskCollectionParams';
+import { IUpdateTaskParams } from 'common/models/IUpdateTaskParams';
 
 const initialState: ITasksSlice = {
   isLoading: false,

@@ -1,4 +1,4 @@
-import { ITaskDTO } from 'common/models/dtos';
+import { ITaskDTO } from 'common/models/TaskDTO';
 
 export interface ITasksSlice {
   isLoading: boolean;

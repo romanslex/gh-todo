@@ -1,11 +1,9 @@
 import { doWithDelay } from 'rml-back-mock-helper';
-import {
-  ICreateTaskParams,
-  IGetTaskCollectionParams,
-  IUpdateTaskParams,
-} from 'common/models/requestsModels';
 import { tasksController } from 'backend/features/Tasks/Tasks.controller';
-import { ITaskDTO } from 'common/models/dtos';
+import { ICreateTaskParams } from 'common/models/ICreateTaskParams';
+import { IGetTaskCollectionParams } from 'common/models/IGetTaskCollectionParams';
+import { ITaskDTO } from 'common/models/TaskDTO';
+import { IUpdateTaskParams } from 'common/models/IUpdateTaskParams';
 
 export const tasksService = {
   create(data: ICreateTaskParams) {
