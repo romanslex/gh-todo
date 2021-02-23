@@ -1,5 +1,5 @@
 import { doWithDelay } from 'rml-back-mock-helper';
-import { tasksController } from 'backend/features/Tasks/Tasks.controller';
+import { tasksController } from 'backend/features/Tasks.controller';
 import { ICreateTaskParams } from 'common/models/ICreateTaskParams';
 import { IGetTaskCollectionParams } from 'common/models/IGetTaskCollectionParams';
 import { ITaskDTO } from 'common/models/TaskDTO';
