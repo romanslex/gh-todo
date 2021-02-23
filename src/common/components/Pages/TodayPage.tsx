@@ -4,6 +4,8 @@ import { tasksSelectors } from 'features/Tasks/Tasks.selectors';
 import { tasksActions } from 'features/Tasks/Tasks.slice';
 import { DateHelper } from 'common/Helpers/Date.helpers';
 import { TaskItem } from 'features/Tasks/components/TaskItem';
+import { AddTaskButton } from 'features/Tasks/components/AddTaskButton';
+import { TasksHooks } from 'features/Tasks/Tasks.hooks';
 
 export const TodayPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -16,12 +18,15 @@ export const TodayPage: React.FC = () => {
     );
   }, [dispatch, today]);
 
+  TasksHooks.useCollectionRefetch({ startDate: today, endDate: today });
+
   return (
     <div>
       Today page
       {tasks.map((task) => (
         <TaskItem key={task.id} task={task} />
       ))}
+      <AddTaskButton />
     </div>
   );
 };
