@@ -13,7 +13,8 @@ const useCollectionRefetch = (payload?: IGetTaskCollectionParams) => {
     if (
       payload &&
       (tasksBranchStatus === ETaskBranchStatus.TaskUpdated ||
-        tasksBranchStatus === ETaskBranchStatus.TaskCreated)
+        tasksBranchStatus === ETaskBranchStatus.TaskCreated ||
+        tasksBranchStatus === ETaskBranchStatus.TaskRemoved)
     ) {
       dispatch(tasksActions.getCollection.try(payload));
     }

@@ -14,6 +14,7 @@ import { tasksSelectors } from 'features/Tasks/Tasks.selectors';
 import { AppModal } from 'common/components/AppModal';
 import { Col, Row } from 'antd/es/grid';
 import { isUpdateTaskParams } from 'common/models/IUpdateTaskParams';
+import Popconfirm from 'antd/es/popconfirm';
 
 interface IFormValues {
   name: string;
@@ -78,6 +79,11 @@ export const EditTaskForm: React.FC = () => {
     dispatch(tasksActions.toggleEditForm({ isOpen: false }));
   };
 
+  const deleteTask = () => {
+    isUpdateTaskParams(editTask) &&
+      dispatch(tasksActions.remove.try(editTask.id));
+  };
+
   return (
     <AppModal
       title={title}
@@ -131,7 +137,21 @@ export const EditTaskForm: React.FC = () => {
             ))}
           </Select>
         </Form.Item>
-        <Row justify="end">
+        <Row justify="space-between">
+          <Col>
+            {!!editTask && (
+              <Popconfirm
+                placement="topLeft"
+                title="Are you sure you want to delete this task?"
+                onConfirm={deleteTask}
+                okText="Yes"
+                cancelText="No"
+                okType="danger"
+              >
+                <Button danger>Delete</Button>
+              </Popconfirm>
+            )}
+          </Col>
           <Col>
             <Button type="primary" htmlType="submit" loading={isLoading}>
               Save

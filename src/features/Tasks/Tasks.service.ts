@@ -23,4 +23,10 @@ export const tasksService = {
       tasksController.update(data);
     });
   },
+
+  remove(id: string) {
+    return doWithDelay(() => {
+      tasksController.remove(id);
+    });
+  },
 };

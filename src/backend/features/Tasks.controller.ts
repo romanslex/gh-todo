@@ -105,4 +105,13 @@ export const tasksController = {
       });
     });
   },
+
+  remove(id: string) {
+    const taskTags = Object.values(
+      localStorageService.getCollection<TaskTag>(taskTagKey)
+    );
+
+    localStorageService.remove(tasksKey, id);
+    taskTags.map((item) => localStorageService.remove(taskTagKey, item.id));
+  },
 };
