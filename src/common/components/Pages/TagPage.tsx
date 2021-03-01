@@ -3,9 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { tasksSelectors } from 'features/Tasks/Tasks.selectors';
 import { tasksActions } from 'features/Tasks/Tasks.slice';
 import { RouteComponentProps } from 'react-router-dom';
-import { TaskItem } from 'features/Tasks/components/TaskItem';
-import { AddTaskButton } from 'features/Tasks/components/AddTaskButton';
 import { TasksHooks } from 'features/Tasks/Tasks.hooks';
+import { TasksLayout } from 'common/components/Layouts/TasksLayout';
 
 type IComponentProps = RouteComponentProps<{ id: string }>;
 
@@ -24,13 +23,5 @@ export const TagPage: React.FC<IComponentProps> = (props: IComponentProps) => {
 
   TasksHooks.useCollectionRefetch({ tagId: id });
 
-  return (
-    <div>
-      Tag page
-      {tasks.map((task) => (
-        <TaskItem key={task.id} task={task} />
-      ))}
-      <AddTaskButton />
-    </div>
-  );
+  return <TasksLayout tasks={tasks} title="Tags page" />;
 };
