@@ -1,12 +1,11 @@
 import React, { useEffect, useMemo } from 'react';
-import { TaskItem } from 'features/Tasks/components/TaskItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { tasksSelectors } from 'features/Tasks/Tasks.selectors';
 import { tasksActions } from 'features/Tasks/Tasks.slice';
 import moment from 'moment';
 import { DateHelper } from 'common/Helpers/Date.helpers';
-import { AddTaskButton } from 'features/Tasks/components/AddTaskButton';
 import { TasksHooks } from 'features/Tasks/Tasks.hooks';
+import { TasksLayout } from 'common/components/Layouts/TasksLayout';
 
 export const WeekPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -28,13 +27,5 @@ export const WeekPage: React.FC = () => {
     endDate: DateHelper.mapMomentToString(endDate),
   });
 
-  return (
-    <div>
-      Week page
-      {tasks.map((task) => (
-        <TaskItem key={task.id} task={task} />
-      ))}
-      <AddTaskButton />
-    </div>
-  );
+  return <TasksLayout tasks={tasks} title="Week" />;
 };

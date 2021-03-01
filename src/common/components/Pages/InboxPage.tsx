@@ -3,9 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { tasksSelectors } from 'features/Tasks/Tasks.selectors';
 import { tasksActions } from 'features/Tasks/Tasks.slice';
 import { projectsSelectors } from 'features/Projects/Projects.selectors';
-import { TaskItem } from 'features/Tasks/components/TaskItem';
-import { AddTaskButton } from 'features/Tasks/components/AddTaskButton';
 import { TasksHooks } from 'features/Tasks/Tasks.hooks';
+import { TasksLayout } from 'common/components/Layouts/TasksLayout';
 
 export const InboxPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -25,12 +24,5 @@ export const InboxPage: React.FC = () => {
     return null;
   }
 
-  return (
-    <div>
-      {tasks.map((task) => (
-        <TaskItem key={task.id} task={task} />
-      ))}
-      <AddTaskButton />
-    </div>
-  );
+  return <TasksLayout tasks={tasks} title="Inbox page" />;
 };
