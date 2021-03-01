@@ -2,16 +2,18 @@ import React from 'react';
 import { TaskItem } from 'features/Tasks/components/TaskItem';
 import { AddTaskButton } from 'features/Tasks/components/AddTaskButton';
 import { ITaskModel } from 'features/Tasks/Tasks.models';
+import { Loader } from 'common/components/Loader';
 
 interface IComponentProps {
   tasks: ITaskModel[];
   title: string;
+  isLoading: boolean;
 }
 
 export const TasksLayout: React.FC<IComponentProps> = (
   props: IComponentProps
 ) => {
-  const { title, tasks } = props;
+  const { title, tasks, isLoading } = props;
 
   return (
     <>
@@ -19,6 +21,8 @@ export const TasksLayout: React.FC<IComponentProps> = (
       {tasks.map((task) => (
         <TaskItem key={task.id} task={task} />
       ))}
+
+      {isLoading && <Loader />}
       <div>
         <AddTaskButton />
       </div>

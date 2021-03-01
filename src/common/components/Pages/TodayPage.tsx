@@ -10,6 +10,7 @@ export const TodayPage: React.FC = () => {
   const dispatch = useDispatch();
   const tasks = useSelector(tasksSelectors.getCollection);
   const today = DateHelper.getTodayDateString();
+  const isLoading = useSelector(tasksSelectors.getIsLoading);
 
   useEffect(() => {
     dispatch(
@@ -19,5 +20,5 @@ export const TodayPage: React.FC = () => {
 
   TasksHooks.useCollectionRefetch({ startDate: today, endDate: today });
 
-  return <TasksLayout tasks={tasks} title="Today" />;
+  return <TasksLayout tasks={tasks} title="Today" isLoading={isLoading} />;
 };

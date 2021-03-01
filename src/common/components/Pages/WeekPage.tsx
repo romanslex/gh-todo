@@ -12,6 +12,7 @@ export const WeekPage: React.FC = () => {
   const tasks = useSelector(tasksSelectors.getCollection);
   const startDate = useMemo(() => moment(), []);
   const endDate = useMemo(() => moment().add(7, 'days'), []);
+  const isLoading = useSelector(tasksSelectors.getIsLoading);
 
   useEffect(() => {
     dispatch(
@@ -27,5 +28,5 @@ export const WeekPage: React.FC = () => {
     endDate: DateHelper.mapMomentToString(endDate),
   });
 
-  return <TasksLayout tasks={tasks} title="Week" />;
+  return <TasksLayout tasks={tasks} title="Week" isLoading={isLoading} />;
 };
