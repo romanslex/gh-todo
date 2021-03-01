@@ -18,6 +18,7 @@ import { SidebarDropdown } from 'features/Sidebar/components/SidebarDropdown';
 import { IProjectModel } from 'features/Projects/Projects.models';
 import { ITagModel } from 'features/Tags/Tags.models';
 import { ColorCircle } from 'common/components/ColorCircle';
+import { Col, Row } from 'antd/es/grid';
 
 const getUrl = (baseUrl: string, id: string) => `${baseUrl}/${id}`;
 
@@ -78,22 +79,30 @@ export const AppMenu: React.FC = () => {
         {hasProjects &&
           projects.map((project) => (
             <Menu.Item key={project.id} className="pr-0">
-              <Link
-                to={getUrl(ERoute.Project, project.id)}
-                className="d-flex d-flex_align--center"
-              >
-                <ColorCircle
-                  width="10px"
-                  height="10px"
-                  color={project.color}
-                  className="mr-2"
-                />
-                <div className="flex-grow-1">{project.name}</div>
-                <SidebarDropdown
-                  onEdit={() => openEditProjectModal(project)}
-                  onRemove={() => removeProject(project.id)}
-                />
-              </Link>
+              <Row align="middle">
+                <Col>
+                  <ColorCircle
+                    width="10px"
+                    height="10px"
+                    color={project.color}
+                    className="mr-2"
+                  />
+                </Col>
+                <Col flex={1}>
+                  <Link
+                    to={getUrl(ERoute.Project, project.id)}
+                    className="c-white"
+                  >
+                    <div className="flex-grow-1">{project.name}</div>
+                  </Link>
+                </Col>
+                <Col>
+                  <SidebarDropdown
+                    onEdit={() => openEditProjectModal(project)}
+                    onRemove={() => removeProject(project.id)}
+                  />
+                </Col>
+              </Row>
             </Menu.Item>
           ))}
         {!hasProjects && <Menu.Item>No projects yet</Menu.Item>}
@@ -110,16 +119,19 @@ export const AppMenu: React.FC = () => {
         {hasTags &&
           tags.map((tag) => (
             <Menu.Item key={tag.id} className="pr-0">
-              <Link
-                to={getUrl(ERoute.Tag, tag.id)}
-                className="d-flex d-flex_align--center"
-              >
-                <div className="flex-grow-1">{tag.name}</div>
-                <SidebarDropdown
-                  onEdit={() => openEditTagModal(tag)}
-                  onRemove={() => removeTag(tag.id)}
-                />
-              </Link>
+              <Row align="middle">
+                <Col flex={1}>
+                  <Link to={getUrl(ERoute.Tag, tag.id)} className="c-white">
+                    <div className="flex-grow-1">{tag.name}</div>
+                  </Link>
+                </Col>
+                <Col>
+                  <SidebarDropdown
+                    onEdit={() => openEditTagModal(tag)}
+                    onRemove={() => removeTag(tag.id)}
+                  />
+                </Col>
+              </Row>
             </Menu.Item>
           ))}
         {!hasTags && <Menu.Item>No tags yet</Menu.Item>}
