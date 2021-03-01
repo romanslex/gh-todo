@@ -41,7 +41,7 @@ export const SidebarDropdown: React.FC<IComponentProps> = ({
       }
       trigger={['click']}
     >
-      <MoreOutlined />
+      <Button className="c-white" type="text" icon={<MoreOutlined />} />
     </Dropdown>
   );
 };
