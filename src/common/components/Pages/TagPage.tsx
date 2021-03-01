@@ -16,6 +16,7 @@ export const TagPage: React.FC<IComponentProps> = (props: IComponentProps) => {
   } = props;
   const dispatch = useDispatch();
   const tasks = useSelector(tasksSelectors.getCollection);
+  const isLoading = useSelector(tasksSelectors.getIsLoading);
 
   useEffect(() => {
     id && dispatch(tasksActions.getCollection.try({ tagId: id }));
@@ -23,5 +24,5 @@ export const TagPage: React.FC<IComponentProps> = (props: IComponentProps) => {
 
   TasksHooks.useCollectionRefetch({ tagId: id });
 
-  return <TasksLayout tasks={tasks} title="Tags page" />;
+  return <TasksLayout tasks={tasks} title="Tags page" isLoading={isLoading} />;
 };

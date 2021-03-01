@@ -65,6 +65,7 @@ const tasksSlice = createSlice({
       })
       .addCase(getCollection.try, (state) => {
         state.isLoading = true;
+        state.collection = [];
         state.status = ETaskBranchStatus.CollectionFetching;
       })
       .addCase(getCollection.success, (state, { payload }) => {

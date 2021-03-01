@@ -10,6 +10,7 @@ export const InboxPage: React.FC = () => {
   const dispatch = useDispatch();
   const tasks = useSelector(tasksSelectors.getInboxTasks);
   const inboxProject = useSelector(projectsSelectors.getInboxProject);
+  const isLoading = useSelector(tasksSelectors.getIsLoading);
 
   useEffect(() => {
     inboxProject &&
@@ -24,5 +25,5 @@ export const InboxPage: React.FC = () => {
     return null;
   }
 
-  return <TasksLayout tasks={tasks} title="Inbox page" />;
+  return <TasksLayout isLoading={isLoading} tasks={tasks} title="Inbox page" />;
 };

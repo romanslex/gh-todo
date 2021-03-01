@@ -18,6 +18,7 @@ export const ProjectPage: React.FC<IComponentProps> = (
   } = props;
   const dispatch = useDispatch();
   const tasks = useSelector(tasksSelectors.getCollection);
+  const isLoading = useSelector(tasksSelectors.getIsLoading);
 
   useEffect(() => {
     id && dispatch(tasksActions.getCollection.try({ projectId: id }));
@@ -25,5 +26,7 @@ export const ProjectPage: React.FC<IComponentProps> = (
 
   TasksHooks.useCollectionRefetch({ projectId: id });
 
-  return <TasksLayout tasks={tasks} title="Projects page" />;
+  return (
+    <TasksLayout tasks={tasks} title="Projects page" isLoading={isLoading} />
+  );
 };

@@ -9,7 +9,7 @@ export const tasksService = {
   create(data: ICreateTaskParams) {
     return doWithDelay(() => {
       tasksController.create(data);
-    }, 1000);
+    }, 500);
   },
 
   getCollection(data: IGetTaskCollectionParams): Promise<ITaskDTO[]> {
