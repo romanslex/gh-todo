@@ -129,7 +129,12 @@ export const EditTaskForm: React.FC = () => {
           </Select>
         </Form.Item>
         <Form.Item name="tags" label="Tags">
-          <Select mode="multiple" className="w-100" placeholder="Tags">
+          <Select
+            mode="multiple"
+            className="w-100"
+            placeholder="Tags"
+            optionFilterProp="children"
+          >
             {tags.map((tag) => (
               <Select.Option key={tag.id} value={tag.id}>
                 {tag.name}
