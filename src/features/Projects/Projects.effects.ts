@@ -13,6 +13,7 @@ function* create() {
       try {
         yield call(projectsService.create, payload);
         yield put(projectsActions.create.success());
+        yield put(projectsActions.getCollection.try());
       } catch (e) {
         yield put(projectsActions.create.fail(e.message));
       }
