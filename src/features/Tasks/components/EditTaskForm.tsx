@@ -31,7 +31,9 @@ export const EditTaskForm: React.FC = () => {
   const isLoading = useSelector(tasksSelectors.getIsLoading);
   const dispatch = useDispatch();
 
-  const title = editTask ? 'Edit task' : 'Create task';
+  const isUpdateForm = isUpdateTaskParams(editTask);
+
+  const title = isUpdateForm ? 'Edit task' : 'Create task';
 
   const fields = [
     {
@@ -144,7 +146,7 @@ export const EditTaskForm: React.FC = () => {
         </Form.Item>
         <Row justify="space-between">
           <Col>
-            {!!editTask && (
+            {isUpdateForm && (
               <Popconfirm
                 placement="topLeft"
                 title="Are you sure you want to delete this task?"
