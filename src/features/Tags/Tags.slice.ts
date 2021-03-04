@@ -68,6 +68,7 @@ const tagsSlice = createSlice({
       })
       .addCase(update.success, (state) => {
         state.isLoading = false;
+        state.isEditModalOpen = false;
       })
       .addCase(update.fail, (state) => {
         state.isLoading = false;
