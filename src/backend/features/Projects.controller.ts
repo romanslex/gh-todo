@@ -2,8 +2,11 @@ import { localStorageService } from 'rml-back-mock-helper';
 import { v4 } from 'uuid';
 import { EProjectColor, Project } from 'common/models/Project';
 import { ICreateProjectParams } from 'common/models/ICreateProjectParams';
+import { Task } from 'common/models/Task';
+import { tasksController } from 'backend/features/Tasks.controller';
 
 const key = 'projects';
+const tasksKey = 'tasks';
 
 const inboxProject: Project = {
   id: v4(),
@@ -34,6 +37,12 @@ export const projectsController = {
   },
 
   remove(id: string): void {
+    const tasks = Object.values(
+      localStorageService.getCollection<Task>(tasksKey)
+    );
+    tasks
+      .filter((task) => task.project === id)
+      .forEach((task) => tasksController.remove(task.id));
     localStorageService.remove(key, id);
   },
 
