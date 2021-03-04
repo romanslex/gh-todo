@@ -26,7 +26,7 @@ export const EditProjectModal: React.FC = () => {
     },
     {
       name: 'color',
-      value: editProject?.color,
+      value: editProject?.color || EProjectColor.Red,
     },
   ];
 
