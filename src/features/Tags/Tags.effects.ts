@@ -13,6 +13,7 @@ function* create() {
       try {
         yield call(tagsService.create, payload);
         yield put(tagsActions.create.success());
+        yield put(tagsActions.getCollection.try());
       } catch (e) {
         yield put(tagsActions.create.fail(e.message));
       }
