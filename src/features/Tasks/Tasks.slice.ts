@@ -10,6 +10,7 @@ import { ICreateTaskParams } from 'common/models/ICreateTaskParams';
 import { IGetTaskCollectionParams } from 'common/models/IGetTaskCollectionParams';
 import { IUpdateTaskParams } from 'common/models/IUpdateTaskParams';
 import { tagsActions } from 'features/Tags/Tags.slice';
+import { projectsActions } from 'features/Projects/Projects.slice';
 
 const initialState: ITasksSlice = {
   isLoading: false,
@@ -111,6 +112,14 @@ const tasksSlice = createSlice({
           });
 
           return { ...item, tags };
+        });
+      })
+      .addCase(projectsActions.update.success, (state, { payload }) => {
+        state.collection = state.collection.map((task) => {
+          if (task.project.id === payload.id) {
+            return { ...task, project: payload };
+          }
+          return task;
         });
       }),
 });

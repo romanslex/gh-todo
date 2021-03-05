@@ -46,7 +46,8 @@ export const projectsController = {
     localStorageService.remove(key, id);
   },
 
-  update(data: Project): void {
+  update(data: Project): Project {
     localStorageService.update(key, data);
+    return data;
   },
 };

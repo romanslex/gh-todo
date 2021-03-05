@@ -55,8 +55,8 @@ function* update() {
     projectsActions.update.try,
     function* updateWorker({ payload }: PayloadAction<IProjectModel>) {
       try {
-        yield call(projectsService.update, payload);
-        yield put(projectsActions.update.success());
+        const project = yield call(projectsService.update, payload);
+        yield put(projectsActions.update.success(project));
         yield put(projectsActions.getCollection.try());
       } catch (e) {
         yield put(projectsActions.update.fail(e.message));
