@@ -47,8 +47,9 @@ const projectsSlice = createSlice({
   },
   extraReducers: (builder) =>
     builder
-      .addCase(create.try, (state) => {
+      .addCase(create.try, (state, { payload }) => {
         state.isLoading = true;
+        state.editProjectData = payload;
       })
       .addCase(create.success, (state) => {
         state.isLoading = false;
