@@ -52,8 +52,8 @@ function* update() {
     tagsActions.update.try.type,
     function* updateWorker({ payload }: PayloadAction<ITagModel>) {
       try {
-        yield call(tagsService.update, payload);
-        yield put(tagsActions.update.success());
+        const tag: ITagModel = yield call(tagsService.update, payload);
+        yield put(tagsActions.update.success(tag));
         yield put(tagsActions.getCollection.try());
       } catch (e) {
         yield put(tagsActions.update.fail(e.message));

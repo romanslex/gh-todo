@@ -22,9 +22,9 @@ export const projectsService = {
     });
   },
 
-  update(data: IProjectModel) {
+  update(data: IProjectModel): Promise<IProjectModel> {
     return doWithDelay(() => {
-      projectsController.update(data);
+      return projectsController.update(data);
     }, 1000);
   },
 

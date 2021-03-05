@@ -22,9 +22,9 @@ export const tagsService = {
     });
   },
 
-  update(data: ITagModel) {
+  update(data: ITagModel): Promise<ITagModel> {
     return doWithDelay(() => {
-      tagsController.update(data);
+      return tagsController.update(data);
     });
   },
 };

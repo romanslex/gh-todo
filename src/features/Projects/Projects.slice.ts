@@ -27,9 +27,11 @@ const remove = ReduxHelpers.createAction<string, void, string>(
   'projects/remove'
 );
 
-const update = ReduxHelpers.createAction<IUpdateProjectParams, void, string>(
-  'projects/update'
-);
+const update = ReduxHelpers.createAction<
+  IUpdateProjectParams,
+  IProjectModel,
+  string
+>('projects/update');
 
 const initInbox = createAction('projects/initInbox');
 

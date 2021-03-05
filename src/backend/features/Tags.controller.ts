@@ -32,7 +32,8 @@ export const tagsController = {
     localStorageService.remove(key, id);
   },
 
-  update(data: Tag) {
+  update(data: Tag): Tag {
     localStorageService.update(key, data);
+    return data;
   },
 };
