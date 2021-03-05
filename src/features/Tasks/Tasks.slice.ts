@@ -9,6 +9,7 @@ import { ReduxHelpers } from 'common/Helpers/Redux.helpers';
 import { ICreateTaskParams } from 'common/models/ICreateTaskParams';
 import { IGetTaskCollectionParams } from 'common/models/IGetTaskCollectionParams';
 import { IUpdateTaskParams } from 'common/models/IUpdateTaskParams';
+import { tagsActions } from 'features/Tags/Tags.slice';
 
 const initialState: ITasksSlice = {
   isLoading: false,
@@ -101,6 +102,16 @@ const tasksSlice = createSlice({
       })
       .addCase(remove.fail, (state) => {
         state.isLoading = false;
+      })
+      .addCase(tagsActions.update.success, (state, { payload }) => {
+        state.collection = state.collection.map((item) => {
+          const tags = item?.tags?.map((tag) => {
+            if (tag.id === payload.id) return payload;
+            return tag;
+          });
+
+          return { ...item, tags };
+        });
       }),
 });
 

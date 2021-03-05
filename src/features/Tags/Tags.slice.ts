@@ -24,7 +24,7 @@ const getCollection = ReduxHelpers.createAction<void, ITagModel[], string>(
 
 const remove = ReduxHelpers.createAction<string, void, string>('tags/remove');
 
-const update = ReduxHelpers.createAction<ITagModel, void, string>(
+const update = ReduxHelpers.createAction<ITagModel, ITagModel, string>(
   'tags/update'
 );
 
