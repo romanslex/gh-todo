@@ -3,6 +3,8 @@ import {
   IProjectsSlice,
 } from 'features/Projects/Projects.models';
 import { createSelector } from '@reduxjs/toolkit';
+import { IUpdateProjectParams } from 'common/models/IUpdateProjectParams';
+import { ICreateProjectParams } from 'common/models/ICreateProjectParams';
 
 type State = { projects: IProjectsSlice };
 
@@ -14,7 +16,9 @@ const getIsLoading = (state: State): boolean => state.projects.isLoading;
 const getCollection = (state: State): IProjectModel[] =>
   state.projects.collection;
 
-const getEditProjectData = (state: State): IProjectModel | undefined =>
+const getEditProjectData = (
+  state: State
+): IUpdateProjectParams | ICreateProjectParams | undefined =>
   state.projects.editProjectData;
 
 const getCollectionWithoutInbox = createSelector(
