@@ -6,6 +6,7 @@ import Button from 'antd/es/button';
 import { useDispatch, useSelector } from 'react-redux';
 import { tagsSelectors } from 'features/Tags/Tags.selectors';
 import { tagsActions } from 'features/Tags/Tags.slice';
+import { isUpdateTagParams } from 'common/models/IUpdateTagParams';
 
 interface IFormValues {
   name: string;
@@ -18,18 +19,19 @@ export const EditTagModal: React.FC = () => {
   const editTag = useSelector(tagsSelectors.getEditTagData);
   const fields = [{ name: 'name', value: editTag?.name }];
 
+  const title = isUpdateTagParams(editTag) ? 'Update tag' : 'Create new tag';
+
   const close = () => dispatch(tagsActions.toggleEditModal({ isOpen: false }));
   const finish = (values: IFormValues) => {
-    editTag && dispatch(tagsActions.update.try({ ...editTag, ...values }));
-    !editTag && dispatch(tagsActions.create.try(values));
+    if (isUpdateTagParams(editTag)) {
+      dispatch(tagsActions.update.try({ ...editTag, ...values }));
+    } else {
+      dispatch(tagsActions.create.try(values));
+    }
   };
 
   return (
-    <AppModal
-      title={editTag ? 'Update tag' : 'Create new tag'}
-      isOpen={isOpen}
-      close={close}
-    >
+    <AppModal title={title} isOpen={isOpen} close={close}>
       <Form
         layout="vertical"
         onFinish={finish}

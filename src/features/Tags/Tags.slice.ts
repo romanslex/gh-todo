@@ -6,6 +6,7 @@ import {
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ReduxHelpers } from 'common/Helpers/Redux.helpers';
 import { ICreateTagParams } from 'common/models/ICreateTagParams';
+import { IUpdateTagParams } from 'common/models/IUpdateTagParams';
 
 const initialState: ITagsSlice = {
   isEditModalOpen: false,
@@ -24,7 +25,7 @@ const getCollection = ReduxHelpers.createAction<void, ITagModel[], string>(
 
 const remove = ReduxHelpers.createAction<string, void, string>('tags/remove');
 
-const update = ReduxHelpers.createAction<ITagModel, ITagModel, string>(
+const update = ReduxHelpers.createAction<IUpdateTagParams, ITagModel, string>(
   'tags/update'
 );
 
@@ -42,8 +43,9 @@ const tagsSlice = createSlice({
   },
   extraReducers: (builder) =>
     builder
-      .addCase(create.try, (state) => {
+      .addCase(create.try, (state, { payload }) => {
         state.isLoading = true;
+        state.editTagData = payload;
       })
       .addCase(create.success, (state) => {
         state.isLoading = false;
