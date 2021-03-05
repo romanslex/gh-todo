@@ -8,6 +8,7 @@ import Input from 'antd/es/input';
 import Button from 'antd/es/button';
 import { ColorPicker } from 'common/components/ColorPicker';
 import { EProjectColor } from 'common/models/Project';
+import { isUpdateProjectParams } from 'common/models/IUpdateProjectParams';
 
 interface IFormValues {
   name: string;
@@ -19,6 +20,9 @@ export const EditProjectModal: React.FC = () => {
   const isOpen = useSelector(projectsSelectors.getIsEditModalOpen);
   const isLoading = useSelector(projectsSelectors.getIsLoading);
   const editProject = useSelector(projectsSelectors.getEditProjectData);
+  const isUpdateForm = isUpdateProjectParams(editProject);
+  const title = isUpdateForm ? 'Edit project' : 'Create new project';
+
   const fields = [
     {
       name: 'name',
@@ -33,13 +37,15 @@ export const EditProjectModal: React.FC = () => {
   const close = () =>
     dispatch(projectsActions.toggleEditModal({ isOpen: false }));
   const finish = (values: IFormValues) => {
-    editProject &&
+    if (isUpdateProjectParams(editProject)) {
       dispatch(projectsActions.update.try({ ...editProject, ...values }));
-    !editProject && dispatch(projectsActions.create.try(values));
+    } else {
+      dispatch(projectsActions.create.try(values));
+    }
   };
 
   return (
-    <AppModal title="Create new project" isOpen={isOpen} close={close}>
+    <AppModal title={title} isOpen={isOpen} close={close}>
       <Form
         layout="vertical"
         onFinish={finish}

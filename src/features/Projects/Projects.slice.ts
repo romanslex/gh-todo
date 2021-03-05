@@ -6,6 +6,7 @@ import {
 import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ReduxHelpers } from 'common/Helpers/Redux.helpers';
 import { ICreateProjectParams } from 'common/models/ICreateProjectParams';
+import { IUpdateProjectParams } from 'common/models/IUpdateProjectParams';
 
 const initialState: IProjectsSlice = {
   isEditModalOpen: false,
@@ -26,7 +27,7 @@ const remove = ReduxHelpers.createAction<string, void, string>(
   'projects/remove'
 );
 
-const update = ReduxHelpers.createAction<IProjectModel, void, string>(
+const update = ReduxHelpers.createAction<IUpdateProjectParams, void, string>(
   'projects/update'
 );
 
@@ -72,6 +73,7 @@ const projectsSlice = createSlice({
       })
       .addCase(update.success, (state) => {
         state.isLoading = false;
+        state.isEditModalOpen = false;
       })
       .addCase(update.fail, (state) => {
         state.isLoading = false;
