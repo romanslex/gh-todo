@@ -31,7 +31,8 @@ export const Default: React.FC = () => {
     <Layout className="h-100">
       <Sidebar />
       <Layout>
-        <Header className="bg-white pr-7 pl-7">
+        <Header className="bg-white pr-7 pl-7 d-flex d-flex_justify--space-between d-flex_align--center">
+          <div className="mobile-only fs-xl">GH Todo</div>
           <Button
             type="text"
             onClick={toggleMobileMenu}
