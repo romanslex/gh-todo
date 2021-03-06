@@ -29,7 +29,6 @@ export const EditTagModal: React.FC = () => {
 
   const close = () => dispatch(tagsActions.toggleEditModal({ isOpen: false }));
   const finish = (values: IFormValues) => {
-    console.log(values);
     if (isUpdateTagParams(editTag)) {
       dispatch(tagsActions.update.try({ ...editTag, ...values }));
     } else {

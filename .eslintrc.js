@@ -39,6 +39,7 @@ module.exports = {
     "jsx-a11y/click-events-have-key-events": "off",
     "@typescript-eslint/explicit-module-boundary-types": 'off',
     "default-case": "off",
+    "jsx-a11y/anchor-is-valid": "off",
     "@typescript-eslint/no-unused-expressions": [
       "error", {"allowShortCircuit": true }
     ],
