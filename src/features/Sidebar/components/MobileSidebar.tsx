@@ -30,7 +30,7 @@ export const MobileSidebar: React.FC = () => {
       className="mobile-sidebar"
       closeIcon={null}
     >
-      <AppMenu />
+      <AppMenu closeMobileMenu={closeMenu} />
     </Drawer>
   );
 };
