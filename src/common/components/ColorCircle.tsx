@@ -1,10 +1,10 @@
 import React, { CSSProperties } from 'react';
-import { EProjectColor } from 'common/models/Project';
+import { EColor } from 'common/models/EColor';
 
 interface IComponentProps {
   width: string;
   height: string;
-  color: EProjectColor;
+  color: EColor;
   className?: string;
 }
 

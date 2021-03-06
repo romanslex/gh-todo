@@ -1,17 +1,8 @@
+import { EColor } from 'common/models/EColor';
+
 export interface Project {
   id: string;
   name: string;
-  color: EProjectColor;
+  color: EColor;
   isInbox: boolean;
-}
-
-export enum EProjectColor {
-  Red = 'red',
-  Orange = 'orange',
-  Yellow = 'yellow',
-  Green = 'green',
-  Cyan = 'cyan',
-  Blue = 'blue',
-  Magenta = 'magenta',
-  Purple = 'purple',
 }

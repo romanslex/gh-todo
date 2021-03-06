@@ -7,12 +7,12 @@ import Form from 'antd/es/form';
 import Input from 'antd/es/input';
 import Button from 'antd/es/button';
 import { ColorPicker } from 'common/components/ColorPicker';
-import { EProjectColor } from 'common/models/Project';
+import { EColor } from 'common/models/EColor';
 import { isUpdateProjectParams } from 'common/models/IUpdateProjectParams';
 
 interface IFormValues {
   name: string;
-  color: EProjectColor;
+  color: EColor;
 }
 
 export const EditProjectModal: React.FC = () => {
@@ -30,7 +30,7 @@ export const EditProjectModal: React.FC = () => {
     },
     {
       name: 'color',
-      value: editProject?.color || EProjectColor.Red,
+      value: editProject?.color || EColor.Red,
     },
   ];
 

@@ -1,8 +1,8 @@
-import { EProjectColor } from 'common/models/Project';
+import { EColor } from 'common/models/EColor';
 
 export interface ICreateProjectParams {
   name: string;
-  color: EProjectColor;
+  color: EColor;
 }
 
 export const isCreateProjectParams = (
