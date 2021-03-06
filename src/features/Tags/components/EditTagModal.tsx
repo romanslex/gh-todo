@@ -20,12 +20,16 @@ export const EditTagModal: React.FC = () => {
   const isLoading = useSelector(tagsSelectors.getIsLoading);
   const isOpen = useSelector(tagsSelectors.getIsEditModalOpen);
   const editTag = useSelector(tagsSelectors.getEditTagData);
-  const fields = [{ name: 'name', value: editTag?.name }];
+  const fields = [
+    { name: 'name', value: editTag?.name },
+    { name: 'color', value: editTag?.color || EColor.Red },
+  ];
 
   const title = isUpdateTagParams(editTag) ? 'Update tag' : 'Create new tag';
 
   const close = () => dispatch(tagsActions.toggleEditModal({ isOpen: false }));
   const finish = (values: IFormValues) => {
+    console.log(values);
     if (isUpdateTagParams(editTag)) {
       dispatch(tagsActions.update.try({ ...editTag, ...values }));
     } else {

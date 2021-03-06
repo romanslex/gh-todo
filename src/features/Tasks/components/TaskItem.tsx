@@ -78,7 +78,7 @@ export const TaskItem: React.FC<IComponentProps> = ({
             </Col>
             <Col>
               {tags?.map((tag) => (
-                <span className="mr-1 fs-xs" key={tag.id}>
+                <span className={`mr-1 fs-xs c-pr-${tag.color}`} key={tag.id}>
                   {tag.name}
                 </span>
               ))}
