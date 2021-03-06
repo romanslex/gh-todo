@@ -7,11 +7,14 @@ import { TaskTag } from 'common/models/Task';
 const key = 'tags';
 const taskTagKey = 'task_tag';
 
+const makeTagName = (raw: string): string => raw.replaceAll(' ', '_');
+
 export const tagsController = {
   create(data: ICreateTagParams): void {
     const tag = {
       id: v4(),
       ...data,
+      name: makeTagName(data.name),
     };
     localStorageService.add(key, tag);
   },
@@ -33,7 +36,7 @@ export const tagsController = {
   },
 
   update(data: Tag): Tag {
-    localStorageService.update(key, data);
+    localStorageService.update(key, { ...data, name: makeTagName(data.name) });
     return data;
   },
 };
