@@ -19,9 +19,9 @@ export const SidebarDropdown: React.FC<IComponentProps> = ({
       overlay={
         <Menu>
           <Menu.Item>
-            <Button size="small" type="text" onClick={onEdit}>
+            <a className="ant-dropdown-link" onClick={onEdit}>
               Edit
-            </Button>
+            </a>
           </Menu.Item>
           <Menu.Item>
             <Popconfirm
@@ -32,9 +32,7 @@ export const SidebarDropdown: React.FC<IComponentProps> = ({
               cancelText="No"
               okType="danger"
             >
-              <Button size="small" type="text">
-                Remove
-              </Button>
+              <a className="ant-dropdown-link">Remove</a>
             </Popconfirm>
           </Menu.Item>
         </Menu>
