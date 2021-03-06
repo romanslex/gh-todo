@@ -19,6 +19,7 @@ import { IProjectModel } from 'features/Projects/Projects.models';
 import { ITagModel } from 'features/Tags/Tags.models';
 import { ColorCircle } from 'common/components/ColorCircle';
 import { Col, Row } from 'antd/es/grid';
+import { getColorValue } from 'common/models/EColor';
 
 const getUrl = (baseUrl: string, id: string) => `${baseUrl}/${id}`;
 
@@ -120,6 +121,9 @@ export const AppMenu: React.FC = () => {
           tags.map((tag) => (
             <Menu.Item key={tag.id} className="pr-0">
               <Row align="middle">
+                <Col>
+                  <TagOutlined style={{ color: getColorValue(tag.color) }} />
+                </Col>
                 <Col flex={1}>
                   <Link to={getUrl(ERoute.Tag, tag.id)} className="c-white">
                     <div className="flex-grow-1">{tag.name}</div>

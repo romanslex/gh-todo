@@ -1,16 +1,17 @@
 import { localStorageService } from 'rml-back-mock-helper';
 import { v4 } from 'uuid';
-import { EProjectColor, Project } from 'common/models/Project';
+import { Project } from 'common/models/Project';
 import { ICreateProjectParams } from 'common/models/ICreateProjectParams';
 import { Task } from 'common/models/Task';
 import { tasksController } from 'backend/features/Tasks.controller';
+import { EColor } from 'common/models/EColor';
 
 const key = 'projects';
 const tasksKey = 'tasks';
 
 const inboxProject: Project = {
   id: v4(),
-  color: EProjectColor.Blue,
+  color: EColor.Blue,
   name: 'Inbox',
   isInbox: true,
 };

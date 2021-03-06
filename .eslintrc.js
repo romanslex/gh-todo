@@ -38,6 +38,7 @@ module.exports = {
     "react/require-default-props": "off",
     "jsx-a11y/click-events-have-key-events": "off",
     "@typescript-eslint/explicit-module-boundary-types": 'off',
+    "default-case": "off",
     "@typescript-eslint/no-unused-expressions": [
       "error", {"allowShortCircuit": true }
     ],

@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react';
-import { EProjectColor } from 'common/models/Project';
+import { EColor } from 'common/models/EColor';
 
 const colorItemRadius = 30;
 const colorItemStyle: CSSProperties = {
@@ -12,24 +12,22 @@ const activeColorItemStyle: CSSProperties = {
 };
 
 interface IComponentProps {
-  value?: EProjectColor;
+  value?: EColor;
   disabled?: boolean;
-  onChange?: (value: EProjectColor) => void;
+  onChange?: (value: EColor) => void;
 }
 
 export const ColorPicker: React.FC<IComponentProps> = ({
-  value = EProjectColor.Red,
+  value = EColor.Red,
   onChange,
   disabled,
 }: IComponentProps) => {
   return (
     <div className="d-flex d-flex_justify--space-between">
-      {Object.values(EProjectColor).map((color) => (
+      {Object.values(EColor).map((color) => (
         <div
           key={color}
-          onClick={() =>
-            !disabled && onChange && onChange(color as EProjectColor)
-          }
+          onClick={() => !disabled && onChange && onChange(color as EColor)}
           style={
             value === color
               ? { ...colorItemStyle, ...activeColorItemStyle }

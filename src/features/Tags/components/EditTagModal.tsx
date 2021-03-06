@@ -7,9 +7,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { tagsSelectors } from 'features/Tags/Tags.selectors';
 import { tagsActions } from 'features/Tags/Tags.slice';
 import { isUpdateTagParams } from 'common/models/IUpdateTagParams';
+import { EColor } from 'common/models/EColor';
+import { ColorPicker } from 'common/components/ColorPicker';
 
 interface IFormValues {
   name: string;
+  color: EColor;
 }
 
 export const EditTagModal: React.FC = () => {
@@ -17,12 +20,16 @@ export const EditTagModal: React.FC = () => {
   const isLoading = useSelector(tagsSelectors.getIsLoading);
   const isOpen = useSelector(tagsSelectors.getIsEditModalOpen);
   const editTag = useSelector(tagsSelectors.getEditTagData);
-  const fields = [{ name: 'name', value: editTag?.name }];
+  const fields = [
+    { name: 'name', value: editTag?.name },
+    { name: 'color', value: editTag?.color || EColor.Red },
+  ];
 
   const title = isUpdateTagParams(editTag) ? 'Update tag' : 'Create new tag';
 
   const close = () => dispatch(tagsActions.toggleEditModal({ isOpen: false }));
   const finish = (values: IFormValues) => {
+    console.log(values);
     if (isUpdateTagParams(editTag)) {
       dispatch(tagsActions.update.try({ ...editTag, ...values }));
     } else {
@@ -44,6 +51,9 @@ export const EditTagModal: React.FC = () => {
           rules={[{ required: true, message: 'Field is required' }]}
         >
           <Input disabled={isLoading} />
+        </Form.Item>
+        <Form.Item label="Color" name="color">
+          <ColorPicker disabled={isLoading} />
         </Form.Item>
         <div className="d-flex d-flex_justify--end">
           <Form.Item className="mr-2 mb-0">
