@@ -38,11 +38,14 @@ export const TaskItem: React.FC<IComponentProps> = ({
       })
     );
 
+  const changeDoneStatus = () =>
+    dispatch(tasksActions.changeDoneStatus.try({ id, isDone: !isDone }));
+
   return (
     <Card bodyStyle={cardBodyStyles} className="mb-3">
       <Row gutter={[12, 0]}>
         <Col>
-          <Checkbox />
+          <Checkbox onClick={changeDoneStatus} checked={isDone} />
         </Col>
         <Col flex={1}>
           <Row>

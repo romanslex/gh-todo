@@ -13,6 +13,7 @@ import {
 } from 'common/models/IGetTaskCollectionParams';
 import { ITaskDTO } from 'common/models/TaskDTO';
 import { IUpdateTaskParams } from 'common/models/IUpdateTaskParams';
+import { IChangeTaskDoneStatusParams } from 'common/models/IChangeTaskDoneStatusParams';
 
 const tasksKey = 'tasks';
 const taskTagKey = 'task_tag';
@@ -116,5 +117,28 @@ export const tasksController = {
 
     localStorageService.remove(tasksKey, id);
     taskTags.map((item) => localStorageService.remove(taskTagKey, item.id));
+  },
+
+  changeDoneStatus({ id, isDone }: IChangeTaskDoneStatusParams): ITaskDTO {
+    const task = localStorageService.get<Task>(tasksKey, id);
+    task.isDone = isDone;
+    localStorageService.update(tasksKey, task);
+
+    const project = localStorageService.get<Project>(projectsKey, task.project);
+    const taskTags = Object.values(
+      localStorageService.getCollection<TaskTag>(taskTagKey)
+    );
+    const tags = taskTags
+      .filter((item) => item.taskId === id)
+      .map((item) => localStorageService.get<Tag>(tagsKey, item.tagId));
+
+    return {
+      id,
+      isDone,
+      project,
+      tags,
+      dueDate: task.dueDate,
+      name: task.name,
+    };
   },
 };

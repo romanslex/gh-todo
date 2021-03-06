@@ -11,6 +11,7 @@ import { IGetTaskCollectionParams } from 'common/models/IGetTaskCollectionParams
 import { IUpdateTaskParams } from 'common/models/IUpdateTaskParams';
 import { tagsActions } from 'features/Tags/Tags.slice';
 import { projectsActions } from 'features/Projects/Projects.slice';
+import { IChangeTaskDoneStatusParams } from 'common/models/IChangeTaskDoneStatusParams';
 
 const initialState: ITasksSlice = {
   isLoading: false,
@@ -36,6 +37,12 @@ const update = ReduxHelpers.createAction<IUpdateTaskParams, void, string>(
 );
 
 const remove = ReduxHelpers.createAction<string, void, string>('tasks/remove');
+
+const changeDoneStatus = ReduxHelpers.createAction<
+  IChangeTaskDoneStatusParams,
+  ITaskModel,
+  string
+>('tasks/changeDoneStatus');
 
 const tasksSlice = createSlice({
   name: 'tasks',
@@ -121,6 +128,12 @@ const tasksSlice = createSlice({
           }
           return task;
         });
+      })
+      .addCase(changeDoneStatus.success, (state, { payload }) => {
+        const taskId = state.collection.findIndex(
+          (item) => item.id === payload.id
+        );
+        taskId !== -1 && (state.collection[taskId] = payload);
       }),
 });
 
@@ -131,4 +144,5 @@ export const tasksActions = {
   getCollection,
   update,
   remove,
+  changeDoneStatus,
 };
