@@ -54,7 +54,11 @@ export const TaskItem: React.FC<IComponentProps> = ({
               flex={1}
               onClick={editTask}
             >
-              {name}
+              <span
+                style={isDone ? { textDecoration: 'line-through' } : undefined}
+              >
+                {name}
+              </span>
             </Col>
             <Col>
               <Row align="middle" gutter={[6, 0]}>
