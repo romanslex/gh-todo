@@ -24,5 +24,12 @@ export const TagPage: React.FC<IComponentProps> = (props: IComponentProps) => {
 
   TasksHooks.useCollectionRefetch({ tagId: id });
 
-  return <TasksLayout tasks={tasks} title="Tags page" isLoading={isLoading} />;
+  return (
+    <TasksLayout
+      tasks={tasks}
+      title="Tags page"
+      isLoading={isLoading}
+      editFormData={{ tags: [id] }}
+    />
+  );
 };

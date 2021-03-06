@@ -7,6 +7,8 @@ const mapMomentToString = (date: Moment): string =>
 
 const getTodayDateString = (): string => moment().format(DATE_DISPLAY_FORMAT);
 
+const getTodayDateNumber = (): number => moment().unix();
+
 const mapStringToMoment = (
   date: string,
   format: string = DATE_DISPLAY_FORMAT
@@ -26,4 +28,5 @@ export const DateHelper = {
   mapMomentToNumber,
   mapNumberToString,
   mapMomentToString,
+  getTodayDateNumber,
 };

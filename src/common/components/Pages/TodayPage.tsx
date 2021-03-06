@@ -20,5 +20,12 @@ export const TodayPage: React.FC = () => {
 
   TasksHooks.useCollectionRefetch({ startDate: today, endDate: today });
 
-  return <TasksLayout tasks={tasks} title="Today" isLoading={isLoading} />;
+  return (
+    <TasksLayout
+      tasks={tasks}
+      title="Today"
+      isLoading={isLoading}
+      editFormData={{ dueDate: DateHelper.getTodayDateNumber() }}
+    />
+  );
 };

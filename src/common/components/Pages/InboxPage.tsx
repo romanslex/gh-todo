@@ -25,5 +25,12 @@ export const InboxPage: React.FC = () => {
     return null;
   }
 
-  return <TasksLayout isLoading={isLoading} tasks={tasks} title="Inbox page" />;
+  return (
+    <TasksLayout
+      isLoading={isLoading}
+      tasks={tasks}
+      title="Inbox page"
+      editFormData={{ project: inboxProject.id }}
+    />
+  );
 };
