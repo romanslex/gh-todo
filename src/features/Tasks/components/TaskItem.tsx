@@ -20,7 +20,7 @@ interface IComponentProps {
 export const TaskItem: React.FC<IComponentProps> = ({
   task,
 }: IComponentProps) => {
-  const { id, name, project, dueDate, tags } = task;
+  const { id, name, project, dueDate, tags, isDone } = task;
   const dispatch = useDispatch();
 
   const editTask = () =>
@@ -31,6 +31,7 @@ export const TaskItem: React.FC<IComponentProps> = ({
           id,
           name,
           dueDate,
+          isDone,
           project: project.id,
           tags: tags?.map((tag) => tag.id),
         },

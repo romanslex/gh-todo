@@ -21,13 +21,14 @@ const projectsKey = 'projects';
 
 export const tasksController = {
   create(data: ICreateTaskParams): void {
-    const { name, project, tags, dueDate } = data;
+    const { name, project, tags, dueDate, isDone } = data;
     const taskId = v4();
     const task: Task = {
       id: taskId,
       name,
       dueDate,
       project,
+      isDone,
     };
     localStorageService.add(tasksKey, task);
 
@@ -76,6 +77,7 @@ export const tasksController = {
       id: task.id,
       name: task.name,
       dueDate: task.dueDate,
+      isDone: task.isDone,
       project: projects[task.project],
       tags: taskTagCollection
         .filter((item) => item.taskId === task.id)
@@ -84,12 +86,13 @@ export const tasksController = {
   },
 
   update(data: IUpdateTaskParams) {
-    const { id, name, project, tags, dueDate } = data;
+    const { id, name, project, tags, dueDate, isDone } = data;
     const task: Task = {
       id,
       name,
       dueDate,
       project,
+      isDone,
     };
     localStorageService.update(tasksKey, task);
 
