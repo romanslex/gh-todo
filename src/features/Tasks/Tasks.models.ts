@@ -13,7 +13,7 @@ export type ITaskModel = ITaskDTO;
 
 export interface IEditFormBranch {
   isOpen: boolean;
-  data?: ICreateTaskParams | IUpdateTaskParams;
+  data?: ICreateTaskParams | IUpdateTaskParams | IEditTaskParams;
 }
 
 export enum ETaskBranchStatus {
@@ -27,3 +27,5 @@ export enum ETaskBranchStatus {
   TaskRemoving = 'taskRemoving',
   TaskRemoved = 'taskRemoved',
 }
+
+export type IEditTaskParams = Partial<IUpdateTaskParams>;

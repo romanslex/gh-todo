@@ -27,6 +27,11 @@ export const ProjectPage: React.FC<IComponentProps> = (
   TasksHooks.useCollectionRefetch({ projectId: id });
 
   return (
-    <TasksLayout tasks={tasks} title="Projects page" isLoading={isLoading} />
+    <TasksLayout
+      tasks={tasks}
+      title="Projects page"
+      isLoading={isLoading}
+      editFormData={{ project: id }}
+    />
   );
 };

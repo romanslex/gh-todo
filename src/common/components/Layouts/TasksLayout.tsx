@@ -1,19 +1,20 @@
 import React from 'react';
 import { TaskItem } from 'features/Tasks/components/TaskItem';
 import { AddTaskButton } from 'features/Tasks/components/AddTaskButton';
-import { ITaskModel } from 'features/Tasks/Tasks.models';
+import { IEditTaskParams, ITaskModel } from 'features/Tasks/Tasks.models';
 import { Loader } from 'common/components/Loader';
 
 interface IComponentProps {
   tasks: ITaskModel[];
   title: string;
   isLoading: boolean;
+  editFormData?: IEditTaskParams;
 }
 
 export const TasksLayout: React.FC<IComponentProps> = (
   props: IComponentProps
 ) => {
-  const { title, tasks, isLoading } = props;
+  const { title, tasks, isLoading, editFormData } = props;
   const hasCompletedTasks = tasks.some((task) => task.isDone);
 
   return (
@@ -27,7 +28,7 @@ export const TasksLayout: React.FC<IComponentProps> = (
 
       {isLoading && <Loader />}
       <div>
-        <AddTaskButton />
+        <AddTaskButton editFormData={editFormData} />
       </div>
 
       {hasCompletedTasks && (

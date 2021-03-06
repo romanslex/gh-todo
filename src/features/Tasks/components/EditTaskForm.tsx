@@ -69,7 +69,7 @@ export const EditTaskForm: React.FC = () => {
         })
       );
 
-    !editTask &&
+    !isUpdateForm &&
       dispatch(
         tasksActions.create.try({
           ...values,
