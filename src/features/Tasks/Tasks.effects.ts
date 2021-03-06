@@ -6,6 +6,7 @@ import { ITaskModel } from 'features/Tasks/Tasks.models';
 import { ICreateTaskParams } from 'common/models/ICreateTaskParams';
 import { IGetTaskCollectionParams } from 'common/models/IGetTaskCollectionParams';
 import { IUpdateTaskParams } from 'common/models/IUpdateTaskParams';
+import { IChangeTaskDoneStatusParams } from 'common/models/IChangeTaskDoneStatusParams';
 
 function* create() {
   yield takeEvery(
@@ -69,4 +70,27 @@ function* remove() {
   );
 }
 
-export const tasksEffects = [create(), getCollection(), update(), remove()];
+function* changeDoneStatus() {
+  yield takeEvery(
+    tasksActions.changeDoneStatus.try.type,
+    function* worker({ payload }: PayloadAction<IChangeTaskDoneStatusParams>) {
+      try {
+        const task: ITaskModel = yield call(
+          tasksService.changeDoneStatus,
+          payload
+        );
+        yield put(tasksActions.changeDoneStatus.success(task));
+      } catch (e) {
+        yield put(tasksActions.changeDoneStatus.fail(e.message));
+      }
+    }
+  );
+}
+
+export const tasksEffects = [
+  create(),
+  getCollection(),
+  update(),
+  remove(),
+  changeDoneStatus(),
+];

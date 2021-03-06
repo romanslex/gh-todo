@@ -13,6 +13,7 @@ import {
 } from 'common/models/IGetTaskCollectionParams';
 import { ITaskDTO } from 'common/models/TaskDTO';
 import { IUpdateTaskParams } from 'common/models/IUpdateTaskParams';
+import { IChangeTaskDoneStatusParams } from 'common/models/IChangeTaskDoneStatusParams';
 
 const tasksKey = 'tasks';
 const taskTagKey = 'task_tag';
@@ -21,13 +22,14 @@ const projectsKey = 'projects';
 
 export const tasksController = {
   create(data: ICreateTaskParams): void {
-    const { name, project, tags, dueDate } = data;
+    const { name, project, tags, dueDate, isDone } = data;
     const taskId = v4();
     const task: Task = {
       id: taskId,
       name,
       dueDate,
       project,
+      isDone,
     };
     localStorageService.add(tasksKey, task);
 
@@ -76,6 +78,7 @@ export const tasksController = {
       id: task.id,
       name: task.name,
       dueDate: task.dueDate,
+      isDone: task.isDone,
       project: projects[task.project],
       tags: taskTagCollection
         .filter((item) => item.taskId === task.id)
@@ -84,12 +87,13 @@ export const tasksController = {
   },
 
   update(data: IUpdateTaskParams) {
-    const { id, name, project, tags, dueDate } = data;
+    const { id, name, project, tags, dueDate, isDone } = data;
     const task: Task = {
       id,
       name,
       dueDate,
       project,
+      isDone,
     };
     localStorageService.update(tasksKey, task);
 
@@ -113,5 +117,28 @@ export const tasksController = {
 
     localStorageService.remove(tasksKey, id);
     taskTags.map((item) => localStorageService.remove(taskTagKey, item.id));
+  },
+
+  changeDoneStatus({ id, isDone }: IChangeTaskDoneStatusParams): ITaskDTO {
+    const task = localStorageService.get<Task>(tasksKey, id);
+    task.isDone = isDone;
+    localStorageService.update(tasksKey, task);
+
+    const project = localStorageService.get<Project>(projectsKey, task.project);
+    const taskTags = Object.values(
+      localStorageService.getCollection<TaskTag>(taskTagKey)
+    );
+    const tags = taskTags
+      .filter((item) => item.taskId === id)
+      .map((item) => localStorageService.get<Tag>(tagsKey, item.tagId));
+
+    return {
+      id,
+      isDone,
+      project,
+      tags,
+      dueDate: task.dueDate,
+      name: task.name,
+    };
   },
 };

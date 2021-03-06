@@ -20,7 +20,7 @@ interface IComponentProps {
 export const TaskItem: React.FC<IComponentProps> = ({
   task,
 }: IComponentProps) => {
-  const { id, name, project, dueDate, tags } = task;
+  const { id, name, project, dueDate, tags, isDone } = task;
   const dispatch = useDispatch();
 
   const editTask = () =>
@@ -31,17 +31,21 @@ export const TaskItem: React.FC<IComponentProps> = ({
           id,
           name,
           dueDate,
+          isDone,
           project: project.id,
           tags: tags?.map((tag) => tag.id),
         },
       })
     );
 
+  const changeDoneStatus = () =>
+    dispatch(tasksActions.changeDoneStatus.try({ id, isDone: !isDone }));
+
   return (
     <Card bodyStyle={cardBodyStyles} className="mb-3">
       <Row gutter={[12, 0]}>
         <Col>
-          <Checkbox />
+          <Checkbox onClick={changeDoneStatus} checked={isDone} />
         </Col>
         <Col flex={1}>
           <Row>
@@ -50,7 +54,11 @@ export const TaskItem: React.FC<IComponentProps> = ({
               flex={1}
               onClick={editTask}
             >
-              {name}
+              <span
+                style={isDone ? { textDecoration: 'line-through' } : undefined}
+              >
+                {name}
+              </span>
             </Col>
             <Col>
               <Row align="middle" gutter={[6, 0]}>

@@ -7,4 +7,5 @@ export interface ITaskDTO {
   dueDate?: number;
   project: Project;
   tags?: Tag[];
+  isDone: boolean;
 }

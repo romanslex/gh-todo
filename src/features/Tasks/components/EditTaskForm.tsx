@@ -65,6 +65,7 @@ export const EditTaskForm: React.FC = () => {
           id: editTask.id,
           ...values,
           dueDate: dueDate ? DateHelper.mapMomentToNumber(dueDate) : undefined,
+          isDone: false,
         })
       );
 
@@ -73,6 +74,7 @@ export const EditTaskForm: React.FC = () => {
         tasksActions.create.try({
           ...values,
           dueDate: dueDate ? DateHelper.mapMomentToNumber(dueDate) : undefined,
+          isDone: false,
         })
       );
   };

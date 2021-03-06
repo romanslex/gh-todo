@@ -4,6 +4,7 @@ import { ICreateTaskParams } from 'common/models/ICreateTaskParams';
 import { IGetTaskCollectionParams } from 'common/models/IGetTaskCollectionParams';
 import { ITaskDTO } from 'common/models/TaskDTO';
 import { IUpdateTaskParams } from 'common/models/IUpdateTaskParams';
+import { IChangeTaskDoneStatusParams } from 'common/models/IChangeTaskDoneStatusParams';
 
 export const tasksService = {
   create(data: ICreateTaskParams) {
@@ -27,6 +28,12 @@ export const tasksService = {
   remove(id: string) {
     return doWithDelay(() => {
       tasksController.remove(id);
+    });
+  },
+
+  changeDoneStatus(data: IChangeTaskDoneStatusParams): Promise<ITaskDTO> {
+    return doWithDelay(() => {
+      return tasksController.changeDoneStatus(data);
     });
   },
 };

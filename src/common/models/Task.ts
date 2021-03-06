@@ -3,6 +3,7 @@ export interface Task {
   name: string;
   dueDate?: number;
   project: string;
+  isDone: boolean;
 }
 
 export interface TaskTag {
