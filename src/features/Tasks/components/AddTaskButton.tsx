@@ -17,7 +17,12 @@ export const AddTaskButton: React.FC<IComponentProps> = ({
     dispatch(tasksActions.toggleEditForm({ isOpen: true, data: editFormData }));
 
   return (
-    <Button type="link" icon={<PlusCircleOutlined />} onClick={openEditForm}>
+    <Button
+      type="link"
+      icon={<PlusCircleOutlined />}
+      onClick={openEditForm}
+      className="pl-0"
+    >
       Add task
     </Button>
   );
