@@ -17,7 +17,7 @@ import { TodayPage } from 'common/components/Pages/TodayPage';
 import { WeekPage } from 'common/components/Pages/WeekPage';
 import { TagPage } from 'common/components/Pages/TagPage';
 
-const { Header, Content, Footer } = Layout;
+const { Header, Content } = Layout;
 
 export const Default: React.FC = () => {
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ export const Default: React.FC = () => {
   useInit();
 
   return (
-    <Layout className="h-100">
+    <Layout>
       <Sidebar />
       <Layout>
         <Header className="bg-white pr-7 pl-7 d-flex d-flex_justify--space-between d-flex_align--center">
@@ -52,7 +52,6 @@ export const Default: React.FC = () => {
           </Switch>
           <EditTaskForm />
         </Content>
-        <Footer>Footer</Footer>
       </Layout>
       <EditProjectModal />
       <EditTagModal />
