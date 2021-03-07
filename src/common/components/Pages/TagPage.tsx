@@ -5,6 +5,7 @@ import { tasksActions } from 'features/Tasks/Tasks.slice';
 import { RouteComponentProps } from 'react-router-dom';
 import { TasksHooks } from 'features/Tasks/Tasks.hooks';
 import { TasksLayout } from 'common/components/Layouts/TasksLayout';
+import { TagsHooks } from 'features/Tags/Tags.hooks';
 
 type IComponentProps = RouteComponentProps<{ id: string }>;
 
@@ -17,6 +18,7 @@ export const TagPage: React.FC<IComponentProps> = (props: IComponentProps) => {
   const dispatch = useDispatch();
   const tasks = useSelector(tasksSelectors.getCollection);
   const isLoading = useSelector(tasksSelectors.getIsLoading);
+  const tag = TagsHooks.useCurrentTag(id);
 
   useEffect(() => {
     id && dispatch(tasksActions.getCollection.try({ tagId: id }));
@@ -27,7 +29,7 @@ export const TagPage: React.FC<IComponentProps> = (props: IComponentProps) => {
   return (
     <TasksLayout
       tasks={tasks}
-      title="Tags page"
+      title={tag?.name || 'Tags page'}
       isLoading={isLoading}
       editFormData={{ tags: [id] }}
     />

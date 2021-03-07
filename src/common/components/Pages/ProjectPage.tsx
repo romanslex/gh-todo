@@ -5,6 +5,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import { tasksActions } from 'features/Tasks/Tasks.slice';
 import { TasksHooks } from 'features/Tasks/Tasks.hooks';
 import { TasksLayout } from 'common/components/Layouts/TasksLayout';
+import { ProjectsHooks } from 'features/Projects/Projects.hooks';
 
 type IComponentProps = RouteComponentProps<{ id: string }>;
 
@@ -19,6 +20,7 @@ export const ProjectPage: React.FC<IComponentProps> = (
   const dispatch = useDispatch();
   const tasks = useSelector(tasksSelectors.getCollection);
   const isLoading = useSelector(tasksSelectors.getIsLoading);
+  const project = ProjectsHooks.useCurrentProject(id);
 
   useEffect(() => {
     id && dispatch(tasksActions.getCollection.try({ projectId: id }));
@@ -29,7 +31,7 @@ export const ProjectPage: React.FC<IComponentProps> = (
   return (
     <TasksLayout
       tasks={tasks}
-      title="Projects page"
+      title={project?.name || 'Project page'}
       isLoading={isLoading}
       editFormData={{ project: id }}
     />
