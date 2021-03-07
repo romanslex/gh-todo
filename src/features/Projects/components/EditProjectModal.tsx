@@ -55,7 +55,10 @@ export const EditProjectModal: React.FC = () => {
         <Form.Item
           label="Name"
           name="name"
-          rules={[{ required: true, message: 'Field is required' }]}
+          rules={[
+            { required: true, message: 'Field is required' },
+            { max: 60, message: 'Project name can be max 60 letters' },
+          ]}
         >
           <Input disabled={isLoading} />
         </Form.Item>

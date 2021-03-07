@@ -50,11 +50,7 @@ export const TaskItem: React.FC<IComponentProps> = ({
         </Col>
         <Col flex={1}>
           <Row>
-            <Col
-              className="cursor-pointer c-primary"
-              flex={1}
-              onClick={editTask}
-            >
+            <Col className="cursor-pointer" flex={1} onClick={editTask}>
               <span
                 style={isDone ? { textDecoration: 'line-through' } : undefined}
               >
