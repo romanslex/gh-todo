@@ -2,7 +2,9 @@ export enum ERoute {
   Inbox = '/inbox',
   Today = '/today',
   Week = '/week',
-  Project = '/projects',
-  Tag = '/tags',
+  Projects = '/projects',
+  Project = '/projects/:id',
+  Tags = '/tags',
+  Tag = '/tags/:id',
   Filter = '/filters',
 }

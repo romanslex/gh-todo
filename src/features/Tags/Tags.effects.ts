@@ -1,9 +1,13 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { tagsActions } from 'features/Tags/Tags.slice';
 import { ITagModel } from 'features/Tags/Tags.models';
 import { tagsService } from 'features/Tags/Tags.service';
 import { ICreateTagParams } from 'common/models/ICreateTagParams';
+import { match, matchPath } from 'react-router-dom';
+import { ERoute } from 'common/const/Router.const';
+import { push } from 'connected-react-router';
+import { routerSelectors } from 'features/Router/Router.selectors';
 
 function* create() {
   yield takeEvery(
@@ -38,8 +42,15 @@ function* remove() {
     function* removeWorker({ payload: id }: PayloadAction<string>) {
       try {
         yield call(tagsService.remove, id);
-        yield put(tagsActions.remove.success());
         yield put(tagsActions.getCollection.try());
+        const pathname: string = yield select(routerSelectors.getPathname);
+
+        const matcher: match<{ id: string }> = yield call(matchPath, pathname, {
+          path: ERoute.Tag,
+        });
+        yield matcher?.params?.id === id && put(push(ERoute.Inbox));
+
+        yield put(tagsActions.remove.success());
       } catch (e) {
         yield put(tagsActions.remove.fail(e.message));
       }

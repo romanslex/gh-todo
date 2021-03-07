@@ -46,8 +46,8 @@ export const Default: React.FC = () => {
             <Route path={ERoute.Inbox} component={InboxPage} />
             <Route path={ERoute.Today} component={TodayPage} />
             <Route path={ERoute.Week} component={WeekPage} />
-            <Route path={`${ERoute.Tag}/:id`} component={TagPage} />
-            <Route path={`${ERoute.Project}/:id`} component={ProjectPage} />
+            <Route path={ERoute.Tag} component={TagPage} />
+            <Route path={ERoute.Project} component={ProjectPage} />
             <Route path="*" component={() => <Redirect to={ERoute.Inbox} />} />
           </Switch>
           <EditTaskForm />
