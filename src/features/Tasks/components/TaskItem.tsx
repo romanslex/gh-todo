@@ -22,6 +22,7 @@ export const TaskItem: React.FC<IComponentProps> = ({
 }: IComponentProps) => {
   const { id, name, project, dueDate, tags, isDone } = task;
   const dispatch = useDispatch();
+  const hasTags = tags && tags?.length > 0;
 
   const editTask = () =>
     dispatch(
@@ -43,7 +44,7 @@ export const TaskItem: React.FC<IComponentProps> = ({
 
   return (
     <Card bodyStyle={cardBodyStyles} className="mb-3">
-      <Row gutter={[12, 0]}>
+      <Row gutter={[12, 0]} wrap={false}>
         <Col>
           <Checkbox onClick={changeDoneStatus} checked={isDone} />
         </Col>
@@ -61,7 +62,7 @@ export const TaskItem: React.FC<IComponentProps> = ({
               </span>
             </Col>
             <Col>
-              <Row align="middle" gutter={[6, 0]}>
+              <Row align="middle" gutter={[6, 0]} wrap={false}>
                 <Col className="fs-xs">{project.name}</Col>
                 <Col>
                   <ColorCircle
@@ -85,11 +86,19 @@ export const TaskItem: React.FC<IComponentProps> = ({
               )}
             </Col>
             <Col>
-              {tags?.map((tag) => (
-                <span className={`mr-1 fs-xs c-pr-${tag.color}`} key={tag.id}>
-                  {tag.name}
-                </span>
-              ))}
+              {hasTags && (
+                <Row gutter={[12, 0]}>
+                  {tags?.map((tag) => (
+                    <Col
+                      style={{ wordBreak: 'break-all' }}
+                      className={`fs-xs c-pr-${tag.color}`}
+                      key={tag.id}
+                    >
+                      {tag.name}
+                    </Col>
+                  ))}
+                </Row>
+              )}
             </Col>
           </Row>
         </Col>
