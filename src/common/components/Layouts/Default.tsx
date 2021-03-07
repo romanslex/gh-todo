@@ -11,7 +11,7 @@ import { EditTagModal } from 'features/Tags/components/EditTagModal';
 import { EditTaskForm } from 'features/Tasks/components/EditTaskForm';
 import { ERoute } from 'common/const/Router.const';
 import { InboxPage } from 'common/components/Pages/InboxPage';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { ProjectPage } from 'common/components/Pages/ProjectPage';
 import { TodayPage } from 'common/components/Pages/TodayPage';
 import { WeekPage } from 'common/components/Pages/WeekPage';
@@ -48,6 +48,7 @@ export const Default: React.FC = () => {
             <Route path={ERoute.Week} component={WeekPage} />
             <Route path={`${ERoute.Tag}/:id`} component={TagPage} />
             <Route path={`${ERoute.Project}/:id`} component={ProjectPage} />
+            <Route path="*" component={() => <Redirect to={ERoute.Inbox} />} />
           </Switch>
           <EditTaskForm />
         </Content>

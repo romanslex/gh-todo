@@ -29,7 +29,7 @@ export const TagPage: React.FC<IComponentProps> = (props: IComponentProps) => {
   return (
     <TasksLayout
       tasks={tasks}
-      title={tag?.name || 'Tags page'}
+      title={tag?.name || "Tag doesn't exist"}
       isLoading={isLoading}
       editFormData={{ tags: [id] }}
     />
