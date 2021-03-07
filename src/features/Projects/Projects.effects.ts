@@ -1,9 +1,13 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery, select } from 'redux-saga/effects';
 import { projectsActions } from 'features/Projects/Projects.slice';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { IProjectModel } from 'features/Projects/Projects.models';
 import { projectsService } from 'features/Projects/Projects.service';
 import { ICreateProjectParams } from 'common/models/ICreateProjectParams';
+import { ERoute } from 'common/const/Router.const';
+import { routerSelectors } from 'features/Router/Router.selectors';
+import { matchPath, match } from 'react-router-dom';
+import { push } from 'connected-react-router';
 
 function* create() {
   yield takeEvery(
@@ -41,8 +45,15 @@ function* remove() {
     function* removeWorker({ payload: id }: PayloadAction<string>) {
       try {
         yield call(projectsService.remove, id);
-        yield put(projectsActions.remove.success());
         yield put(projectsActions.getCollection.try());
+        const pathname: string = yield select(routerSelectors.getPathname);
+
+        const matcher: match<{ id: string }> = yield call(matchPath, pathname, {
+          path: ERoute.Project,
+        });
+        yield matcher?.params?.id === id && put(push(ERoute.Inbox));
+
+        yield put(projectsActions.remove.success());
       } catch (e) {
         yield put(projectsActions.remove.fail(e.message));
       }

@@ -10,13 +10,13 @@ export const tasksService = {
   create(data: ICreateTaskParams) {
     return doWithDelay(() => {
       tasksController.create(data);
-    }, 500);
+    });
   },
 
   getCollection(data: IGetTaskCollectionParams): Promise<ITaskDTO[]> {
     return doWithDelay(() => {
       return tasksController.getCollection(data);
-    }, 500);
+    });
   },
 
   update(data: IUpdateTaskParams) {

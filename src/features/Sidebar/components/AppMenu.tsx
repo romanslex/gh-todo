@@ -87,7 +87,7 @@ export const AppMenu: React.FC<IComponentProps> = ({
         </Link>
       </Menu.Item>
       <Menu.SubMenu
-        key={ERoute.Project}
+        key={ERoute.Projects}
         title={
           <SubMenuItemWithAddBtn
             icon={<ProjectOutlined />}
@@ -102,7 +102,7 @@ export const AppMenu: React.FC<IComponentProps> = ({
               <Row wrap={false}>
                 <Col flex={1} className="sub-menu__link-col">
                   <Link
-                    to={getUrl(ERoute.Project, project.id)}
+                    to={getUrl(ERoute.Projects, project.id)}
                     className="c-white"
                     onClick={close}
                   >
@@ -145,7 +145,7 @@ export const AppMenu: React.FC<IComponentProps> = ({
               <Row wrap={false}>
                 <Col flex={1} className="sub-menu__link-col">
                   <Link
-                    to={getUrl(ERoute.Tag, tag.id)}
+                    to={getUrl(ERoute.Tags, tag.id)}
                     className="c-white"
                     onClick={close}
                   >

@@ -31,7 +31,7 @@ export const ProjectPage: React.FC<IComponentProps> = (
   return (
     <TasksLayout
       tasks={tasks}
-      title={project?.name || 'Project page'}
+      title={project?.name || "Project doesn't exist"}
       isLoading={isLoading}
       editFormData={{ project: id }}
     />

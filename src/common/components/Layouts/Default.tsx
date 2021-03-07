@@ -11,13 +11,13 @@ import { EditTagModal } from 'features/Tags/components/EditTagModal';
 import { EditTaskForm } from 'features/Tasks/components/EditTaskForm';
 import { ERoute } from 'common/const/Router.const';
 import { InboxPage } from 'common/components/Pages/InboxPage';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { ProjectPage } from 'common/components/Pages/ProjectPage';
 import { TodayPage } from 'common/components/Pages/TodayPage';
 import { WeekPage } from 'common/components/Pages/WeekPage';
 import { TagPage } from 'common/components/Pages/TagPage';
 
-const { Header, Content, Footer } = Layout;
+const { Header, Content } = Layout;
 
 export const Default: React.FC = () => {
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ export const Default: React.FC = () => {
   useInit();
 
   return (
-    <Layout className="h-100">
+    <Layout>
       <Sidebar />
       <Layout>
         <Header className="bg-white pr-7 pl-7 d-flex d-flex_justify--space-between d-flex_align--center">
@@ -46,12 +46,12 @@ export const Default: React.FC = () => {
             <Route path={ERoute.Inbox} component={InboxPage} />
             <Route path={ERoute.Today} component={TodayPage} />
             <Route path={ERoute.Week} component={WeekPage} />
-            <Route path={`${ERoute.Tag}/:id`} component={TagPage} />
-            <Route path={`${ERoute.Project}/:id`} component={ProjectPage} />
+            <Route path={ERoute.Tag} component={TagPage} />
+            <Route path={ERoute.Project} component={ProjectPage} />
+            <Route path="*" component={() => <Redirect to={ERoute.Inbox} />} />
           </Switch>
           <EditTaskForm />
         </Content>
-        <Footer>Footer</Footer>
       </Layout>
       <EditProjectModal />
       <EditTagModal />

@@ -7,7 +7,7 @@ export const projectsService = {
   create(data: ICreateProjectParams) {
     return doWithDelay(() => {
       projectsController.create(data);
-    }, 5000);
+    });
   },
 
   getCollection() {
@@ -25,7 +25,7 @@ export const projectsService = {
   update(data: IProjectModel): Promise<IProjectModel> {
     return doWithDelay(() => {
       return projectsController.update(data);
-    }, 1000);
+    });
   },
 
   initInboxProject() {
