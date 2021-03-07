@@ -47,7 +47,10 @@ export const EditTagModal: React.FC = () => {
         <Form.Item
           label="Name"
           name="name"
-          rules={[{ required: true, message: 'Field is required' }]}
+          rules={[
+            { required: true, message: 'Field is required' },
+            { max: 30, message: 'Tag name can be max 30 letters' },
+          ]}
         >
           <Input disabled={isLoading} />
         </Form.Item>

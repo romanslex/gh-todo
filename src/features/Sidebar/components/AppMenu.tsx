@@ -65,7 +65,12 @@ export const AppMenu: React.FC<IComponentProps> = ({
   );
 
   return (
-    <Menu theme="dark" mode="inline" selectedKeys={[currentPath]}>
+    <Menu
+      theme="dark"
+      mode="inline"
+      selectedKeys={[currentPath]}
+      className="app-menu"
+    >
       <Menu.Item key={ERoute.Inbox} icon={<InboxOutlined />}>
         <Link to={ERoute.Inbox} onClick={close}>
           Inbox
@@ -93,23 +98,25 @@ export const AppMenu: React.FC<IComponentProps> = ({
       >
         {hasProjects &&
           projects.map((project) => (
-            <Menu.Item key={project.id} className="pr-0">
-              <Row align="middle">
-                <Col>
-                  <ColorCircle
-                    width="10px"
-                    height="10px"
-                    color={project.color}
-                    className="mr-2"
-                  />
-                </Col>
-                <Col flex={1}>
+            <Menu.Item key={project.id} className="sub-menu__item">
+              <Row wrap={false}>
+                <Col flex={1} className="sub-menu__link-col">
                   <Link
                     to={getUrl(ERoute.Project, project.id)}
                     className="c-white"
                     onClick={close}
                   >
-                    <div className="flex-grow-1">{project.name}</div>
+                    <Row align="middle" wrap={false}>
+                      <Col>
+                        <ColorCircle
+                          width="10px"
+                          height="10px"
+                          color={project.color}
+                          className="mr-2"
+                        />
+                      </Col>
+                      <Col className="sub-menu__name-col">{project.name}</Col>
+                    </Row>
                   </Link>
                 </Col>
                 <Col>
@@ -134,18 +141,22 @@ export const AppMenu: React.FC<IComponentProps> = ({
       >
         {hasTags &&
           tags.map((tag) => (
-            <Menu.Item key={tag.id} className="pr-0">
-              <Row align="middle">
-                <Col>
-                  <TagOutlined style={{ color: getColorValue(tag.color) }} />
-                </Col>
-                <Col flex={1}>
+            <Menu.Item key={tag.id} className="sub-menu__item">
+              <Row wrap={false}>
+                <Col flex={1} className="sub-menu__link-col">
                   <Link
                     to={getUrl(ERoute.Tag, tag.id)}
                     className="c-white"
                     onClick={close}
                   >
-                    <div className="flex-grow-1">{tag.name}</div>
+                    <Row align="middle" wrap={false}>
+                      <Col>
+                        <TagOutlined
+                          style={{ color: getColorValue(tag.color) }}
+                        />
+                      </Col>
+                      <Col className="sub-menu__name-col">{tag.name}</Col>
+                    </Row>
                   </Link>
                 </Col>
                 <Col>

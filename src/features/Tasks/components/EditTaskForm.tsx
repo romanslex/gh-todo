@@ -103,7 +103,10 @@ export const EditTaskForm: React.FC = () => {
         <Form.Item
           name="name"
           label="Title"
-          rules={[{ required: true, message: 'Field is required' }]}
+          rules={[
+            { required: true, message: 'Field is required' },
+            { max: 240, message: 'Task name can be max 240 letters' },
+          ]}
         >
           <Input name="name" placeholder="Todo ..." />
         </Form.Item>
