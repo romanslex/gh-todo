@@ -3,6 +3,7 @@ import { TaskItem } from 'features/Tasks/components/TaskItem';
 import { AddTaskButton } from 'features/Tasks/components/AddTaskButton';
 import { IEditTaskParams, ITaskModel } from 'features/Tasks/Tasks.models';
 import { Loader } from 'common/components/Loader';
+import Empty from 'antd/es/empty';
 
 interface IComponentProps {
   tasks: ITaskModel[];
@@ -16,6 +17,7 @@ export const TasksLayout: React.FC<IComponentProps> = (
 ) => {
   const { title, tasks, isLoading, editFormData } = props;
   const hasCompletedTasks = tasks.some((task) => task.isDone);
+  const hasIncompletedTasks = tasks.some((task) => !task.isDone);
 
   return (
     <>
@@ -25,6 +27,12 @@ export const TasksLayout: React.FC<IComponentProps> = (
         .map((task) => (
           <TaskItem key={task.id} task={task} />
         ))}
+      {!hasIncompletedTasks && !isLoading && (
+        <Empty
+          image={Empty.PRESENTED_IMAGE_SIMPLE}
+          description="No tasks yet"
+        />
+      )}
 
       {isLoading && <Loader />}
       <div>
